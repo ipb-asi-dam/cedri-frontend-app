@@ -3,16 +3,16 @@ package com.example.cedri_app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_forgot_password.*
 
-class MainActivity : AppCompatActivity() {
+class ForgotPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_forgot_password)
 
-        buttonForgotPassword.setOnClickListener {
-            val intent = Intent (this, ForgotPasswordActivity::class.java)
+        buttonRecover.setOnClickListener {
+            val intent = Intent (this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
