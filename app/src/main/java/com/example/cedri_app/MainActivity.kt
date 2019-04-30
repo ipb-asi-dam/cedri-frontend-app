@@ -22,16 +22,20 @@ class MainActivity : AppCompatActivity() {
         buttonLogin.setOnClickListener{
             var utilsTeste = Utils()
             if (editTextEmail.text.isEmpty()){
-                editTextEmail.error = "COLOQUE UM EMAIL"
-            } else if (utilsTeste.validarEmail(editTextEmail.text.toString())){
-                Toast.makeText(this,"EMAIL INVALIDO", Toast.LENGTH_LONG).show()
+                editTextEmail.error = "PREENCHA ESTE CAMPO"
+            } else if (!(utilsTeste.validarEmail(editTextEmail.text.toString(), this))){
+                // Toast.makeText(this,"EMAIL INVALIDO", Toast.LENGTH_LONG).show()
+                editTextEmail.error = "EMAIL INVALIDO"
             } else if (editTextPassword.text.isEmpty()) {
-                editTextPassword.error = "COLOQUE UMA SENHA"
-            } else if (utilsTeste.validarSenha("a2")){
-                Toast.makeText(this,"SENHA INVALIDA", Toast.LENGTH_LONG).show()
+                editTextPassword.error = "PREENCHA ESTE CAMPO"
+            } else if (!(utilsTeste.validarSenha(editTextPassword.text.toString()))){
+                // Toast.makeText(this,"PREENCHA ESTE CAMPO", Toast.LENGTH_LONG).show()
+                editTextPassword.error = "SENHA INVALIDA"
             } else {
-                Toast.makeText(this,"EMAIL E SENHA INVALIDAS", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
             }
+
+            /* TODO: MAKE COMMUNICATION WITH THE BACKEND (WHEN IT EXISTS) */
 
         }
     }
