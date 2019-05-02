@@ -3,7 +3,6 @@ package com.example.cedri_app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,16 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         buttonLogin.setOnClickListener{
             var utilsTeste = Utils()
-            if (editTextEmail.text.isEmpty()){
-                editTextEmail.error = "PREENCHA ESTE CAMPO"
-            } else if (!(utilsTeste.validarEmail(editTextEmail.text.toString(), this))){
+            if (editTextEmailActivityMain.text.isEmpty()){
+                editTextEmailActivityMain.error = "PREENCHA ESTE CAMPO"
+            } else if (!(utilsTeste.validarEmail(editTextEmailActivityMain.text.toString()))){
                 // Toast.makeText(this,"EMAIL INVALIDO", Toast.LENGTH_LONG).show()
-                editTextEmail.error = "EMAIL INVALIDO"
-            } else if (editTextPassword.text.isEmpty()) {
-                editTextPassword.error = "PREENCHA ESTE CAMPO"
-            } else if (!(utilsTeste.validarSenha(editTextPassword.text.toString()))){
+                editTextEmailActivityMain.error = "EMAIL INVALIDO"
+            } else if (editTextPasswordActivityMain.text.isEmpty()) {
+                editTextPasswordActivityMain.error = "PREENCHA ESTE CAMPO"
+            } else if (!(utilsTeste.validarSenha(editTextPasswordActivityMain.text.toString()))){
                 // Toast.makeText(this,"PREENCHA ESTE CAMPO", Toast.LENGTH_LONG).show()
-                editTextPassword.error = "SENHA INVALIDA"
+                editTextPasswordActivityMain.error = "SENHA INVALIDA"
             } else {
                 Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
             }
