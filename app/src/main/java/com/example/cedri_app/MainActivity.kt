@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
                 editTextPasswordActivityMain.error = "SENHA INVALIDA"
             } else {
                 Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
+                val intent = Intent (this, MenuActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
             /* TODO: MAKE COMMUNICATION WITH THE BACKEND (WHEN IT EXISTS) */
