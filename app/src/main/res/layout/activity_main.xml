@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.0" android:id="@+id/loggin_boxLogoImage"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="48dp" android:layout_marginLeft="48dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="64dp" android:layout_marginLeft="48dp"
             android:layout_marginStart="48dp" android:layout_marginEnd="48dp" android:layout_marginRight="48dp">
 
         <ImageView
@@ -42,17 +42,18 @@
             android:layout_centerHorizontal="true"
             android:paddingLeft="10dp"
             android:hint="Email"
-            android:drawableLeft="@drawable/round_person_black_18dp"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
             android:drawablePadding="10dp"
             android:paddingRight="10dp"
             android:textColorHint="@color/colorPrimaryDark"
             android:textColor="@color/black"
             android:background="@drawable/input_background_circle"
             android:id="@+id/editTextEmailActivityMain"
-            app:layout_constraintEnd_toEndOf="@+id/emailTextBackgroun"
-            app:layout_constraintStart_toStartOf="@+id/emailTextBackgroun"
-            app:layout_constraintTop_toTopOf="@+id/emailTextBackgroun"
-            app:layout_constraintBottom_toBottomOf="@+id/emailTextBackgroun"/>
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginTop="128dp"
+            app:layout_constraintTop_toBottomOf="@+id/loggin_boxLogoImage"/>
 
     <EditText
             android:layout_width="310dp"
@@ -60,7 +61,7 @@
             android:layout_centerHorizontal="true"
             android:paddingLeft="10dp"
             android:hint="Password"
-            android:drawableLeft="@drawable/round_lock_black_18dp"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:drawablePadding="10dp"
             android:paddingRight="10dp"
             android:textColorHint="@color/colorPrimaryDark"

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">cedri-app</string>
+    <string name="tela_menu_name">MENU</string>
 </resources>
