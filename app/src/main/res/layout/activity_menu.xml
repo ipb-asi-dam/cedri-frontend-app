@@ -10,34 +10,84 @@
         android:background="@color/colorPrimary"
         app:contentInsetStart="0dp">
 
-        <include layout="@layout/toolbar_layout"
-            android:id="@+id/toolbarMenu"
-        ></include>
+    <include layout="@layout/toolbar_layout"
+             android:id="@+id/toolbarMenu"
+    ></include>
 
-        <GridLayout
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarMenu">
+
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/toolbarMenu"
-                android:columnCount="2"
-                android:rowCount="2"
-                android:alignmentMode="alignMargins"
-                android:padding="16dp"
-        >
+                android:layout_height="match_parent">
 
-            <!--Linha 1-->
-            <!--Coluna 1-->
-            <android.support.v7.widget.CardView>
+            <GridLayout
+                    android:id="@+id/mainGrid"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:alignmentMode="alignMargins"
+                    android:columnOrderPreserved="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+            >
 
-            </android.support.v7.widget.CardView>
-            <!--Coluna 2-->
+                <!-- Row 1 -->
 
-            <!--Linha 2-->
-            <!--Coluna 1-->
+                <!-- Column 1 -->
 
-            <!--Coluna 2-->
+                <include layout="@layout/card_menu_layout"
+                         android:layout_columnWeight="1"
+                         android:layout_rowWeight="1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginBottom="16dp"
+                         android:layout_marginLeft="16dp"
+                         android:layout_marginRight="16dp">
+                </include>
 
-        </GridLayout>
+                <!-- Column 2 -->
+                <include layout="@layout/card_menu_layout"
+                         android:layout_columnWeight="1"
+                         android:layout_rowWeight="1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginBottom="16dp"
+                         android:layout_marginLeft="16dp"
+                         android:layout_marginRight="16dp">
+                </include>
 
+
+                <!-- Row 2 -->
+
+                <!-- Column 1 -->
+                <include layout="@layout/card_menu_layout"
+                         android:layout_columnWeight="1"
+                         android:layout_rowWeight="1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginBottom="16dp"
+                         android:layout_marginLeft="16dp"
+                         android:layout_marginRight="16dp">
+                </include>
+
+                <!-- Column 2 -->
+                <include layout="@layout/card_menu_layout"
+                         android:layout_columnWeight="1"
+                         android:layout_rowWeight="1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginBottom="16dp"
+                         android:layout_marginLeft="16dp"
+                         android:layout_marginRight="16dp">
+                </include>
+
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
