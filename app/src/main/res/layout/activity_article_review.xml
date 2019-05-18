@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ArticleReviewActivity">
+
+    <!-- TODO: fazer a "componetização" dos elementos como a Toolbar.-->
+
+    <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            tools:context=".MenuActivity"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:background="@color/colorPrimary"
+            app:contentInsetStart="0dp"
+            android:id="@+id/toolbar">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageButton
+                    android:id="@+id/backImageButtonSingleArticleReview"
+                    android:layout_height="48dp"
+                    android:layout_width="48dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    android:background="@color/colorPrimary"
+                    android:contentDescription="Logout button."
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:text="RESUMO ARTIGO"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:layout_height="32dp"
+                    android:id="@+id/textView"
+                    android:layout_marginRight="181dp"
+                    android:layout_marginEnd="155dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="191dp"
+                    android:layout_marginStart="191dp"
+                    android:layout_centerInParent="true"/>
+
+            <ImageButton
+                    android:id="@+id/logoutImageButton2"
+                    android:layout_height="48dp"
+                    android:layout_width="48dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:background="@color/colorPrimary"
+                    android:contentDescription="Avatar button."
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+            />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
+
+        <EditText
+                android:id="@+id/articleTitleProcuraActivity"
+                android:text="TITULO ARTIGO"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"/>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:text="@string/exemploAbstract"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:text="Junho 14, 2015"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:paddingLeft="10dp"
+                    android:drawableLeft="@drawable/ic_access_time_black_24dp"/>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp">
+
+                <Button
+                        android:text="Aprovar"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:background="@color/backgroundLight"
+                        android:layout_width="128dp"
+                        android:layout_height="match_parent"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="top"
+                    android:layout_margin="48dp">
+
+                <Button
+                        android:text="Download PDF"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:background="@color/backgroundLight"
+                        android:layout_width="128dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentLeft="true"
+                />
+
+                <Button
+                        android:id="@+id/buttonPerfilAutorTelaResumoArtigo"
+                        android:text="Perfil Autor"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:background="@color/backgroundLight"
+                        android:layout_width="128dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentRight="true"
+                />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

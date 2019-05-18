@@ -23,11 +23,10 @@
                 android:layout_height="match_parent">
 
             <ImageButton
-                    android:id="@+id/logoutImageButton"
+                    android:id="@+id/backImageButtonSearch"
                     android:layout_height="48dp"
                     android:layout_width="48dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_power_settings_new_black_24dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
                     android:background="@color/colorPrimary"
                     android:contentDescription="Logout button."
                     android:clickable="true"
@@ -101,6 +100,7 @@
                 android:layout_marginTop="4dp">
 
             <TextView
+                    android:id="@+id/artigo1"
                     android:text="Nome do artigo 1"
                     android:textColor="@color/black"
                     android:gravity="center_vertical"
