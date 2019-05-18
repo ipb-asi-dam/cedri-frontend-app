@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">cedri-app</string>
     <string name="tela_menu_name">MENU</string>
+    <string name="tela_procura_name">PROCURA</string>
     <string name="itemMenuDashboard">DASBOARD</string>
     <string name="itemMenuProcurar">PROCURAR</string>
     <string name="itemMenuAprovacoes">APROVAÇÕES</string>
