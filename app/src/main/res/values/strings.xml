@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">cedri-app</string>
     <string name="tela_menu_name">MENU</string>
+    <string name="tela_procura_name">PROCURA</string>
+    <string name="itemMenuDashboard">DASBOARD</string>
+    <string name="itemMenuProcurar">PROCURAR</string>
+    <string name="itemMenuAprovacoes">APROVAÇÕES</string>
+    <string name="itemMenuConfiguracoes">CONFIG.</string>
+    <string name="exemploAbstract">A aprendizagem por reforço está revolucionando a inteligência artificial, isso
+        representa que
+        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
+        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
+        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
+        ações. A aprendizagem por reforço está revolucionando a inteligência artificial, isso representa que
+        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
+        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
+        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
+        ações. A aprendizagem por reforço está revolucionando a inteligência artificial, isso representa que
+        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
+        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
+        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
+        ações.
+    </string>
 </resources>
