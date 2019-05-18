@@ -25,7 +25,9 @@ class MenuActivity : AppCompatActivity() {
         }
 
         itemMenuColum1Row1.setOnClickListener {
-            Toast.makeText(this, "NAO IMPLEMENTADO", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, PublicationPieChartActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         itemMenuColum1Row2.setOnClickListener {
