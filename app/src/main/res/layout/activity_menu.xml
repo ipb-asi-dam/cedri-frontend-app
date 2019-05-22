@@ -126,6 +126,7 @@
                         android:layout_height="wrap_content"
                         app:cardElevation="8dp"
                         app:cardCornerRadius="8dp"
+                        android:clickable="true"
                         card_view:cardBackgroundColor="@color/colorPrimaryDark"
 
                 >
@@ -136,20 +137,19 @@
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorAccent">
+                            android:background="@color/colorPrimaryDark">
 
                         <ImageView
                                 android:src="@drawable/ic_insert_chart_black_24dp"
                                 android:scaleType="centerCrop"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:clickable="true"/>
+                                android:layout_height="48dp"/>
 
                         <TextView
                                 android:text="@string/itemMenuDashboard"
                                 android:textAlignment="center"
-                                android:textColor="@android:color/black"
+                                android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
@@ -172,6 +172,7 @@
                         android:layout_height="wrap_content"
                         app:cardElevation="8dp"
                         app:cardCornerRadius="8dp"
+                        android:clickable="true"
                         card_view:cardBackgroundColor="@color/colorPrimaryDark"
 
                 >
@@ -182,20 +183,19 @@
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorAccent">
+                            android:background="@color/colorPrimaryDark">
 
                         <ImageView
                                 android:src="@drawable/ic_search_black_24dp"
                                 android:scaleType="centerCrop"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:clickable="true"/>
+                                android:layout_height="48dp"/>
 
                         <TextView
                                 android:text="@string/itemMenuProcurar"
                                 android:textAlignment="center"
-                                android:textColor="@android:color/black"
+                                android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
@@ -221,6 +221,7 @@
                         android:layout_height="wrap_content"
                         app:cardElevation="8dp"
                         app:cardCornerRadius="8dp"
+                        android:clickable="true"
                         card_view:cardBackgroundColor="@color/colorPrimaryDark"
 
                 >
@@ -231,20 +232,19 @@
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorAccent">
+                            android:background="@color/colorPrimaryDark">
 
                         <ImageView
                                 android:src="@drawable/ic_spellcheck_black_24dp"
                                 android:scaleType="centerCrop"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:clickable="true"/>
+                                android:layout_height="48dp"/>
 
                         <TextView
                                 android:text="@string/itemMenuAprovacoes"
                                 android:textAlignment="center"
-                                android:textColor="@android:color/black"
+                                android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
@@ -267,6 +267,7 @@
                         android:layout_height="wrap_content"
                         app:cardElevation="8dp"
                         app:cardCornerRadius="8dp"
+                        android:clickable="true"
                         card_view:cardBackgroundColor="@color/colorPrimaryDark"
 
                 >
@@ -277,20 +278,19 @@
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorAccent">
+                            android:background="@color/colorPrimaryDark">
 
                         <ImageView
                                 android:src="@drawable/ic_settings_black_24dp"
                                 android:scaleType="centerCrop"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:clickable="true"/>
+                                android:layout_height="48dp"/>
 
                         <TextView
                                 android:text="@string/itemMenuConfiguracoes"
                                 android:textAlignment="center"
-                                android:textColor="@android:color/black"
+                                android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
