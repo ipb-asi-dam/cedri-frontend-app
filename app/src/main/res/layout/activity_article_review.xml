@@ -37,18 +37,14 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="RESUMO ARTIGO"
+                    android:text="@string/tela_revisao_artigo_name"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:layout_height="32dp"
                     android:id="@+id/textView"
-                    android:layout_marginRight="181dp"
-                    android:layout_marginEnd="155dp"
                     android:gravity="center"
-                    android:layout_marginLeft="191dp"
-                    android:layout_marginStart="191dp"
                     android:layout_centerInParent="true"/>
 
             <ImageButton
@@ -78,12 +74,13 @@
             android:orientation="vertical"
             android:background="@color/colorPrimary">
 
-        <EditText
+        <TextView
                 android:id="@+id/articleTitleProcuraActivity"
-                android:text="TITULO ARTIGO"
+                android:text="@string/titulo_artigo"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"/>

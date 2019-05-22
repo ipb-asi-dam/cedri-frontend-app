@@ -39,18 +39,14 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="PERFIL AUTOR"
+                    android:text="@string/tela_perfil_name"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:layout_height="32dp"
                     android:id="@+id/textView"
-                    android:layout_marginRight="181dp"
-                    android:layout_marginEnd="155dp"
                     android:gravity="center"
-                    android:layout_marginLeft="191dp"
-                    android:layout_marginStart="191dp"
                     android:layout_centerInParent="true"/>
 
             <ImageButton
