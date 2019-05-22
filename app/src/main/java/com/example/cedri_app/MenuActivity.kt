@@ -14,10 +14,6 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        // setSupportActionBar(android.support.v7.widget.Toolbar(this))
-
-        val logoutButton = findViewById<ImageButton>(R.id.logoutImageButton)
-
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -25,7 +21,9 @@ class MenuActivity : AppCompatActivity() {
         }
 
         itemMenuColum1Row1.setOnClickListener {
-            Toast.makeText(this, "NAO IMPLEMENTADO", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, PublicationPieChartActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         itemMenuColum1Row2.setOnClickListener {

@@ -1,0 +1,10 @@
+{
+	"userId": 20,
+	"publications": {
+		"book": 30,
+		"book_chapter": 23,
+		"editorial": 8,
+		"proceeding": 9,
+		"journal": 11
+	}
+}

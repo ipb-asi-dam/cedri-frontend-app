@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">cedri-app</string>
     <string name="tela_menu_name">MENU</string>
-    <string name="tela_procura_name">PROCURA</string>
-    <string name="itemMenuDashboard">DASBOARD</string>
-    <string name="itemMenuProcurar">PROCURAR</string>
-    <string name="itemMenuAprovacoes">APROVAÇÕES</string>
-    <string name="itemMenuConfiguracoes">CONFIG.</string>
+    <string name="tela_procura_name">SEARCH</string>
+    <string name="itemMenuDashboard">DASHBOARD</string>
+    <string name="itemMenuProcurar">SEARCH</string>
+    <string name="itemMenuAprovacoes">APPROVALS</string>
+    <string name="tela_perfil_name">AUTHOR</string>
+    <string name="tela_revisao_artigo_name">REVIEW</string>
+    <string name="tela_todos_artigos_name">ARTICLES</string>
+    <string name="titulo_artigo">ARTICLE TITLE</string>
+    <string name="itemMenuConfiguracoes">SETINGS</string>
+    <string name="tela_dashbord_public_piechart">PUBLICATIONS MADED</string>
     <string name="exemploAbstract">A aprendizagem por reforço está revolucionando a inteligência artificial, isso
         representa que
         sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
