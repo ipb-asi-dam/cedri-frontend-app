@@ -5,6 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/backgroundLight"
         tools:context=".ArticleReviewActivity">
 
     <!-- TODO: fazer a "componetização" dos elementos como a Toolbar.-->
@@ -71,8 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-            android:orientation="vertical"
-            android:background="@color/colorPrimary">
+            android:orientation="vertical">
 
         <TextView
                 android:id="@+id/articleTitleProcuraActivity"
@@ -135,8 +136,8 @@
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:background="@color/backgroundLight"
+                        android:textColor="@color/colorPrimary"
+                        android:background="@color/colorPrimaryDark"
                         android:layout_width="128dp"
                         android:layout_height="match_parent"
                         />
@@ -155,8 +156,8 @@
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:background="@color/backgroundLight"
+                        android:textColor="@color/colorPrimary"
+                        android:background="@color/colorPrimaryDark"
                         android:layout_width="128dp"
                         android:layout_height="48dp"
                         android:layout_alignParentLeft="true"
@@ -168,8 +169,8 @@
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:background="@color/backgroundLight"
+                        android:textColor="@color/colorPrimary"
+                        android:background="@color/colorPrimaryDark"
                         android:layout_width="128dp"
                         android:layout_height="48dp"
                         android:layout_alignParentRight="true"

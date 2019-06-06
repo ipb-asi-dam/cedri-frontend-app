@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SearchActivity">
+        tools:context=".SearchActivity"
+        android:background="@color/backgroundLight">
 
     <!-- TODO: fazer a "componetização" dos elementos como a Toolbar.-->
 
@@ -69,6 +70,7 @@
 
     <EditText
             android:id="@+id/editTextProcurarActivitySearch"
+            android:layout_marginTop="8dp"
             android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -77,23 +79,23 @@
             android:paddingLeft="10dp"
             android:hint="Procurar"
             android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:drawableTint="@color/black"
             android:drawablePadding="10dp"
             android:paddingRight="10dp"
             android:textColorHint="@color/colorPrimaryDark"
             android:textColor="@color/black"
-            android:background="@color/colorPrimary"/>
+            android:background="@drawable/input_background_circle"/>
 
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/editTextProcurarActivitySearch"
-            android:background="@color/backgroundLight">
+            android:layout_below="@id/editTextProcurarActivitySearch">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="8dp">
 
             <Button
                     android:id="@+id/artigo1"
