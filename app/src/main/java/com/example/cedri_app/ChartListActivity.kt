@@ -1,19 +1,24 @@
 package com.example.cedri_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
-//import com.github.mikephil.charting.charts.Chart
 import kotlinx.android.synthetic.main.activity_chart_list.*
 import com.example.cedri_app.model.Chart
+import kotlinx.android.synthetic.main.activity_chart_list.backImageButtonChartList
 
 class ChartListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart_list)
+
+        backImageButtonChartList.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         val recyclerView = chart_list_recyclerview
         recyclerView.setHasFixedSize(true)

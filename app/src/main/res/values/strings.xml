@@ -27,4 +27,8 @@
         ações.
     </string>
     <string name="chart_preview_image">chart</string>
+
+    <!-- Menu Bar Titles-->
+    <string name="menu_bar_titles_chart_list_screen">CHARTS</string>
+
 </resources>
