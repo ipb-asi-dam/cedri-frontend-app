@@ -5,4 +5,7 @@
     <color name="colorAccent">#2699fb</color>
     <color name="black">#000000</color>
     <color name="backgroundLight">#F1F9FF</color>
+    <color name="chartMenuBlue">#daf3f7</color>
+    <color name="HTMLGainsboro">#DCDCDC</color>
+    <color name="HTMLGray">#808080</color>
 </resources>

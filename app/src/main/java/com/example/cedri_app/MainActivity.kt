@@ -32,6 +32,26 @@ class MainActivity : AppCompatActivity() {
                 editTextPasswordActivityMain.error = "SENHA INVALIDA"
             } else {
                 Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
+                val email = editTextEmailActivityMain.text.toString();
+                val password = editTextPasswordActivityMain.text.toString();
+
+                println("EMAIL: ${email}, PASS: ${password}")
+                /*
+                val retrofitClient = NetworkUtils
+                    .getRetrofitInstance("https://jsonplaceholder.typicode.com")
+
+                val endpoint = retrofitClient.create(Endpoint::class.java)
+                val callback = endpoint.getPosts()
+
+                callback.enqueue(object: Callback<List<Posts>> {
+                    override fun onFailure(call: Call<List<Posts>>, t: Throwable) {
+                        Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+                    }
+                    override fun onResponse(call: Call<List<Posts>>, response: Response<List<Posts>>) {
+                        setupPieChartView()
+                    }
+                })*/
+
                 val intent = Intent (this, MenuActivity::class.java)
                 startActivity(intent)
                 finish()

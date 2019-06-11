@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
-import android.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
         itemMenuColum1Row1.setOnClickListener {
-            val intent = Intent(this, PublicationPieChartActivity::class.java)
+            val intent = Intent(this, ChartListActivity::class.java)
             startActivity(intent)
             finish()
         }

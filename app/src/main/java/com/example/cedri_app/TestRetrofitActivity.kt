@@ -13,8 +13,8 @@ class TestRetrofitActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_retrofit)
-
-        getData()
+        createData()
+        //getData()
     }
 
     fun getData() {
@@ -33,6 +33,28 @@ class TestRetrofitActivity : AppCompatActivity() {
                     textView.text = textView.text.toString().plus(it.body)
                 }
 
+            }
+        })
+    }
+
+    fun createData() {
+        val post = Posts(19, 0, "TESTE KOTLIN", "BODY TEST KOTLIN 123456");
+        val retrofitClient = NetworkUtils
+            .getRetrofitInstance("https://jsonplaceholder.typicode.com")
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+
+        val callback = endpoint.postPosts(post)
+
+        callback.enqueue(object: Callback<Posts> {
+            override fun onFailure(call: Call<Posts>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
+                response.body()?.let {
+                    textView.text = textView.text.toString().plus(it.id)
+                    // textView.text = textView.text.toString().plus(it.body)
+                }
             }
         })
     }

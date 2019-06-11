@@ -4,6 +4,7 @@
           package="com.example.cedri_app">
 
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:allowBackup="true"
@@ -31,7 +32,12 @@
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".PublicationPieChartActivity"
+                android:name=".ChartListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".OutcomesChartActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
