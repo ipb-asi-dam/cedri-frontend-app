@@ -12,12 +12,16 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.chart_item.view.*
 
 class ChartListAdapter(private val charts: List<Chart>,
-                       private val context: Context) : Adapter<ChartListAdapter.ViewHolder>() {
+                       private val context: Context,
+                       private val onItemClickListener: (chart: Chart, position: Int) -> Unit) : Adapter<ChartListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chart = charts[position]
         holder?.let {
             it.bindView(chart)
+            it.itemView.setOnClickListener {
+                onItemClickListener(chart, position)
+            }
         }
     }
 

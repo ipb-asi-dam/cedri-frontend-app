@@ -13,7 +13,9 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_publication_pie_chart.*
@@ -32,13 +34,14 @@ class OutcomesChartActivity : AppCompatActivity() {
         setSupportActionBar(android.support.v7.widget.Toolbar(this))
 
         backImageButtonPieChart.setOnClickListener{
-            val intent = Intent (this, MenuActivity::class.java)
+            val intent = Intent (this, ChartListActivity::class.java)
             startActivity(intent)
             finish()
         }
+        val a = AppCompatActivity()
 
         //getOutcomesData()
-        //setupPieChartView()
+        setupPieChartView()
         //setupPieChartView2()
 
     }
@@ -75,6 +78,17 @@ class OutcomesChartActivity : AppCompatActivity() {
         return countPublications.publications
     }
 
+    fun setData(entry: ArrayList<PieEntry>) {
+        val publications: TotalPublications = readJSONfromFile()
+
+        entry.add( PieEntry( publications.book.toFloat(), "book"))
+        entry.add( PieEntry( publications.bookChapter.toFloat(), "bookChapter"))
+        entry.add( PieEntry( publications.editorial.toFloat(), "editorial"))
+        entry.add( PieEntry( publications.proceeding.toFloat(), "proceeding"))
+        entry.add( PieEntry( publications.journal.toFloat(), "journal"))
+
+        println("PUBLICATION BOOK> ${publications.book.toFloat()}")
+    }
 
     fun setupPieChartView() {
         var mPie: PieChart? = null
@@ -89,29 +103,29 @@ class OutcomesChartActivity : AppCompatActivity() {
 
         legend?.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
 
-
         val entry = ArrayList<PieEntry>()
+        setData(entry)
 
-        val publications: TotalPublications = readJSONfromFile()
-
-        entry.add( PieEntry( publications.book.toFloat(), "book"))
-        println("PUBLICATION BOOK> ${publications.book.toFloat()}")
-        entry.add( PieEntry( publications.bookChapter.toFloat(), "bookChapter"))
-        entry.add( PieEntry( publications.editorial.toFloat(), "editorial"))
-        entry.add( PieEntry( publications.proceeding.toFloat(), "proceeding"))
-        entry.add( PieEntry( publications.journal.toFloat(), "journal"))
+        // Insere os textos
         val dataSet = PieDataSet(entry, "Rótulos")
+
+        // Define cores do pie chart
         dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
+
+        // Insere os valores
         dataSet.setDrawValues(true)
         val pieData = PieData(dataSet)
         pieData.setValueFormatter(PercentFormatter())
+        //pieData.setValueFormatter(DefaultValueFormatter(3))
         pieData.setValueTextSize(20f)
         pieData.setValueTextColor(Color.WHITE)
+
         mPie?.data = pieData
     }
+
     fun setupPieChartView2() {
         var mPie: PieChart? = null
-        mPie = findViewById(R.id.pie2)
+        mPie = findViewById(R.id.pie)
 
         mPie?.setUsePercentValues(true)
 
