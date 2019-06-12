@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/chartMenuBlue"
         tools:context="com.example.cedri_app.OutcomesChartActivity">
 
     <android.support.v7.widget.Toolbar
@@ -36,18 +36,14 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="@string/tela_dashbord_public_piechart"
+                    android:text="@string/menu_bar_titles_outcomes_chart_screen"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:layout_height="32dp"
                     android:id="@+id/textView"
-                    android:layout_marginRight="181dp"
-                    android:layout_marginEnd="155dp"
                     android:gravity="center"
-                    android:layout_marginLeft="191dp"
-                    android:layout_marginStart="191dp"
                     android:layout_centerInParent="true"/>
 
             <ImageButton

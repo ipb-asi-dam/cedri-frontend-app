@@ -10,7 +10,7 @@
     <string name="tela_todos_artigos_name">ARTICLES</string>
     <string name="titulo_artigo">ARTICLE TITLE</string>
     <string name="itemMenuConfiguracoes">SETTINGS</string>
-    <string name="tela_dashbord_public_piechart">PUBLICATIONS MADED</string>
+
     <string name="exemploAbstract">A aprendizagem por reforço está revolucionando a inteligência artificial, isso
         representa que
         sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
@@ -30,5 +30,6 @@
 
     <!-- Menu Bar Titles-->
     <string name="menu_bar_titles_chart_list_screen">CHARTS</string>
+    <string name="menu_bar_titles_outcomes_chart_screen">TOTAL OUTCOMES</string>
 
 </resources>
