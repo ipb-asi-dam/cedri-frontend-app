@@ -33,7 +33,7 @@
                     android:id="@+id/logoutButton"
                     android:layout_height="48dp"
                     android:layout_width="48dp"
-                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    android:src="@drawable/ic_power_settings_new_black_24dp"
                     android:background="@color/colorPrimary"
                     android:contentDescription="Back action"
                     android:clickable="true"

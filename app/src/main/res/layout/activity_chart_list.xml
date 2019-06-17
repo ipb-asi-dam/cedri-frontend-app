@@ -4,10 +4,6 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/activityVerticalMargin"
-                android:paddingLeft="@dimen/activityHorizontalMargin"
-                android:paddingRight="@dimen/activityHorizontalMargin"
-                android:paddingTop="@dimen/activityVerticalMargin"
                 tools:context="com.example.cedri_app.ChartListActivity"
                 android:background="@color/chartMenuBlue">
 
