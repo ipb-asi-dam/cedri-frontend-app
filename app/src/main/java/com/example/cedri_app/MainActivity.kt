@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.cedri_app.model.AuthenticateRequest
 import com.example.cedri_app.model.AuthenticateResponse
+import com.example.cedri_app.model.ResponseChecker
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_test_retrofit.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,11 +45,14 @@ class MainActivity : AppCompatActivity() {
                 loginRequest(this, email, password)
             }
         }
-
     }
+
     private fun loginRequest(mainAct : MainActivity, email: String, password: String) {
-        val retrofitClient = NetworkUtils
-            .getRetrofitInstance("http://192.168.0.104:5000")
+        val tokenInterceptor = TokenInterceptor("TOKEN_FROM_LOGIN")
+        //val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, "http://192.168.0.104:5000")
+        val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, "http://192.168.1.13:5000")
+
+        //val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.0.104:5000")
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val authRequest = AuthenticateRequest(email, password)
         val callback = endpoint.postLogin(authRequest)
@@ -61,23 +64,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<AuthenticateResponse>, response: Response<AuthenticateResponse>) {
-                println("DEU CERTO FOGUINHO")
-                println("RESPONSE: ${response}")
-                println("CALL: ${call}")
-                // Verifica se tá ok
+                // println("RESPONSE: ${response}")
+                // println("BODY: ${response.body()}")
+                val responseChecker = ResponseChecker(mainAct, response)
 
-                // Se tiver, decodifica o JWT
-
-                // Armazena numa variável
-
-                // Se tiver errado, pede para tentar novamente.
-                response.body()?.let {
-                    println("RESULTADOS: ${it}")
+                if ( responseChecker.checkResponse() ) {
+                    val intent = Intent(mainAct, MenuActivity::class.java)
+                    intent.putExtra("token", response?.body()?.data?.token)
+                    startActivity(intent)
+                    finish()
                 }
-
-                val intent = Intent (mainAct, MenuActivity::class.java)
-                startActivity(intent)
-                finish()
             }
         })
     }

@@ -12,6 +12,12 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        val extras = getIntent().getExtras()
+        println("BEFORE PRINT TOKEN")
+        if (extras != null) {
+            println("TOKEN: ${extras.getString("token")}")
+        }
+
 
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
