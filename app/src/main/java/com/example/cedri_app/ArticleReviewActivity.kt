@@ -18,7 +18,7 @@ class ArticleReviewActivity : AppCompatActivity() {
         }
 
         buttonPerfilAutorTelaResumoArtigo.setOnClickListener {
-            val intent = Intent(this, AutorPerfilActivity::class.java)
+            val intent = Intent(this, AuthorPerfilActivity::class.java)
             startActivity(intent)
             finish()
         }

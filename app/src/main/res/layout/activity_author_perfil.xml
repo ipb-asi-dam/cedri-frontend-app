@@ -6,7 +6,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AutorPerfilActivity"
+        tools:context=".AuthorPerfilActivity"
         android:background="@color/backgroundLight">
 
     <!-- TODO: fazer a "componetização" dos elementos como a Toolbar.-->
@@ -77,14 +77,16 @@
             android:layout_margin="16dp">
 
         <ImageView
+                android:id="@+id/author_perfil_avatar"
                 android:src="@drawable/ic_person_black_24dp"
                 android:scaleType="centerCrop"
-                android:layout_width="256dp" 
+                android:layout_width="256dp"
                 android:layout_height="256dp"
                 android:layout_gravity="center"/>
-        
+
         <TextView
-                android:text="Nome autor completo"
+                android:id="@+id/author_perfil_full_name"
+                android:text="Nome Completo do Autor"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"/>
@@ -111,8 +113,8 @@
                             android:background="@color/colorPrimaryDark">
 
                         <TextView
-                                android:id="@+id/authorNum"
-                                android:text="+351 924077163"
+                                android:id="@+id/author_phone_number"
+                                android:text="+000 000000000"
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="left|center"
                                 android:paddingLeft="16dp"
@@ -139,7 +141,8 @@
                             android:orientation="vertical">
 
                         <TextView
-                                android:text="fulano@gmail.com"
+                                android:id="@+id/author_perfil_first_email"
+                                android:text="fulano@exemplo.com"
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="left|center"
                                 android:paddingLeft="16dp"
@@ -165,7 +168,8 @@
                             android:orientation="vertical">
 
                         <TextView
-                                android:text="fulano@outlook.com"
+                                android:id="@+id/author_perfil_second_email"
+                                android:text="fulano@sample_example.com"
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="left|center"
                                 android:paddingLeft="16dp"

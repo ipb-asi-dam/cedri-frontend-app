@@ -1,4 +1,6 @@
 package com.example.cedri_app
+import android.content.Intent.getIntent
+import android.os.Bundle
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -26,6 +28,19 @@ class NetworkUtils {
                 .baseUrl(baseUrl)
                 .client(client)
                 .build()
+        }
+
+        fun getBaseUrl() : String {
+            // return "http://192.168.1.13:5000"
+            return "http://192.168.0.101:5000"
+        }
+
+        fun getToken(extras : Bundle?) : String {
+            var token = ""
+            extras?.getString("token")?.let {
+                token = it
+            }
+            return token
         }
 
         fun getRetrofitInstance(path: String): Retrofit {
