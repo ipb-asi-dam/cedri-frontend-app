@@ -86,65 +86,13 @@
             android:textColor="@color/black"
             android:background="@drawable/input_background_circle"/>
 
-    <ScrollView
+    <ListView
+            android:id="@+id/search_listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/editTextProcurarActivitySearch">
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
-
-            <Button
-                    android:id="@+id/artigo1"
-                    android:text="Nome do artigo 1"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:background="@color/colorPrimary"
-                    android:clickable="true"/>
-
-            <TextView
-                    android:text="Nome do artigo 2"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:background="@color/colorPrimary"
-                    android:clickable="true"/>
-            <TextView
-                    android:text="Nome do artigo 3"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:background="@color/colorPrimary"
-                    android:clickable="true"/>
-            <TextView
-                    android:text="Nome do artigo 6"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:background="@color/colorPrimary"
-                    android:clickable="true"/>
-
-        </LinearLayout>
-    </ScrollView>
+            android:layout_below="@id/editTextProcurarActivitySearch"
+            android:layout_marginTop="8dp"
+            android:dividerHeight="4dp">
+    </ListView>
 
 </RelativeLayout>
