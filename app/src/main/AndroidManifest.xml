@@ -16,7 +16,7 @@
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ApprovalsActivity">
         </activity>
-        <activity android:name=".AutorPerfilActivity">
+        <activity android:name=".AuthorPerfilActivity">
         </activity>
         <activity android:name=".ArticleReviewActivity">
         </activity>
@@ -26,6 +26,11 @@
                 android:name=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".ForgotPasswordActivity"
@@ -45,11 +50,7 @@
                 android:name=".MenuActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 

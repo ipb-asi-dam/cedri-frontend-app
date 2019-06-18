@@ -2,9 +2,14 @@ package com.example.cedri_app.model
 
 import com.google.gson.annotations.SerializedName
 
-data class AuthenticateResponse (
+class AuthenticateResponse<T>(
     @SerializedName("status")
-    val status: String,
+    private val status : String,
     @SerializedName("data")
-    val data: ResData
-)
+    private val data : T
+) {
+    fun getData() : T = data
+    fun getStatus() : String = status
+}
+
+

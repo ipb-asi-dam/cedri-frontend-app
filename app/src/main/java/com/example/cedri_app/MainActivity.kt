@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.cedri_app.model.AuthenticateRequest
 import com.example.cedri_app.model.AuthenticateResponse
 import com.example.cedri_app.model.ResponseChecker
+import com.example.cedri_app.model.Token
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
                 val email = editTextEmailActivityMain.text.toString();
                 val password = editTextPasswordActivityMain.text.toString();
 
-                println("EMAIL: ${email}, PASS: ${password}")
                 loginRequest(this, email, password)
             }
         }
@@ -49,28 +49,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun loginRequest(mainAct : MainActivity, email: String, password: String) {
         val tokenInterceptor = TokenInterceptor("TOKEN_FROM_LOGIN")
-        //val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, "http://192.168.0.104:5000")
-        val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, "http://192.168.1.13:5000")
+        val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, NetworkUtils.getBaseUrl())
 
-        //val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.0.104:5000")
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val authRequest = AuthenticateRequest(email, password)
         val callback = endpoint.postLogin(authRequest)
 
         // Asynchronous request. For synchronous request, use callback.execute()
-        callback.enqueue(object : Callback<AuthenticateResponse> {
-            override fun onFailure(call: Call<AuthenticateResponse>, t: Throwable) {
+        callback.enqueue(object : Callback<AuthenticateResponse<Token>> {
+            override fun onFailure(call: Call<AuthenticateResponse<Token>>, t: Throwable) {
+                println("ERROR::::: ${t.message}")
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<AuthenticateResponse>, response: Response<AuthenticateResponse>) {
-                // println("RESPONSE: ${response}")
-                // println("BODY: ${response.body()}")
+            override fun onResponse(call: Call<AuthenticateResponse<Token>>, response: Response<AuthenticateResponse<Token>>) {
                 val responseChecker = ResponseChecker(mainAct, response)
 
                 if ( responseChecker.checkResponse() ) {
                     val intent = Intent(mainAct, MenuActivity::class.java)
-                    intent.putExtra("token", response?.body()?.data?.token)
+                    val token = response?.body()?.getData()?.token
+                    intent.putExtra("token", token)
                     startActivity(intent)
                     finish()
                 }

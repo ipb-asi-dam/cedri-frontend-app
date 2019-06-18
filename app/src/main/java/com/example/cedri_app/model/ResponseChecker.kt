@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import retrofit2.Response
 
-class ResponseChecker(activity: Context, response: Response<AuthenticateResponse>?) {
+class ResponseChecker<T>(activity: Context, response: Response<AuthenticateResponse<T>>?) {
     val activity = activity
     val response = response
 
@@ -21,20 +21,20 @@ class ResponseChecker(activity: Context, response: Response<AuthenticateResponse
     }
 
     private fun hasBody() : Boolean {
-        return if (response?.body()?.status !== null) hasStatus()
+        return if (response?.body()?.getStatus() !== null) hasStatus()
             else showMsgAndReturnFalse("OCORREU UM ERRO INESPERADO: SEM STATUS")
     }
 
     private fun hasStatus() : Boolean {
-        if (response?.body()?.status == "success") {
-            return if (response?.body()?.data !== null) hasData()
+        if (response?.body()?.getStatus() == "success") {
+            return if (response?.body()?.getData() !== null) hasData()
                 else showMsgAndReturnFalse("NÃO FORAM RECEBIDOS DADOS DO SERVIDOR. TENTE NOVAMENTE")
         }
         return showMsgAndReturnFalse("LOGIN OU SENHA INVÁLIDO")
     }
 
     private fun hasData() : Boolean {
-        return if (response?.body()?.data?.token !== null) true else showMsgAndReturnFalse("TOKEN VAZIO. TENTE NOVAMENTE")
+        return if (response?.body()?.getData() != null) true else showMsgAndReturnFalse("DATA VAZIO. TENTE NOVAMENTE")
     }
 
     private fun showMsgAndReturnFalse(errorMsg: String) : Boolean {
