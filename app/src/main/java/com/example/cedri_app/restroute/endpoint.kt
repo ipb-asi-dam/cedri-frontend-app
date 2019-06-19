@@ -21,7 +21,7 @@ interface Endpoint {
     fun indexTotalOutcomes(): Call<AuthenticateResponse<TotalOutcomes>>
 
     @GET("api/public/total-outcomes/:id")
-    fun showTatalOutcomesShow(): Call<AuthenticateResponse<TotalOutcomes>>
+    fun showTotalOutcomesShow(): Call<AuthenticateResponse<TotalOutcomes>>
 
     @GET("api/private/users/{investigator_id}")
     fun showInvestigator(@Path("investigator_id") investigator_id : Int): Call<AuthenticateResponse<Investigator>>

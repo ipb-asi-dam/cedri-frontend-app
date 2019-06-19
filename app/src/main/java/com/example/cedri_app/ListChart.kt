@@ -70,9 +70,9 @@ class ListChartActivity : AppCompatActivity() {
         val jFile = assets.open("total_outcomes.json")
         val bufferedReader: BufferedReader = jFile.bufferedReader()
         val inputString = bufferedReader.use { it.readText() }
-        var countPublications = gson.fromJson(inputString, TotalOutcomes::class.java)
+        var countPublications = gson.fromJson(inputString, TotalPublications::class.java)
 
-        return countPublications.publications
+        return countPublications
     }
 
 

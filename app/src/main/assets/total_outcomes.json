@@ -1,19 +1,7 @@
 {
-	"userId": 20,
 	"awards": 190,
-	"publications": {
-		"book": 30,
-		"book_chapter": 23,
-		"editorial": 8,
-		"proceeding": 9,
-		"journal": 11
-	},
-	"intellectual_properties": {
-		"patents": 27,
-		"softwares": 32
-	},
-	"theses": {
-		"msc": 100,
-		"phd": 36
-	}
+	"publications": 71,
+	"intellectual_properties": 23,
+	"theses": 49,
+	"total": 272
 }

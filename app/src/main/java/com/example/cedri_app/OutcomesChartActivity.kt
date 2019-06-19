@@ -6,21 +6,19 @@ import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import android.widget.TextView
 import android.widget.Toast
-import com.example.cedri_app.model.TotalPublications
-import com.example.cedri_app.model.TotalOutcomes
+import com.example.cedri_app.model.*
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.DefaultValueFormatter
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
@@ -30,15 +28,23 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.BufferedReader
 import java.util.*
-import com.github.mikephil.charting.utils.ViewPortHandler
-import com.github.mikephil.charting.formatter.IValueFormatter
 import java.text.DecimalFormat
-
 
 class OutcomesChartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_publication_pie_chart)
+
+        /* Start main process */
+        /*
+        val token = NetworkUtils.getToken(getIntent().getExtras())
+        tryGetData(this, token)
+        */
+        /* End main process */
+
+        /* Start process for test, get outcomes data from files. */
+        configureOutcomesChart( readAndGetOutcomesJSONFile() )
+        /* End process for test. */
 
         setSupportActionBar(android.support.v7.widget.Toolbar(this))
 
@@ -47,159 +53,132 @@ class OutcomesChartActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        val a = AppCompatActivity()
-
-        //getOutcomesData()
-        setupPieChartView()
-        //setupPieChartView2()
-
     }
-    /*
-    // oncereate-> onStart-> onResume -> ... CICLO DE VIDA DA ACTIVITY
-    override fun onStart() {
-        super.onStart()
-        //getData()
-    }*/
 
-    fun getOutcomesData() {
-        val retrofitClient = NetworkUtils
-            .getRetrofitInstance("https://jsonplaceholder.typicode.com")
+    private fun tryGetData(mainAct : OutcomesChartActivity, token : String) {
+        val tokenInterceptor = TokenInterceptor(token)
+
+        val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, NetworkUtils.getBaseUrl())
         val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.getPosts()
+        val callback = endpoint.showTotalOutcomesShow()
+
         // Asynchronous request. For synchronous request, use callback.execute()
-        callback.enqueue(object: Callback<List<Posts>> {
-            override fun onFailure(call: Call<List<Posts>>, t: Throwable) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalOutcomes>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalOutcomes>>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
-            override fun onResponse(call: Call<List<Posts>>, response: Response<List<Posts>>) {
-                setupPieChartView()
+
+            override fun onResponse(call: Call<AuthenticateResponse<TotalOutcomes>>, response: Response<AuthenticateResponse<TotalOutcomes>>) {
+                val responseChecker = ResponseChecker(mainAct, response)
+
+                if ( responseChecker.checkResponse() ) {
+                    val totalOutcomes : TotalOutcomes = response.body()?.getData() ?: run {
+                        val errorMsg = "OUTCOMES NÃO ENCONTRADO"
+                        Toast.makeText(baseContext, errorMsg, Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    configureOutcomesChart(totalOutcomes)
+                }
             }
         })
     }
 
-    fun readJSONfromFile() : TotalPublications {
-        var gson = Gson()
-        val jFile = assets.open("total_outcomes.json")
-        val bufferedReader: BufferedReader = jFile.bufferedReader()
-        val inputString = bufferedReader.use { it.readText() }
-        var countPublications = gson.fromJson(inputString, TotalOutcomes::class.java)
-
-        return countPublications.publications
+    private fun configureLegend(legend: Legend) {
+        legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        legend.orientation = Legend.LegendOrientation.VERTICAL
+        legend.setDrawInside(false)
+        legend.textSize = 13f
+        legend.formSize = 15f
+        legend.xEntrySpace = 7f
+        legend.yEntrySpace = 0f
+        legend.yOffset = 0f
     }
 
-    fun setData(entry: ArrayList<PieEntry>) {
-        val publications: TotalPublications = readJSONfromFile()
+    private fun configurePieChartSlices(mPie: PieChart, totalOutcomes: TotalOutcomes) {
+        // True para deixar em porcentagem. False para deixar o valor integral.
+        mPie.setUsePercentValues(true)
 
-        entry.add( PieEntry( publications.book.toFloat(), "Book"))
-        entry.add( PieEntry( publications.bookChapter.toFloat(), "bookChapter"))
-        entry.add( PieEntry( publications.editorial.toFloat(), "editorial"))
-        entry.add( PieEntry( publications.proceeding.toFloat(), "proceeding"))
-        entry.add( PieEntry( publications.journal.toFloat(), "journal"))
-
-        println("PUBLICATION BOOK> ${publications.book.toFloat()}")
-    }
-
-    fun setupPieChartView() {
-        var mPie: PieChart? = null
-        mPie = findViewById(R.id.pie)
-
-        mPie?.setUsePercentValues(true)
-
-        val desc: Description = Description()
-        //desc.text = "PieChart das Publicações"
-
-        mPie?.description = desc
-        val legend: Legend? = mPie?.legend
-
-        legend?.let {
-            it.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-            it.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-            it.orientation = Legend.LegendOrientation.VERTICAL
-            it.setDrawInside(false)
-            it.textSize = 13f
-            it.formSize = 15f
-            it.setXEntrySpace(7f)
-            it.setYEntrySpace(0f)
-            it.setYOffset(0f)
-        }
-        mPie.setCenterText(generateCenterSpannableText(132))
+        // Array dos dados que serão inseridos no pichart
         val entry = ArrayList<PieEntry>()
-        setData(entry)
+        // Insere os valores nos dados do piechart
+        setData(entry, totalOutcomes)
 
-        // Insere os textos
-        val dataSet = PieDataSet(entry, "Rótulos")
+        // Cria o dataset de acordo com as entidades.
+        val dataSet = PieDataSet(entry, "Outcomes Results")
 
         // Define cores do pie chart
         dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
         // dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
 
-        // Insere os valores
+        // Desenha os valores no interior das fatias do Pie Chart
         dataSet.setDrawValues(true)
+
+        // Estiliza o conteúdo (texto) que vai ser escrito dentro das fatias
         val pieData = PieData(dataSet)
         pieData.setValueFormatter(MyPercentFormatter())
         //pieData.setValueFormatter(DefaultValueFormatter(3))
         pieData.setValueTextSize(20f)
         pieData.setValueTextColor(Color.WHITE)
 
-        mPie?.data = pieData
+        mPie.data = pieData
     }
 
-    private fun generateCenterSpannableText(total: Int): SpannableString {
-        val digits = total.toString().length // 14 ~ 22
-        val s = SpannableString("We've all got Outcomes.\nWe have ${total} in total.")
-
-        s.setSpan(RelativeSizeSpan(1.5f), 0, 14, 0)
-
-        s.setSpan(StyleSpan(Typeface.NORMAL), 14, 22, 0)
-        s.setSpan(ForegroundColorSpan(Color.RED), 14, 22, 0)
-        s.setSpan(RelativeSizeSpan(2.1f), 14, 22, 0)
-
-        s.setSpan(RelativeSizeSpan(1.5f), 22, 27, 0)
-
-        s.setSpan(StyleSpan(Typeface.NORMAL), 32, 32+digits, 0)
-        s.setSpan(ForegroundColorSpan(Color.GREEN), 32, 32+digits, 0)
-        s.setSpan(RelativeSizeSpan(1.8f), 32, 32+digits, 0)
-
-        s.setSpan(RelativeSizeSpan(1.5f), 32+digits, s.length, 0)
-
-
-        return s
-    }
-
-    fun setupPieChartView2() {
-        var mPie: PieChart? = null
-        mPie = findViewById(R.id.pie)
-
-        mPie?.setUsePercentValues(true)
-
-        val desc: Description = Description()
+    private fun setupDescription() : Description {
+        val desc = Description()
         desc.text = "PieChart das Publicações"
-        mPie?.description = desc
-        val legend: Legend? = mPie?.legend
-
-        legend?.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
-
-
-        val entry = ArrayList<PieEntry>()
-
-        val publications: TotalPublications = readJSONfromFile()
-
-        entry.add( PieEntry( publications.book.toFloat(), "Book (${publications.book})"))
-        println("PUBLICATION BOOK> ${publications.book.toFloat()}")
-        entry.add( PieEntry( publications.bookChapter.toFloat(), "BookChapter"))
-        entry.add( PieEntry( publications.editorial.toFloat(), "Editorial"))
-        entry.add( PieEntry( publications.proceeding.toFloat(), "Proceeding"))
-        entry.add( PieEntry( publications.journal.toFloat(), "Journal"))
-        val dataSet = PieDataSet(entry, "Rótulos")
-        dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
-        dataSet.setDrawValues(true)
-        val pieData = PieData(dataSet)
-        pieData.setValueFormatter(PercentFormatter())
-        pieData.setValueTextSize(20f)
-        pieData.setValueTextColor(Color.WHITE)
-        mPie?.data = pieData
+        return desc
     }
 
+    private fun configureOutcomesChart(totalOutcomes: TotalOutcomes) {
+        val pieChart = findViewById<PieChart>(R.id.pie) ?: run {
+            println("ERROR: ID do Piechart não encontrado")
+            return
+        }
+
+        pieChart.description = setupDescription()
+        configureLegend(pieChart.legend)
+        pieChart.centerText = generateCenterSpannableText(totalOutcomes.total)
+        configurePieChartSlices(pieChart, totalOutcomes)
+    }
+
+    private fun readAndGetOutcomesJSONFile() : TotalOutcomes {
+        val gson = Gson()
+        val jFile = assets.open("total_outcomes.json")
+        val bufferedReader: BufferedReader = jFile.bufferedReader()
+        val inputString = bufferedReader.use { it.readText() }
+        return gson.fromJson(inputString, TotalOutcomes::class.java)
+    }
+
+    private fun setData(entry: ArrayList<PieEntry>, totalOutcomes: TotalOutcomes) {
+        entry.add( PieEntry( totalOutcomes.awards.toFloat(), "Awards"))
+        entry.add( PieEntry( totalOutcomes.intellectualProperties.toFloat(), "Intellectual Properties"))
+        entry.add( PieEntry( totalOutcomes.publications.toFloat(), "Publications"))
+        entry.add( PieEntry( totalOutcomes.theses.toFloat(), "Theses"))
+    }
+
+    private fun generateCenterSpannableText(total: Int): CharSequence {
+        val msg01 = SpannableString("We've all got ")
+        msg01.setSpan(RelativeSizeSpan(1.4f), 0, msg01.length, 0)
+
+        val msg02 = SpannableString("Outcomes")
+        msg02.setSpan(StyleSpan(Typeface.NORMAL), 0, msg02.length, 0)
+        msg02.setSpan(ForegroundColorSpan(Color.RED), 0, msg02.length, 0)
+        msg02.setSpan(RelativeSizeSpan(2.1f), 0, msg02.length, 0)
+
+        val msg03 = SpannableString(".\nWe have ")
+        msg03.setSpan(RelativeSizeSpan(1.4f), 0, msg03.length, 0)
+
+        val msg04 = SpannableString("${total}")
+        msg04.setSpan(StyleSpan(Typeface.NORMAL), 0, msg04.length, 0)
+        msg04.setSpan(ForegroundColorSpan(Color.GREEN), 0, msg04.length, 0)
+        msg04.setSpan(RelativeSizeSpan(1.8f), 0, msg04.length, 0)
+
+        val msg05 = SpannableString(" in total.")
+        msg05.setSpan(RelativeSizeSpan(1.4f), 0, msg05.length, 0)
+
+        return TextUtils.concat(msg01, msg02, msg03, msg04, msg05)
+    }
 
     private class MyPercentFormatter() : ValueFormatter() {
 
@@ -215,6 +194,5 @@ class OutcomesChartActivity : AppCompatActivity() {
             // return mFormat.format(value.toDouble()) + if (percentSignSeparated) " %" else "%"
             return mFormat.format(value.toDouble()) + if (percentSignSeparated) " %" else "%"
         }
-
     }
 }

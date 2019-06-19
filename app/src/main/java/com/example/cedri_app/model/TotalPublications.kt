@@ -12,5 +12,7 @@ data class TotalPublications (
     @SerializedName("proceeding")
     var proceeding: Int,
     @SerializedName("journal")
-    var journal: Int
+    var journal: Int,
+    @SerializedName("total")
+    val total: Int
 )
