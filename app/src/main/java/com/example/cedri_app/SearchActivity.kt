@@ -14,7 +14,6 @@ import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_search.*
-//import kotlinx.coroutines.*
 import okhttp3.Dispatcher
 
 class SearchActivity : AppCompatActivity() {

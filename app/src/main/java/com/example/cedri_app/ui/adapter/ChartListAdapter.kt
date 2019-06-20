@@ -1,4 +1,4 @@
-package com.example.cedri_app
+package com.example.cedri_app.ui.adapter
 
 import com.example.cedri_app.model.Chart
 import android.content.Context
@@ -7,21 +7,19 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-//import com.github.mikephil.charting.charts.Chart
+import com.example.cedri_app.R
+import com.example.cedri_app.model.Total
 import kotlinx.android.synthetic.main.chart_item.view.*
 
-class ChartListAdapter(private val charts: List<Chart>,
+class ChartListAdapter(private val charts: List<Chart<out Total, *>>,
                        private val context: Context,
-                       private val onItemClickListener: (chart: Chart, position: Int) -> Unit) : Adapter<ChartListAdapter.ViewHolder>() {
+                       private val onItemClickListener: (chart: Chart<out Total, *>, position: Int) -> Unit) : Adapter<ChartListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chart = charts[position]
-        holder?.let {
-            it.bindView(chart)
-            it.itemView.setOnClickListener {
-                onItemClickListener(chart, position)
-            }
+        holder.bindView(chart)
+        holder.itemView.setOnClickListener {
+            onItemClickListener(chart, position)
         }
     }
 
@@ -35,7 +33,7 @@ class ChartListAdapter(private val charts: List<Chart>,
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(chart: Chart) {
+        fun bindView(chart: Chart<out Total, *>) {
             val title = itemView.chart_item_title
             val description = itemView.chart_item_description
             val image = itemView.chart_item_image

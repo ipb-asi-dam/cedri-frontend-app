@@ -2,17 +2,26 @@ package com.example.cedri_app.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TotalPublications (
+class TotalPublications(
     @SerializedName("book")
-    var book: Int,
+    val book: Int,
     @SerializedName("book_chapter")
-    var bookChapter: Int,
+    val bookChapter: Int,
     @SerializedName("editorial")
-    var editorial: Int,
+    val editorial: Int,
     @SerializedName("proceeding")
-    var proceeding: Int,
+    val proceeding: Int,
     @SerializedName("journal")
-    var journal: Int,
-    @SerializedName("total")
-    val total: Int
-)
+    val journal: Int,
+    total: Int
+
+) : Total(total) {
+    override fun getPairList(): List<Pair<String, Int>> {
+        return listOf (
+            Pair("Book", book),
+            Pair("Book Chapters", bookChapter),
+            Pair("Editorials", editorial),
+            Pair("Proceedings", proceeding),
+            Pair("Journals", journal))
+    }
+}

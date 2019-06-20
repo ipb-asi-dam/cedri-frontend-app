@@ -2,9 +2,17 @@ package com.example.cedri_app.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TotalIntellectualProperties(
+class TotalIntellectualProperties(
     @SerializedName("patents")
     val patents: Int,
     @SerializedName("softwares")
-    val softwares: Int
-)
+    val softwares: Int,
+    total : Int
+) : Total(total) {
+
+    override fun getPairList(): List<Pair<String, Int>> {
+        return listOf (
+            Pair("Patents", patents),
+            Pair("Softwares", softwares))
+    }
+}

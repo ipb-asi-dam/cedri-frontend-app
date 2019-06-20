@@ -1,4 +1,4 @@
-package com.example.cedri_app
+package com.example.cedri_app.ui.activity.chart
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,8 +10,8 @@ import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
-import android.widget.TextView
 import android.widget.Toast
+import com.example.cedri_app.*
 import com.example.cedri_app.model.*
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
@@ -43,7 +43,7 @@ class OutcomesChartActivity : AppCompatActivity() {
         /* End main process */
 
         /* Start process for test, get outcomes data from files. */
-        configureOutcomesChart( readAndGetOutcomesJSONFile() )
+        //configureOutcomesChart( readAndGetOutcomesJSONFile() )
         /* End process for test. */
 
         setSupportActionBar(android.support.v7.widget.Toolbar(this))
@@ -54,13 +54,18 @@ class OutcomesChartActivity : AppCompatActivity() {
             finish()
         }
     }
+    /*
 
     private fun tryGetData(mainAct : OutcomesChartActivity, token : String) {
         val tokenInterceptor = TokenInterceptor(token)
 
-        val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, NetworkUtils.getBaseUrl())
+        val retrofitClient = NetworkUtils.setupRetrofit(
+            tokenInterceptor,
+            NetworkUtils.getBaseUrl()
+        )
+        val a = Endpoint::class.java
         val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.showTotalOutcomesShow()
+        val callback = endpoint.index()
 
         // Asynchronous request. For synchronous request, use callback.execute()
         callback.enqueue(object : Callback<AuthenticateResponse<TotalOutcomes>> {
@@ -126,7 +131,7 @@ class OutcomesChartActivity : AppCompatActivity() {
 
     private fun setupDescription() : Description {
         val desc = Description()
-        desc.text = "PieChart das Publicações"
+        desc.text = "Outcome's Pie Chart"
         return desc
     }
 
@@ -194,5 +199,5 @@ class OutcomesChartActivity : AppCompatActivity() {
             // return mFormat.format(value.toDouble()) + if (percentSignSeparated) " %" else "%"
             return mFormat.format(value.toDouble()) + if (percentSignSeparated) " %" else "%"
         }
-    }
+    }*/
 }

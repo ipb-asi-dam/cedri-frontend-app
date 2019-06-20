@@ -50,6 +50,7 @@ class AuthorPerfilActivity : AppCompatActivity() {
 
         val retrofitClient = NetworkUtils.setupRetrofit(tokenInterceptor, NetworkUtils.getBaseUrl())
         val endpoint = retrofitClient.create(Endpoint::class.java)
+        /*
         val callback = endpoint.showInvestigator(payload.id)
 
         // Asynchronous request. For synchronous request, use callback.execute()
@@ -70,7 +71,7 @@ class AuthorPerfilActivity : AppCompatActivity() {
                     configureInvestigator(investigator)
                 }
             }
-        })
+        })*/
     }
 
     private fun configureInvestigator(investigator : Investigator) {
