@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val authRequest = AuthenticateRequest(email, password)
-        /*
+
         val callback = endpoint.postLogin(authRequest)
 
         // Asynchronous request. For synchronous request, use callback.execute()
@@ -74,6 +74,6 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
             }
-        })*/
+        })
     }
 }

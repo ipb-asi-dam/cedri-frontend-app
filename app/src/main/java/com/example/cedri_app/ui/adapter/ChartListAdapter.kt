@@ -8,12 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.cedri_app.R
-import com.example.cedri_app.model.Total
 import kotlinx.android.synthetic.main.chart_item.view.*
 
-class ChartListAdapter(private val charts: List<Chart<out Total, *>>,
+class ChartListAdapter(private val charts: List<Chart>,
                        private val context: Context,
-                       private val onItemClickListener: (chart: Chart<out Total, *>, position: Int) -> Unit) : Adapter<ChartListAdapter.ViewHolder>() {
+                       private val onItemClickListener: (chart: Chart, position: Int) -> Unit) : Adapter<ChartListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chart = charts[position]
@@ -33,12 +32,12 @@ class ChartListAdapter(private val charts: List<Chart<out Total, *>>,
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(chart: Chart<out Total, *>) {
+        fun bindView(chart: Chart) {
             val title = itemView.chart_item_title
             val description = itemView.chart_item_description
             val image = itemView.chart_item_image
             title.text = chart.title
-            description.text = chart.description
+            description.text = chart.getDescription()
             image.setImageResource(R.drawable.piechart_2_icon2)
         }
     }

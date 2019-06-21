@@ -9,11 +9,9 @@ import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import android.widget.TextView
 import android.widget.Toast
-import com.example.cedri_app.Endpoint
-import com.example.cedri_app.NetworkUtils
-import com.example.cedri_app.R
-import com.example.cedri_app.TokenInterceptor
+import com.example.cedri_app.*
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
@@ -26,40 +24,91 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.io.BufferedReader
 import java.text.DecimalFormat
 import java.util.ArrayList
 
-class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
+class TotalPieChart(
     val act: AppCompatActivity,
     val token: String,
     val baseContext: Context,
-    val totalClass: Class<out T>,
-    val cls: Class<out E>) {
+    val chart: Chart) {
 
     fun tryGetData() {
-        val tokenInterceptor = TokenInterceptor(token)
+        when (chart.title) {
+            "CEDRI Awards" -> getTotalAwardsData()
+            "CEDRI Intellectual Properties" -> getTotalIntellectualPropertiesData()
+            "CEDRI Outcomes" -> getTotalOutcomesData()
+            "CEDRI Publications" -> getTotalPublicationsData()
+            "CEDRI Theses" -> getTotalThesesData()
+            else -> getTotalOutcomesData()
+        }
+    }
 
-        // Para testar estaticamente
-        val data = readAndGetPublicationsJSONFile()
+    private fun getTotalAwardsData() {
+        // For test
+        val data = readAndGetDataFromJSONFile(TotalAwards::class.java)
         configurePieChart(data)
-
-        val retrofitClient = NetworkUtils.setupRetrofit(
-            tokenInterceptor,
-            NetworkUtils.getBaseUrl()
-        )
         /*
-        val endpoint = retrofitClient.create(cls)
-        val callback = endpoint.index()
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val callback = endpoint.indexTotalAwards()
+        requestData(callback)*/
+    }
 
+    private fun getTotalThesesData() {
+        // For test
+        val data = readAndGetDataFromJSONFile(TotalTheses::class.java)
+        configurePieChart(data)
+        /*
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val callback = endpoint.indexTotalTheses()
+        requestData(callback)*/
+    }
+
+    private fun getTotalIntellectualPropertiesData() {
+        // For test
+        val data = readAndGetDataFromJSONFile(TotalIntellectualProperties::class.java)
+        configurePieChart(data)
+        /*
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val callback = endpoint.indexTotalIntellectualProperties()
+        requestData(callback)*/
+    }
+
+    private fun getTotalPublicationsData() {
+        // For test
+        val data = readAndGetDataFromJSONFile(TotalPublications::class.java)
+        configurePieChart(data)
+        /*
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val callback = endpoint.indexTotalPublications()
+        requestData(callback)*/
+    }
+
+    private fun getTotalOutcomesData() {
+        // For test
+        val data = readAndGetDataFromJSONFile(TotalOutcomes::class.java)
+        configurePieChart(data)
+        /*
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val callback = endpoint.indexTotalOutcomes()
+        requestData(callback)*/
+    }
+
+    private fun <T: Total>requestData(callback : Call<AuthenticateResponse<T>>) {
         // Asynchronous request. For synchronous request, use callback.execute()
         callback.enqueue(object : Callback<AuthenticateResponse<T>> {
             override fun onFailure(call: Call<AuthenticateResponse<T>>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<AuthenticateResponse<T>>, response: Response<AuthenticateResponse<T>>) {
+            override fun onResponse(call: Call<AuthenticateResponse<T>>,
+                                    response: Response<AuthenticateResponse<T>>) {
                 val responseChecker = ResponseChecker(act, response)
 
                 if ( responseChecker.checkResponse() ) {
@@ -71,7 +120,7 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
                     configurePieChart(data)
                 }
             }
-        })*/
+        })
     }
 
     private fun configureLegend(legend: Legend) {
@@ -96,10 +145,10 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
         setData(entry, data)
 
         // Cria o dataset de acordo com as entidades.
-        val dataSet = PieDataSet(entry, "Outcomes Results")
+        val dataSet = PieDataSet(entry, "${chart.getTableName()} Results")
 
         // Define cores do pie chart
-        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
+        dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
         // dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
 
         // Desenha os valores no interior das fatias do Pie Chart
@@ -116,12 +165,15 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
     }
 
     private fun setupDescription() : Description {
+
         val desc = Description()
-        desc.text = "Publication's Pie Chart"
+        desc.text = "${chart.getTableName()} Pie Chart"
         return desc
     }
 
-    private fun configurePieChart(data: Total) {
+    private fun <T: Total>configurePieChart(data: T) {
+        val menuBarTitle = act.findViewById<TextView>(R.id.textView)
+        menuBarTitle.text = chart.title
         val pieChart = act.findViewById<PieChart>(R.id.pie) ?: run {
             println("ERROR: ID do Piechart não encontrado")
             return
@@ -129,17 +181,16 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
 
         pieChart.description = setupDescription()
         configureLegend(pieChart.legend)
-        pieChart.centerText = generateCenterSpannableText(data.total)
+        val total = data.total
+        pieChart.centerText = generateCenterSpannableText(total)
         configurePieChartSlices(pieChart, data)
     }
 
-    private fun readAndGetPublicationsJSONFile() : T {
-        val gson = Gson()
-        //val jFile = act.assets.open("${totalClass}.json")
-        val jFile = act.assets.open("${totalClass}.json")
+    private fun <T: Total>readAndGetDataFromJSONFile(totalClass : Class<T>) : T {
+        val jFile = act.assets.open("$totalClass.json")
         val bufferedReader: BufferedReader = jFile.bufferedReader()
         val inputString = bufferedReader.use { it.readText() }
-        return gson.fromJson(inputString, totalClass)
+        return Gson().fromJson(inputString, totalClass)
     }
 
     private fun setData(entry: ArrayList<PieEntry>, data: Total) {
@@ -154,7 +205,7 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
         val msg01 = SpannableString("We've all got ")
         msg01.setSpan(RelativeSizeSpan(1.4f), 0, msg01.length, 0)
 
-        val msg02 = SpannableString("Outcomes")
+        val msg02 = SpannableString(chart.getTableName())
         msg02.setSpan(StyleSpan(Typeface.NORMAL), 0, msg02.length, 0)
         msg02.setSpan(ForegroundColorSpan(Color.RED), 0, msg02.length, 0)
         msg02.setSpan(RelativeSizeSpan(2.1f), 0, msg02.length, 0)
@@ -162,7 +213,7 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
         val msg03 = SpannableString(".\nWe have ")
         msg03.setSpan(RelativeSizeSpan(1.4f), 0, msg03.length, 0)
 
-        val msg04 = SpannableString("${total}")
+        val msg04 = SpannableString("$total")
         msg04.setSpan(StyleSpan(Typeface.NORMAL), 0, msg04.length, 0)
         msg04.setSpan(ForegroundColorSpan(Color.GREEN), 0, msg04.length, 0)
         msg04.setSpan(RelativeSizeSpan(1.8f), 0, msg04.length, 0)
@@ -173,13 +224,12 @@ class TotalPieChart<out T: Total, out E: Endpoint<out T>>(
         return TextUtils.concat(msg01, msg02, msg03, msg04, msg05)
     }
 
-    private class MyPercentFormatter() : ValueFormatter() {
+    private class MyPercentFormatter : ValueFormatter() {
 
-        var mFormat: DecimalFormat
+        var mFormat: DecimalFormat = DecimalFormat("###,###,##0.0")
         private var percentSignSeparated: Boolean = false
 
         init {
-            mFormat = DecimalFormat("###,###,##0.0")
             percentSignSeparated = true
         }
 

@@ -1,5 +1,4 @@
 package com.example.cedri_app
-import android.content.Intent.getIntent
 import android.os.Bundle
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
@@ -12,6 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkUtils {
 
     companion object {
+        fun getRetrofit(token: String) : Retrofit {
+            val tokenInterceptor = TokenInterceptor(token)
+
+            return setupRetrofit(tokenInterceptor, getBaseUrl())
+        }
+
         /** Retorna uma instancia do Cliente Retrofit para requisições.
          * @param path caminho principal da API
          */
@@ -31,8 +36,8 @@ class NetworkUtils {
         }
 
         fun getBaseUrl() : String {
-            // return "http://192.168.1.13:5000"
             return "http://192.168.0.101:5000"
+            //return "http://192.168.0.102:5000"
         }
 
         fun getToken(extras : Bundle?) : String {

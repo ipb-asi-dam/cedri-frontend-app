@@ -4,9 +4,9 @@ import android.content.Context
 import android.widget.Toast
 import retrofit2.Response
 
-class ResponseChecker<T>(activity: Context, response: Response<AuthenticateResponse<T>>?) {
-    val activity = activity
-    val response = response
+class ResponseChecker<T>(
+    val activity: Context,
+    val response: Response<AuthenticateResponse<T>>?) {
 
     fun checkResponse() : Boolean {
         if( response !== null) {

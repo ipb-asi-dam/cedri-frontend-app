@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/chartMenuBlue"
-        tools:context="com.example.cedri_app.ui.activity.chart.OutcomesChartActivity">
+        tools:context="com.example.cedri_app.ui.activity.chart.TotalPieChartActivity">
 
     <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -36,13 +36,13 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
+                    android:id="@+id/textView"
                     android:text="@string/menu_bar_titles_outcomes_chart_screen"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:layout_height="32dp"
-                    android:id="@+id/textView"
                     android:gravity="center"
                     android:layout_centerInParent="true"/>
 
