@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "data": [
+      {
+        "id": 1,
+        "title": "artigo sobre agua",
+        "isApproved": true
+      },
+      {
+        "id": 2,
+        "title": "artigo sobre a terra",
+        "isApproved": true
+      },
+      {
+        "id": 3,
+        "title": "artigo sobre pessoas",
+        "isApproved": false
+      },
+      {
+        "id": 4,
+        "title": "artigo sobre arte",
+        "isApproved": true
+      },
+      {
+        "id": 5,
+        "title": "artigo sobre pirahas",
+        "isApproved": false
+      },
+      {
+        "id": 6,
+        "title": "artigo sobre computador",
+        "isApproved": false
+      }
+  ]
+}

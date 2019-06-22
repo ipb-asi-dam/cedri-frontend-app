@@ -12,6 +12,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+            android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ApprovalsActivity">
@@ -23,7 +24,7 @@
         <activity android:name=".SearchActivity">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".MenuActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
             <intent-filter>
@@ -37,7 +38,7 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MenuActivity"
+                android:name=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
         </activity>

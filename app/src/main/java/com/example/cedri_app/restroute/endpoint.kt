@@ -3,10 +3,7 @@ package com.example.cedri_app
 import com.example.cedri_app.model.*
 import com.example.cedri_app.model.tables.PublicationModel
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface Endpoint {
     @POST("api/public/authenticate")
@@ -50,6 +47,9 @@ interface Endpoint {
 
     @GET("api/public/theses/total/{investigator_id")
     fun showTotalTheses(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalTheses>>
+
+    @GET("api/public/projects/")
+    fun indexProject(@Query("page") page_number: Int, @Query("limit") limit: Int): Call<AuthenticateResponse<ArrayList<ApprovalProjectCard>>>
 
     @GET("api/private/publications")
     fun indexPublications(): Call<AuthenticateResponse<List<PublicationModel>>>
