@@ -5,8 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundLight"
-        tools:context="com.example.cedri_app.PublicationPieChartActivity">
+        android:background="@color/chartMenuBlue"
+        tools:context="com.example.cedri_app.ui.activity.chart.TotalPieChartActivity">
 
     <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -36,13 +36,13 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="@string/tela_dashbord_public_piechart"
+                    android:id="@+id/textView"
+                    android:text="@string/menu_bar_titles_outcomes_chart_screen"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:layout_height="32dp"
-                    android:id="@+id/textView"
                     android:gravity="center"
                     android:layout_centerInParent="true"/>
 
@@ -72,7 +72,7 @@
                 android:id="@+id/pie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
-        /></LinearLayout>
+                android:layout_margin="20dp"/>
+    </LinearLayout>
 
 </RelativeLayout>

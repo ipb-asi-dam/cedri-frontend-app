@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.cedri_app.ui.activity.listing.PublicationListActivity"
+                android:background="@color/chartMenuBlue">
+
+    <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            tools:context=".MenuActivity"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:background="@color/colorPrimary"
+            android:id="@+id/toolbar"
+            app:contentInsetStart="0dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageButton
+                    android:id="@+id/backImageButtonPublicationList"
+                    android:layout_height="48dp"
+                    android:layout_width="48dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    android:background="@color/colorPrimary"
+                    android:contentDescription="Logout button."
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:text="@string/menu_bar_titles_my_publications_list_screen"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:layout_height="32dp"
+                    android:id="@+id/textView"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"/>
+
+            <ImageButton
+                    android:id="@+id/logoutImageButton2"
+                    android:layout_height="48dp"
+                    android:layout_width="48dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:background="@color/colorPrimary"
+                    android:contentDescription="Avatar button."
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+            />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/toolbar"
+            android:id="@+id/publication_list_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+</RelativeLayout>

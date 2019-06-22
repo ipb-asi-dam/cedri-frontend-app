@@ -4,6 +4,7 @@
           package="com.example.cedri_app">
 
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:allowBackup="true"
@@ -15,36 +16,58 @@
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ApprovalsActivity">
         </activity>
-        <activity android:name=".AutorPerfilActivity">
+        <activity android:name=".AuthorPerfilActivity">
         </activity>
         <activity android:name=".ArticleReviewActivity">
         </activity>
         <activity android:name=".SearchActivity">
         </activity>
         <activity
-                android:name=".MenuActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
-                android:name=".ForgotPasswordActivity"
-                android:screenOrientation="portrait"/>
-
-        <activity
-                android:name=".PublicationPieChartActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
                 android:name=".MainActivity"
                 android:screenOrientation="portrait"
-                android:theme="@style/AppLoginTheme">
+                android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".ForgotPasswordActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".MenuActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppLoginTheme">
+        </activity>
+
+
+        <!-- Chart Activities -->
+        <activity
+                android:name=".ui.activity.chart.TotalPieChartActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+
+
+        <!-- Listing Activities -->
+        <activity
+                android:name=".ui.activity.listing.ChartListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.PublicationListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.WorkCardListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+
     </application>
 
 </manifest>
