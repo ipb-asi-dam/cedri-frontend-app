@@ -4,7 +4,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.example.cedri_app.ui.activity.listing.ChartListActivity"
+                tools:context="com.example.cedri_app.ui.activity.listing.PublicationListActivity"
                 android:background="@color/chartMenuBlue">
 
     <android.support.v7.widget.Toolbar
@@ -21,7 +21,7 @@
                 android:layout_height="match_parent">
 
             <ImageButton
-                    android:id="@+id/backImageButtonChartList"
+                    android:id="@+id/backImageButtonPublicationList"
                     android:layout_height="48dp"
                     android:layout_width="48dp"
                     android:src="@drawable/ic_arrow_back_black_24dp"
@@ -35,7 +35,7 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="@string/menu_bar_titles_chart_list_screen"
+                    android:text="@string/menu_bar_titles_my_publications_list_screen"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
             android:layout_below="@id/toolbar"
-            android:id="@+id/chart_list_recyclerview"
+            android:id="@+id/publication_list_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />

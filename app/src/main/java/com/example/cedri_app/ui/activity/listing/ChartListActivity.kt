@@ -1,10 +1,13 @@
-package com.example.cedri_app
+package com.example.cedri_app.ui.activity.listing
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.example.cedri_app.MenuActivity
+import com.example.cedri_app.NetworkUtils
+import com.example.cedri_app.R
 import com.example.cedri_app.model.*
 import kotlinx.android.synthetic.main.activity_chart_list.*
 import com.example.cedri_app.ui.adapter.ChartListAdapter
