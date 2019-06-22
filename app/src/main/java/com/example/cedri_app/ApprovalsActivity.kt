@@ -2,22 +2,45 @@ package com.example.cedri_app
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
+import com.example.cedri_app.model.ApprovalProjectCard
+import com.example.cedri_app.model.AuthenticateResponse
+import com.example.cedri_app.model.ResponseChecker
+import com.example.cedri_app.model.Total
+import com.example.cedri_app.ui.adapter.ApporvalsAdapter
+import com.example.cedri_app.ui.adapter.ChartListAdapter
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_approvals.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.BufferedReader
 
 class ApprovalsActivity : AppCompatActivity() {
 
+    val articlesApprovalsList: MutableList<String> = ArrayList()
+
+    var page = 0
+    var isLoading = false
+    val limit = 10
+
+    lateinit var adapter: ApporvalsAdapter
+    lateinit var layoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_approvals)
+
 
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
@@ -25,51 +48,54 @@ class ApprovalsActivity : AppCompatActivity() {
             finish()
         }
 
-        val listView = findViewById<ListView>(R.id.approval_listView)
+        layoutManager = LinearLayoutManager(this)
+        approval_recyclerView.layoutManager = layoutManager
+        getPage()
 
-        listView.adapter = ApprovalListViewAdapter(this)
+        Log.e("E", "--->" + "FUDEU")
+
+        approval_recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                val visibleItemCount = layoutManager.childCount
+                val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+                val total = adapter.itemCount
+
+                if (!isLoading) {
+
+                    if ((visibleItemCount + pastVisibleItem) >= total) {
+                        page++
+                        // BUSCAR NO BACKEND DADOS DA PROXIMA PAGINA
+                        getPage()
+                    }
+
+                }
+
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
     }
 
-    private class ApprovalListViewAdapter(context: Context): BaseAdapter(){
+    fun getPage() {
+        isLoading = true
+        approval_progressBar.visibility = View.VISIBLE
+        val start = ((page) * limit)
+        val end = (page + 1) * limit
 
-        private val mContext: Context
-        private val article_names = arrayListOf<String>(
-            "a", "b", "c", "d", "e"
-        )
-
-        init {
-            mContext = context
+        for (i in start until end) {
+            articlesApprovalsList.add("title: " + i.toString())
         }
+        Handler().postDelayed({
+            if (::adapter.isInitialized) {
+                adapter.notifyDataSetChanged()
+            } else {
+                adapter = ApporvalsAdapter(this)
+                approval_recyclerView.adapter = adapter
+            }
+            isLoading = false
+            approval_progressBar.visibility = View.GONE
+        }, 2000)
 
-        // responsible for rendering each row
-        override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
-            val layoutInflater = LayoutInflater.from(mContext)
-            val row_approval = layoutInflater.inflate(R.layout.card_article, viewGroup, false)
-
-            val card_article_approval = row_approval.findViewById<TextView>(R.id.cardArticle_textView)
-            card_article_approval.text = "${article_names.get(position)}: $position"
-
-            val image = mContext.resources.getDrawable(R.drawable.ic_check_circle_black_24dp)
-
-            card_article_approval.setCompoundDrawablesWithIntrinsicBounds(null,null, image, null)
-
-
-            return row_approval
-        }
-
-        // ignore for now
-        override fun getItem(position: Int): Any {
-            return "getItemReturn"
-        }
-
-        // ignore for now
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        // responsible for how many rows in the listview
-        override fun getCount(): Int {
-            return article_names.size
-        }
     }
+
 }
