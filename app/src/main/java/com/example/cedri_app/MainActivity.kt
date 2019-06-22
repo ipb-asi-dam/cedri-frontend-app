@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
                 // Toast.makeText(this,"PREENCHA ESTE CAMPO", Toast.LENGTH_LONG).show()
                 editTextPasswordActivityMain.error = "SENHA INVALIDA"
             } else {
-                Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
                 val email = editTextEmailActivityMain.text.toString();
                 val password = editTextPasswordActivityMain.text.toString();
+                Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
 
                 loginRequest(this, email, password)
             }

@@ -1,5 +1,6 @@
 package com.example.cedri_app
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -16,6 +17,7 @@ import com.example.cedri_app.model.ApprovalProjectCard
 import com.example.cedri_app.model.AuthenticateResponse
 import com.example.cedri_app.model.ResponseChecker
 import com.example.cedri_app.model.Total
+import com.example.cedri_app.model.tables.ApprovalProjectList
 import com.example.cedri_app.ui.adapter.ApporvalsAdapter
 import com.example.cedri_app.ui.adapter.ChartListAdapter
 import com.google.gson.Gson
@@ -29,7 +31,7 @@ class ApprovalsActivity : AppCompatActivity() {
 
     val articlesApprovalsList: MutableList<String> = ArrayList()
 
-    var page = 0
+    var page = 1
     var isLoading = false
     val limit = 15
 
@@ -41,12 +43,31 @@ class ApprovalsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_approvals)
 
-
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
             finish()
         }
+        val token = NetworkUtils.getToken(intent.getExtras())
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+
+        // instanciando um cliente Retrofit
+        val service = retrofitClient.create(Endpoint::class.java)
+        val call = service?.indexProject(page,limit)
+
+        //callback (async)
+        call?.enqueue(object : Callback<AuthenticateResponse<ApprovalProjectList>>{
+            override fun onFailure(call: Call<AuthenticateResponse<ApprovalProjectList>>, t: Throwable) {
+                Toast.makeText(applicationContext,"CAMPOS INCORRETOS", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<AuthenticateResponse<ApprovalProjectList>>, response: Response<AuthenticateResponse<ApprovalProjectList>>) {
+                val body = response?.body()
+                val projects = body?.getData()?.projects
+                val size = projects?.size
+            }
+
+        })
 
         layoutManager = LinearLayoutManager(this)
         approval_recyclerView.layoutManager = layoutManager
