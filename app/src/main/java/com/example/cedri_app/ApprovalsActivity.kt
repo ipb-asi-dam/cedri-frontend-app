@@ -31,7 +31,7 @@ class ApprovalsActivity : AppCompatActivity() {
 
     var page = 0
     var isLoading = false
-    val limit = 10
+    val limit = 15
 
     lateinit var adapter: ApporvalsAdapter
     lateinit var layoutManager: LinearLayoutManager
