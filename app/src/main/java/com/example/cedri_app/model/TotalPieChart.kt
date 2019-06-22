@@ -102,6 +102,7 @@ class TotalPieChart(
 
     private fun <T: Total>requestData(callback : Call<AuthenticateResponse<T>>) {
         // Asynchronous request. For synchronous request, use callback.execute()
+
         callback.enqueue(object : Callback<AuthenticateResponse<T>> {
             override fun onFailure(call: Call<AuthenticateResponse<T>>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()

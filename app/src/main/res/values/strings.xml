@@ -5,6 +5,7 @@
     <string name="itemMenuDashboard">DASHBOARD</string>
     <string name="itemMenuProcurar">SEARCH</string>
     <string name="itemMenuAprovacoes">APPROVALS</string>
+    <string name="itemMenuMeusTrabalhos">MY WORKS</string>
     <string name="tela_perfil_name">AUTHOR</string>
     <string name="tela_revisao_artigo_name">REVIEW</string>
     <string name="tela_todos_artigos_name">ARTICLES</string>
@@ -28,8 +29,18 @@
     </string>
     <string name="chart_preview_image">chart</string>
 
-    <!-- Menu Bar Titles-->
+    <!-- Menu Bar Titles -->
     <string name="menu_bar_titles_chart_list_screen">CHARTS</string>
+    <string name="menu_bar_titles_my_publications_list_screen">MY PUBLICATIONS</string>
+    <string name="menu_bar_titles_my_events_list_screen">MY EVENTS</string>
+    <string name="menu_bar_titles_my_news_list_screen">MY NEWS</string>
+    <string name="menu_bar_titles_my_awards_list_screen">MY AWARDS</string>
+    <string name="menu_bar_titles_my_projects_list_screen">MY PROJECTS</string>
+    <string name="menu_bar_titles_my_theses_list_screen">MY THESES</string>
+    <string name="menu_bar_titles_my_intellectual_properties_list_screen">MY INTELLECTUAL PROPERTIES</string>
     <string name="menu_bar_titles_outcomes_chart_screen">TOTAL OUTCOMES</string>
+    <string name="menu_bar_titles_work_card_list_screen">MY WORKS</string>
 
+    <!-- Publications List -->
+    <string name="publication_list_type">%1$s (%2$s)</string>
 </resources>

@@ -36,7 +36,8 @@ class NetworkUtils {
         }
 
         fun getBaseUrl() : String {
-            return "http://192.168.0.101:5000"
+            return "http://192.168.190.130:5000"
+            //return "http://192.168.12.1:5000"
             //return "http://192.168.0.102:5000"
         }
 

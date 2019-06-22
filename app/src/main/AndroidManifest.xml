@@ -34,24 +34,40 @@
         </activity>
         <activity
                 android:name=".ForgotPasswordActivity"
-                android:screenOrientation="portrait"/>
-
-        <activity
-                android:name=".ChartListActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
-                android:name=".ui.activity.chart.TotalPieChartActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme">
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".MenuActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
-
         </activity>
+
+
+        <!-- Chart Activities -->
+        <activity
+                android:name=".ui.activity.chart.TotalPieChartActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+
+
+        <!-- Listing Activities -->
+        <activity
+                android:name=".ui.activity.listing.ChartListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.PublicationListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.WorkCardListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+
     </application>
 
 </manifest>

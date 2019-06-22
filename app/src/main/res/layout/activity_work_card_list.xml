@@ -4,7 +4,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.example.cedri_app.ui.activity.listing.ChartListActivity"
+                tools:context="com.example.cedri_app.ui.activity.listing.WorkCardListActivity"
                 android:background="@color/chartMenuBlue">
 
     <android.support.v7.widget.Toolbar
@@ -35,13 +35,13 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="@string/menu_bar_titles_chart_list_screen"
+                    android:id="@+id/textView"
+                    android:text="@string/menu_bar_titles_work_card_list_screen"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:layout_height="32dp"
-                    android:id="@+id/textView"
                     android:gravity="center"
                     android:layout_centerInParent="true"/>
 
@@ -66,7 +66,7 @@
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
             android:layout_below="@id/toolbar"
-            android:id="@+id/chart_list_recyclerview"
+            android:id="@+id/work_card_list_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
