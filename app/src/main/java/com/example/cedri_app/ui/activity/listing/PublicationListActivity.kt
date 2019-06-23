@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.example.cedri_app.Endpoint
-import com.example.cedri_app.MenuActivity
 import com.example.cedri_app.NetworkUtils
 import com.example.cedri_app.R
 import com.example.cedri_app.model.*
