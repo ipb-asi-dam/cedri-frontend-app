@@ -31,7 +31,6 @@ class ChartListActivity : AppCompatActivity() {
 
         val charts = ChartList(true).getCharts()
         recyclerView.adapter = ChartListAdapter(charts, this) { chart, position ->
-            val tes = chart
             Toast.makeText(
                 this,
                 "Clicando no item do recyclerView o(≧▽≦)o", Toast.LENGTH_LONG

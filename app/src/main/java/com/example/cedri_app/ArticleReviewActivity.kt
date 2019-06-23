@@ -11,6 +11,8 @@ class ArticleReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_review)
 
+        val token = NetworkUtils.getToken( getIntent().getExtras() )
+
         backImageButtonSingleArticleReview.setOnClickListener {
             val intent = Intent(this, ApprovalsActivity::class.java)
             startActivity(intent)
@@ -19,6 +21,7 @@ class ArticleReviewActivity : AppCompatActivity() {
 
         buttonPerfilAutorTelaResumoArtigo.setOnClickListener {
             val intent = Intent(this, AuthorPerfilActivity::class.java)
+            intent.putExtra("token", token)
             startActivity(intent)
             finish()
         }

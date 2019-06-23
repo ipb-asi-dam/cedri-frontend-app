@@ -5,18 +5,25 @@ class ChartList(val isAdmin : Boolean) {
     fun getCharts() : List<Chart> {
         when {
             isAdmin == true -> return listOf (
-                Chart("CEDRI Awards"),
-                Chart("CEDRI Intellectual Properties"),
-                Chart("CEDRI Outcomes"),
-                Chart("CEDRI Publications"),
-                Chart("CEDRI Theses")
+                Chart("CeDRI Awards"),
+                Chart("CeDRI Intellectual Properties"),
+                Chart("CeDRI Outcomes"),
+                Chart("CeDRI Publications"),
+                Chart("CeDRI Theses"),
+                Chart("My Awards"),
+                Chart("My Intellectual Properties"),
+                Chart("My Outcomes"),
+                Chart("My Publications"),
+                Chart("My Theses"),
+                Chart("My Projects")
             )
             else -> return listOf (
                 Chart("My Awards"),
                 Chart("My Intellectual Properties"),
                 Chart("My Outcomes"),
                 Chart("My Publications"),
-                Chart("My Theses")
+                Chart("My Theses"),
+                Chart("My Projects")
             )
         }
     }
