@@ -1,6 +1,5 @@
 package com.example.cedri_app
 
-
 import okhttp3.Interceptor
 import okhttp3.Response
 

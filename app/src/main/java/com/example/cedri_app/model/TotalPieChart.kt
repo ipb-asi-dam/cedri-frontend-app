@@ -36,11 +36,11 @@ class TotalPieChart(
 
     fun tryGetData() {
         when (chart.title) {
-            "CEDRI Awards" -> getTotalAwardsData()
-            "CEDRI Intellectual Properties" -> getTotalIntellectualPropertiesData()
-            "CEDRI Outcomes" -> getTotalOutcomesData()
-            "CEDRI Publications" -> getTotalPublicationsData()
-            "CEDRI Theses" -> getTotalThesesData()
+            "CeDRI Awards" -> getTotalAwardsData()
+            "CeDRI Intellectual Properties" -> getTotalIntellectualPropertiesData()
+            "CeDRI Outcomes" -> getTotalOutcomesData()
+            "CeDRI Publications" -> getTotalPublicationsData()
+            "CeDRI Theses" -> getTotalThesesData()
             else -> getTotalOutcomesData()
         }
     }
@@ -166,7 +166,6 @@ class TotalPieChart(
     }
 
     private fun setupDescription() : Description {
-
         val desc = Description()
         desc.text = "${chart.getTableName()} Pie Chart"
         return desc
