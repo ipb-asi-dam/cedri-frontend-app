@@ -15,6 +15,8 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    var myDB = DataBaseHandler(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,9 +40,9 @@ class MainActivity : AppCompatActivity() {
                 // Toast.makeText(this,"PREENCHA ESTE CAMPO", Toast.LENGTH_LONG).show()
                 editTextPasswordActivityMain.error = "SENHA INVALIDA"
             } else {
-                Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
                 val email = editTextEmailActivityMain.text.toString();
                 val password = editTextPasswordActivityMain.text.toString();
+                Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
 
                 loginRequest(this, email, password)
             }
@@ -70,6 +72,13 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(mainAct, MenuActivity::class.java)
                     val token = response?.body()?.getData()?.token
                     intent.putExtra("token", token)
+                    /*
+                    //armazenar no banco o token
+                    var tokenDB : DataInformation = DataInformation(token.toString())
+                    var db : Boolean = myDB.addData(tokenDB)
+                    myDB.close()*/
+
+
                     startActivity(intent)
                     finish()
                 }

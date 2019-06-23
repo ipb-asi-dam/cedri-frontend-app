@@ -3,6 +3,7 @@ package com.example.cedri_app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
 import com.example.cedri_app.ui.activity.listing.WorkCardListActivity
@@ -14,6 +15,9 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         val token = NetworkUtils.getToken( getIntent().getExtras() )
+
+        //var db : DataBaseHandler = DataBaseHandler(applicationContext)
+        //Log.e("BANCOOO", "ESSE É O TOKEN: ${tokenFromDB}")
 
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

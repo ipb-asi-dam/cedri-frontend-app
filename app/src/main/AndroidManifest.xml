@@ -24,7 +24,7 @@
         <activity android:name=".SearchActivity">
         </activity>
         <activity
-                android:name=".MenuActivity"
+                android:name=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
@@ -33,7 +33,7 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".MenuActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
             <intent-filter>

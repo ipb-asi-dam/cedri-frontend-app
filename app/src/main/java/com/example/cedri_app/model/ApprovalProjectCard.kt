@@ -7,6 +7,6 @@ data class ApprovalProjectCard (
     val id: Int,
     @SerializedName("title")
     val title: String,
-    @SerializedName("isApproved")
-    val isApproved: Boolean
+    @SerializedName("isAccepted")
+    val isAccepted: Boolean
 )

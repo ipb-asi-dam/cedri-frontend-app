@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.cedri_app.ApprovalsActivity
@@ -47,18 +48,28 @@ class ApporvalsAdapter(private val approvalProjectCards: List<ApprovalProjectCar
 */
 
 
-class ApporvalsAdapter(val activity: ApprovalsActivity) : RecyclerView.Adapter<ApporvalsAdapter.ApprovalViewHolder>() {
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ApprovalViewHolder {
-        return ApprovalViewHolder(LayoutInflater.from(activity).inflate(R.layout.card_article, p0, false))
+class ApporvalsAdapter(val activity: ApprovalsActivity, val onIntemClickListener : (project: ApprovalProjectCard, position: Int) -> Unit) : RecyclerView.Adapter<ApporvalsAdapter.ApprovalViewHolder>() {
+    override fun onCreateViewHolder(view: ViewGroup, position: Int): ApprovalViewHolder {
+        return ApprovalViewHolder(LayoutInflater.from(activity).inflate(R.layout.card_article, view, false))
     }
 
     override fun getItemCount(): Int {
         return activity.articlesApprovalsList.size
     }
 
-    override fun onBindViewHolder(p0: ApprovalViewHolder, p1: Int) {
-        p0.articleTitle.text = activity.articlesApprovalsList[p1]
-        p0.articleIsApproved.setImageResource(R.drawable.ic_cancel_black_24dp)
+    override fun onBindViewHolder(viewHolder: ApprovalViewHolder, position: Int) {
+        val approvalCard = activity.articlesApprovalsList[position]
+
+        viewHolder.itemView.setOnClickListener{
+            onIntemClickListener(approvalCard, position)
+        }
+
+        viewHolder.articleTitle.text = activity.articlesApprovalsList[position].title
+        if (activity.articlesApprovalsList[position].isAccepted){
+            viewHolder.articleIsApproved.setImageResource(R.drawable.ic_check_circle_black_24dp)
+        } else {
+            viewHolder.articleIsApproved.setImageResource(R.drawable.ic_cancel_black_24dp)
+        }
 
     }
 
