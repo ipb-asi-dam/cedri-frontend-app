@@ -21,49 +21,53 @@ interface Endpoint {
 
 
     /* AWARDS */
-    @GET("api/public/awards/total")
+    @GET("api/public/statistics/awards")
     fun indexTotalAwards(): Call<AuthenticateResponse<TotalAwards>>
 
-    @GET("api/public/awards/total/{investigator_id")
+    @GET("api/public/statistics/awards/{investigator_id")
     fun showTotalAwards(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalAwards>>
 
 
     /* INTELLECTUAL PROPERTIES */
-    @GET("api/public/intellectual-properties/total")
+    @GET("api/public/statistics/intellectual_properties")
     fun indexTotalIntellectualProperties(): Call<AuthenticateResponse<TotalIntellectualProperties>>
 
-    @GET("api/public/intellectual-properties/total/{investigator_id")
+    @GET("api/public/statistics/intellectual_properties/{investigator_id")
     fun showTotalIntellectualProperties(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalIntellectualProperties>>
 
 
-
     /* PUBLICATIONS */
-    @GET("api/public/publications/total")
+    @GET("api/public/statistics/publications")
     fun indexTotalPublications(): Call<AuthenticateResponse<TotalPublications>>
 
-    @GET("api/public/publications/total/{investigator_id")
+    @GET("api/public/publications/{investigator_id")
     fun showTotalPublications(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalPublications>>
 
 
-
     /* OUTCOMES */
-    @GET("api/public/outcomes/total")
+    @GET("api/public/statistics/outcomes/")
     fun indexTotalOutcomes(): Call<AuthenticateResponse<TotalOutcomes>>
 
-    @GET("api/public/outcomes/total/{investigator_id")
+    @GET("api/public/statistics/outcomes/{investigator_id")
     fun showTotalOutcomes(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalOutcomes>>
 
 
-
     /* THESES */
-    @GET("api/public/theses/total")
+    @GET("api/public/statistics/theses/")
     fun indexTotalTheses(): Call<AuthenticateResponse<TotalTheses>>
 
-    @GET("api/public/theses/total/{investigator_id")
+    @GET("api/public/statistics/theses/{investigator_id")
     fun showTotalTheses(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalTheses>>
 
     @GET("api/private/projects/")
     fun indexProject(@Query("page") page_number: Int, @Query("limit") limit: Int): Call<AuthenticateResponse<ApprovalProjectList>>
+
+    @GET("api/public/statistics/projects/")
+    fun indexTotalProjects(): Call<AuthenticateResponse<TotalProjects>>
+
+    @GET("api/public/statistics/outcomes/{investigator_id")
+    fun showTotalProjects(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalProjects>>
+
 
     @GET("api/private/publications")
     fun indexPublications(): Call<AuthenticateResponse<List<PublicationModel>>>
