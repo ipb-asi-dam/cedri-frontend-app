@@ -3,10 +3,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        tools:context="com.example.cedri_app.ui.activity.chart.BarChartActivity"
         android:background="@color/chartMenuBlue"
-        tools:context="com.example.cedri_app.ui.activity.chart.TotalPieChartActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_height="match_parent">
 
             <ImageButton
-                    android:id="@+id/backImageButtonPieChart"
+                    android:id="@+id/backImageButtonBarChart"
                     android:layout_height="48dp"
                     android:layout_width="48dp"
                     android:src="@drawable/ic_arrow_back_black_24dp"
@@ -36,8 +36,8 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:id="@+id/textView"
-                    android:text="@string/menu_bar_titles_outcomes_chart_screen"
+                    android:id="@+id/menu_bar_title"
+                    android:text="@string/menu_bar_titles_bar_chart_screen"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -67,11 +67,9 @@
     <LinearLayout
             android:layout_width="match_parent" android:layout_height="match_parent"
             android:layout_below="@+id/toolbar">
-        <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pie"
+        <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20dp"/>
+                android:layout_height="match_parent"/>
     </LinearLayout>
-
 </RelativeLayout>

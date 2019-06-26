@@ -39,7 +39,11 @@ class ChartListAdapter(
             val image = itemView.chart_item_image
             title.text = chart.title
             description.text = chart.getDescription()
-            image.setImageResource(R.drawable.piechart_2_icon2)
+            when {
+                (chart.title.contains("CeDRI")) -> image.setImageResource(R.drawable.piechart_2_icon2)
+                (chart.title.contains("My")) -> image.setImageResource(R.drawable.bar_chart_scaled)
+                else -> image.setImageResource(R.drawable.piechart_2_icon2)
+            }
         }
     }
 }

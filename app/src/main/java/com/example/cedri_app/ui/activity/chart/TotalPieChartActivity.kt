@@ -14,8 +14,7 @@ class TotalPieChartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_total_pie_chart)
 
         val token = NetworkUtils.getToken(getIntent().getExtras())
-        val extras = getIntent().getExtras()
-        val title = extras?.getString("title") ?: ""
+        val title = intent?.extras?.getString("title") ?: ""
         val chart = Chart(title)
 
         val totalPieChart = TotalPieChart(this, token, baseContext, chart)
