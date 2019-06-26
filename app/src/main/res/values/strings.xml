@@ -29,17 +29,19 @@
     </string>
     <string name="chart_preview_image">chart</string>
 
-    <!-- Menu Bar Titles -->
+    <!--setting toolbar start-->
     <string name="menu_bar_titles_chart_list_screen">CHARTS</string>
-    <string name="menu_bar_titles_my_publications_list_screen">MY PUBLICATIONS</string>
-    <string name="menu_bar_titles_my_awards_list_screen">MY AWARDS</string>
-    <string name="menu_bar_titles_my_projects_list_screen">MY PROJECTS</string>
-    <string name="menu_bar_titles_my_theses_list_screen">MY THESES</string>
-    <string name="menu_bar_titles_my_intellectual_properties_list_screen">MY INTELLECTUAL PROPERTIES</string>
     <string name="menu_bar_titles_outcomes_chart_screen">TOTAL OUTCOMES</string>
     <string name="menu_bar_titles_bar_chart_screen">MY %1$s</string>
-    <string name="menu_bar_titles_work_card_list_screen">MY WORKS</string>
+    <string name="menu_bar_title_work_card_list_screen">MY WORKS</string>
+    <string name="menu_bar_title_specific_work">MY 1$s</string>
+
+    <string name="toolbar_back_image_content_description">Click to go back</string>
+    <string name="toolbar_avatar_image_content_description">Click to see your profile</string>
+    <!--setting toolbar end-->
 
     <!-- Publications List -->
     <string name="publication_list_type">%1$s (%2$s)</string>
+    <string name="my_award_item_title">%1$s</string>
+    <string name="my_award_item_event">%1$s (%2$s)</string>
 </resources>
