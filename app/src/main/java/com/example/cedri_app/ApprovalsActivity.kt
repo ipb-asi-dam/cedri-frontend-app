@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.model.ApprovalProjectCard
 import com.example.cedri_app.model.AuthenticateResponse
 import com.example.cedri_app.model.ResponseChecker
@@ -29,6 +30,8 @@ import java.io.BufferedReader
 
 class ApprovalsActivity : AppCompatActivity() {
 
+    var myDB = DatabaseHandler(this)
+
     val articlesApprovalsList: MutableList<ApprovalProjectCard> = mutableListOf()
 
     var page = 1
@@ -43,12 +46,19 @@ class ApprovalsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_approvals)
 
-        val token = NetworkUtils.getToken(getIntent().getExtras())
+        //val token = NetworkUtils.getToken(getIntent().getExtras())
+
+        val CursorDatabase = myDB.getTokenFromDatabase()
+        var token : String = ""
+
+        if(CursorDatabase.moveToFirst()){
+            token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
+        }
 
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
-            intent.putExtra("token", token)
+            //intent.putExtra("token", token)
             finish()
         }
 
@@ -56,7 +66,7 @@ class ApprovalsActivity : AppCompatActivity() {
 
         layoutManager = LinearLayoutManager(this)
         approval_recyclerView.layoutManager = layoutManager
-        getPage()
+        getPage(token)
 
         Log.e("E", "--->" + "FUDEU")
 
@@ -72,7 +82,7 @@ class ApprovalsActivity : AppCompatActivity() {
                     if ((visibleItemCount + pastVisibleItem) >= total) {
                         page++
                         // BUSCAR NO BACKEND DADOS DA PROXIMA PAGINA
-                        getPage()
+                        getPage(token)
                     }
 
                 }
@@ -82,13 +92,13 @@ class ApprovalsActivity : AppCompatActivity() {
         })
     }
 
-    fun getPage() {
+    fun getPage(token: String) {
         isLoading = true
         approval_progressBar.visibility = View.VISIBLE
         val start = articlesApprovalsList.size
         val end = articlesApprovalsList.size + limit
 
-        retriveBackendData()
+        retriveBackendData(token)
         /*
         for (i in start until end) {
             articlesApprovalsList.add(articlesApprovalsList[i])
@@ -105,7 +115,7 @@ class ApprovalsActivity : AppCompatActivity() {
 
                     val intent = Intent(this, ArticleReviewActivity::class.java)
                     startActivity(intent)
-                    intent.putExtra("token", NetworkUtils.getToken(getIntent().getExtras()))
+                    //intent.putExtra("token", NetworkUtils.getToken(getIntent().getExtras()))
                     finish()
 
 
@@ -118,8 +128,7 @@ class ApprovalsActivity : AppCompatActivity() {
 
     }
 
-    fun retriveBackendData(){
-        val token = NetworkUtils.getToken(intent.getExtras())
+    fun retriveBackendData(token : String){
         val retrofitClient = NetworkUtils.getRetrofit(token)
 
         // instanciando um cliente Retrofit
@@ -134,7 +143,7 @@ class ApprovalsActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<AuthenticateResponse<ApprovalProjectList>>, response: Response<AuthenticateResponse<ApprovalProjectList>>) {
                 val body = response?.body()
-                val projects = body?.getData()?.projects
+                val projects = body?.getData()?.elements
                 val size = projects?.size
 
 

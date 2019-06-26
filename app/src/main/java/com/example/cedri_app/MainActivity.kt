@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.model.AuthenticateRequest
 import com.example.cedri_app.model.AuthenticateResponse
 import com.example.cedri_app.model.ResponseChecker
@@ -15,7 +16,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    var myDB = DataBaseHandler(this)
+    var myDB = DatabaseHandler(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,16 +72,18 @@ class MainActivity : AppCompatActivity() {
                 if ( responseChecker.checkResponse() ) {
                     val intent = Intent(mainAct, MenuActivity::class.java)
                     val token = response?.body()?.getData()?.token
-                    intent.putExtra("token", token)
-                    /*
-                    //armazenar no banco o token
-                    var tokenDB : DataInformation = DataInformation(token.toString())
-                    var db : Boolean = myDB.addData(tokenDB)
-                    myDB.close()*/
+                    //intent.putExtra("token", token)
 
-
-                    startActivity(intent)
-                    finish()
+                    //armazenar no banco o token (ele só passa pra proxima tela se ele receber e inserir o token no DB)
+                    if (token != null) {
+                        if(myDB.insertToken(token)){
+                            Toast.makeText(baseContext, "Inserido no DB", Toast.LENGTH_SHORT).show()
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(baseContext, "Não inserido no DB", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
         })
