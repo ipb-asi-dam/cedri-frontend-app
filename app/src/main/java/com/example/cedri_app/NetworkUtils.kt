@@ -36,8 +36,7 @@ class NetworkUtils {
         }
 
         fun getBaseUrl() : String {
-            return "http://192.168.0.101:5000"
-            //return "http://192.168.0.102:5000"
+            return "http://192.168.1.13:5000"
         }
 
         fun getToken(extras : Bundle?) : String {
@@ -46,13 +45,6 @@ class NetworkUtils {
                 token = it
             }
             return token
-        }
-
-        fun getRetrofitInstance(path: String): Retrofit {
-            return Retrofit.Builder()
-                .baseUrl(path)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
         }
     }
 }

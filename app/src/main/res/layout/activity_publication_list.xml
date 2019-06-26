@@ -35,7 +35,7 @@
                     android:layout_alignParentLeft="true"/>
 
             <TextView
-                    android:text="@string/menu_bar_titles_my_publications_list_screen"
+                    android:text="@string/menu_bar_title_specific_work"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
