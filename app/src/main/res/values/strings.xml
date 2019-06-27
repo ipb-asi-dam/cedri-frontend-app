@@ -11,6 +11,8 @@
     <string name="tela_todos_artigos_name">ARTICLES</string>
     <string name="titulo_artigo">ARTICLE TITLE</string>
     <string name="itemMenuConfiguracoes">SETTINGS</string>
+    <string name="article_review_url_button">Link Project</string>
+
 
     <string name="exemploAbstract">A aprendizagem por reforço está revolucionando a inteligência artificial, isso
         representa que

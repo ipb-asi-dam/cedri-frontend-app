@@ -152,7 +152,7 @@
                     android:layout_margin="48dp">
 
                 <Button
-                        android:text="Download PDF"
+                        android:text="@string/article_review_url_button"
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
