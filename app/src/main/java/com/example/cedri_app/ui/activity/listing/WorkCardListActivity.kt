@@ -29,15 +29,15 @@ class WorkCardListActivity : AppCompatActivity() {
 
         val recyclerView = work_card_list_recyclerview
         recyclerView.setHasFixedSize(true)
+
         val workCards = listOf (
-            //WorkCard(COMMUNICATION_EVENT, "Events", EventListActivity::),
-            //WorkCard(COMMUNICATION_MEDIA, "Medias"),
-            WorkCard(OUTCOMES_PUBLICATIONS, "Books, Book Chapters, Editorials, Journals and Proceedings", PublicationListActivity::class.java)
+            WorkCard(OUTCOMES_PUBLICATIONS, "Books, Book Chapters, Editorials, Journals and Proceedings", PublicationListActivity::class.java),
             //WorkCard(OUTCOMES_INTELLECTUAL_PROPERTIES, "Patents and Sofwares"),
             //WorkCard(OUTCOMES_THESES, "MsC and Ph.D", ),
-            //WorkCard(OUTCOMES_AWARDS),
+            WorkCard(OUTCOMES_AWARDS, "Awards", MyAwardListActivity::class.java)
             //WorkCard(RESEARCH_AND_INNOVATION_PROJECTS)
         )
+
         recyclerView.adapter = WorkCardListAdapter(workCards, this) { workCard, position ->
             Toast.makeText(
                 this,
