@@ -49,7 +49,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
 
     /**
      * Returns only the token that matches the id passed in
-     * @param id
+     * @param
      * @return
      */
     fun getAll(): Cursor {
@@ -60,7 +60,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
 
     /**
      * Returns only the ID that matches the name passed in
-     * @param name
+     * @param
      * @return
      */
     fun getTokenFromDatabase(): Cursor {
@@ -71,9 +71,8 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
 
     /**
      * Updates the name field
-     * @param newName
+     * @param newToken
      * @param id
-     * @param oldName
      */
     fun updateToken(newToken: String, id: Int) {
         val db = this.writableDatabase
@@ -86,7 +85,6 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
     /**
      * Delete from database
      * @param id
-     * @param name
      */
     fun deleteToken(id: Int) {
         val db = this.writableDatabase
