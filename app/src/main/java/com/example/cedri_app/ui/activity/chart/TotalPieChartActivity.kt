@@ -18,7 +18,7 @@ class TotalPieChartActivity : AppCompatActivity() {
         val chart = Chart(title)
 
         val totalPieChart = TotalPieChart(this, token, baseContext, chart)
-        totalPieChart.tryGetData()
+        totalPieChart.tryGetTotalWorksData()
 
         setSupportActionBar(android.support.v7.widget.Toolbar(this))
 
@@ -27,5 +27,7 @@ class TotalPieChartActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
     }
 }
