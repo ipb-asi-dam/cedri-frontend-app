@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.example.cedri_app.MenuActivity
-import com.example.cedri_app.NetworkUtils
+import com.example.cedri_app.NetworkUtils.Companion.getTokenFromDB
 import com.example.cedri_app.R
 import com.example.cedri_app.model.*
 import kotlinx.android.synthetic.main.activity_chart_list.*
@@ -14,11 +14,10 @@ import com.example.cedri_app.ui.adapter.ChartListAdapter
 import kotlinx.android.synthetic.main.activity_chart_list.backImageButtonChartList
 
 class ChartListActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart_list)
-        val token = NetworkUtils.getToken(getIntent().getExtras())
+        val token = getTokenFromDB(this)
 
         backImageButtonChartList.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)

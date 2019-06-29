@@ -1,7 +1,7 @@
 package com.example.cedri_app.model.tables
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.sql.Date
 
 data class TheseModel (
     @SerializedName("id")

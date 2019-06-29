@@ -31,10 +31,10 @@ class WorkCardListActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
 
         val workCards = listOf (
-            WorkCard(OUTCOMES_PUBLICATIONS, "Books, Book Chapters, Editorials, Journals and Proceedings", PublicationListActivity::class.java),
+            WorkCard(OUTCOMES_PUBLICATIONS, "Books, Book Chapters, Editorials, Journals and Proceedings", MyPublicationsActivity::class.java),
             //WorkCard(OUTCOMES_INTELLECTUAL_PROPERTIES, "Patents and Sofwares"),
             //WorkCard(OUTCOMES_THESES, "MsC and Ph.D", ),
-            WorkCard(OUTCOMES_AWARDS, "Awards", MyAwardListActivity::class.java)
+            WorkCard(OUTCOMES_AWARDS, "Awards", MyAwardsActivity::class.java)
             //WorkCard(RESEARCH_AND_INNOVATION_PROJECTS)
         )
 

@@ -10,10 +10,10 @@ import com.example.cedri_app.R
 import com.example.cedri_app.model.tables.AwardModel
 import kotlinx.android.synthetic.main.my_award_item.view.*
 
-class MyAwardListAdapter(
+class MyIntellectualPropertiesAdapter(
     private val awards: List<AwardModel>,
     private val context: Context,
-    private val onItemClickListener: (award: AwardModel, position: Int) -> Unit) : Adapter<MyAwardListAdapter.ViewHolder>() {
+    private val onItemClickListener: (award: AwardModel, position: Int) -> Unit) : Adapter<MyIntellectualPropertiesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val award = awards[position]

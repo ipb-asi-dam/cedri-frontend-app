@@ -73,6 +73,13 @@ interface Endpoint {
 
     @GET("api/public/statistics/theses/{investigator_id")
     fun showTotalTheses(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalTheses>>
+
+    @GET("api/private/theses")
+    fun listMyTheses(
+        @Query("showMy") showMy: Boolean,
+        @Query("page") pageNumber: Int,
+        @Query("limit") limit: Int
+    ): Call<AuthenticateResponse<ElementList<TheseModel>>>
     /* theses endpoints end */
 
     /* project endpoints start */
@@ -80,7 +87,11 @@ interface Endpoint {
     fun indexProject(@Query("page") page_number: Int, @Query("limit") limit: Int): Call<AuthenticateResponse<ApprovalProjectList>>
 
     @GET("api/private/projects")
-    fun listMyProjects(): Call<AuthenticateResponse<ElementList<ProjectModel>>>
+    fun listMyProjects(
+        @Query("showMy") showMy: Boolean,
+        @Query("page") pageNumber: Int,
+        @Query("limit") limit: Int
+    ): Call<AuthenticateResponse<ElementList<ProjectModel>>>
 
     @GET("api/public/statistics/projects/")
     fun indexTotalProjects(): Call<AuthenticateResponse<TotalProjects>>

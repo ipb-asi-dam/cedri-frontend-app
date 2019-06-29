@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
             <ImageView
-                    android:id="@+id/my_award_item_image"
+                    android:id="@+id/my_intellectual_property_item_image"
                     android:tag="image_tag"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -34,26 +34,16 @@
                     android:layout_weight="2"
                     android:orientation="vertical">
                 <TextView
-                        android:id="@+id/my_award_item_title"
+                        android:id="@+id/my_intellectual_property_item_title"
                         android:layout_width="wrap_content"
                         android:maxWidth="158sp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="15dp"
-                        android:text="@string/my_award_item_title"
+                        android:text="@string/my_intellectual_property_item_title"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textSize="28.0sp"
                         android:textColor="@color/black"/>
-                <TextView
-                        android:id="@+id/my_award_item_event"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/my_award_item_event"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="19.0sp"
-                        android:textColor="@color/HTMLGray"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
