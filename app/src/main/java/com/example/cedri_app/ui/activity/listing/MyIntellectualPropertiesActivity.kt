@@ -14,10 +14,8 @@ import com.example.cedri_app.NetworkUtils
 import com.example.cedri_app.R
 import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
-import com.example.cedri_app.model.tables.PatentModel
-import com.example.cedri_app.model.tables.SoftwareModel
-import com.example.cedri_app.ui.adapter.MyPatentsAdapter
-import com.example.cedri_app.ui.adapter.MySoftwareAdapter
+import com.example.cedri_app.model.tables.IntellectualPropertyModel
+import com.example.cedri_app.ui.adapter.MyIntellectualPropertiesAdapter
 import kotlinx.android.synthetic.main.activity_my_intellectual_properties.*
 import kotlinx.android.synthetic.main.activity_my_intellectual_properties.recycler_view
 import retrofit2.Call
@@ -25,15 +23,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyIntellectualPropertiesActivity : AppCompatActivity() {
-    private val mySoftwareList: MutableList<SoftwareModel> = mutableListOf()
-    private val myPatents: MutableList<PatentModel> = mutableListOf()
-    var currentPage = 1
-    var lastPage = -1
+    private val myIntellectualProperties: MutableList<IntellectualPropertyModel> = mutableListOf()
+    private val SOFTWARE = "SOFTWARE"
+    private val PATENT = "PATENT"
+    var currentPageOfSoftwareList = 1
+    var currentPageOfPatentList = 1
+    var lastPageOfSoftwareList = -1
+    var lastPageOfPatentList = -1
     var isLoading = false
     val LIMIT = 15
     var token = ""
-    lateinit var softwareAdapter: MySoftwareAdapter
-    lateinit var patentsAdapter: MyPatentsAdapter
+    lateinit var adapter: MyIntellectualPropertiesAdapter
     lateinit var layoutManager: LinearLayoutManager
     private lateinit var scrollListener: RecyclerView.OnScrollListener
 
@@ -52,32 +52,64 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         recycler_view.layoutManager = layoutManager
 
+        getPage(token, this, SOFTWARE)
+        getPage(token, this, PATENT)
+
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                tryGetPage(act)
+                tryGetPatentPage(act)
+                tryGetSoftwarePage(act)
                 super.onScrolled(recyclerView, dx, dy)
             }
         }
 
-        getPage(token, this)
         recycler_view.addOnScrollListener(scrollListener)
     }
-
-    private fun tryGetPage(act : Context) {
-        if ( !stillHavePagesToDisplay(currentPage, lastPage) ) {
+    private fun tryGetSoftwarePage(act : Context) {
+        if ( !stillHavePagesToDisplay(currentPageOfSoftwareList, lastPageOfSoftwareList) &&
+             !stillHavePagesToDisplay(currentPageOfPatentList, lastPageOfPatentList)) {
             recycler_view.removeOnScrollListener(scrollListener)
-            return Toast.makeText(act, "All IntellectualProperties have been shown", Toast.LENGTH_LONG).show()
+            return Toast.makeText(act, "All Intellectual Properties have been shown", Toast.LENGTH_LONG).show()
         }
+
+        println("################ TRY GET SOFTwARE: CURREnt PAGE DO lastPageOfSOFTWARELIST: ${currentPageOfSoftwareList}")
+        println("################ TRY GET SOFTwARE: CURREnt PAGE DO lastPageOfPATENTST: ${currentPageOfPatentList}")
+        val visibleItemCount = layoutManager.childCount
+        val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val total = adapter.itemCount
+
+        if ( isLoading ||
+            !isCurrentEndOfList(visibleItemCount, pastVisibleItem, total) ||
+            !stillHavePagesToDisplay(currentPageOfSoftwareList, lastPageOfSoftwareList)
+        ) {
+            return
+        }
+        currentPageOfSoftwareList++
+        getPage(token, act, SOFTWARE)
+    }
+
+    private fun tryGetPatentPage(act : Context) {
+        if ( !stillHavePagesToDisplay(currentPageOfSoftwareList, lastPageOfSoftwareList) &&
+             !stillHavePagesToDisplay(currentPageOfPatentList, lastPageOfPatentList)) {
+            recycler_view.removeOnScrollListener(scrollListener)
+            return Toast.makeText(act, "All Intellectual Properties have been shown", Toast.LENGTH_LONG).show()
+        }
+
+        println("################ TRY GET PATENT: CURREnt PAGE DO lastPageOfSOFTWARELIST: ${currentPageOfSoftwareList}")
+        println("################ TRY GET PATENT: CURREnt PAGE DO lastPageOfPATENTST: ${currentPageOfPatentList}")
 
         val visibleItemCount = layoutManager.childCount
         val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
-        val total = softwareAdapter.itemCount + patentsAdapter.itemCount
+        val total = adapter.itemCount
 
-        if ( isLoading || !isCurrentEndOfList(visibleItemCount, pastVisibleItem, total)) {
+        if ( isLoading ||
+            !isCurrentEndOfList(visibleItemCount, pastVisibleItem, total) ||
+            !stillHavePagesToDisplay(currentPageOfPatentList, lastPageOfPatentList)) {
             return
         }
-        currentPage++
-        getPage(token, act)
+        currentPageOfPatentList++
+
+        getPage(token, act, PATENT)
     }
 
     /* As you roll, you're at the bottom of the list? */
@@ -90,26 +122,18 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
         return lastPage > currentPage
     }
 
-    private fun initializeSoftwareAdapter(): MySoftwareAdapter {
-        return MySoftwareAdapter(mySoftwareList, this) { software, position ->
-            Toast.makeText(this, "Software selected", Toast.LENGTH_LONG).show()
+    private fun initializeAdapter(): MyIntellectualPropertiesAdapter {
+        return MyIntellectualPropertiesAdapter(myIntellectualProperties, this) { software, position ->
+            Toast.makeText(this, "Intellectual Property selected", Toast.LENGTH_LONG).show()
         }
     }
 
-    private fun getPage(token : String, act : Context) {
+    private fun getPage(token : String, act : Context, type : String) {
         isLoading = true
         progress_bar.visibility = View.VISIBLE
-        tryGetData(token, act)
+        tryGetData(token, act, type)
         Handler().postDelayed({
-            if (::softwareAdapter.isInitialized) {
-                softwareAdapter.notifyDataSetChanged()
-            } else {
-                softwareAdapter = initializeAdapter()
-                recycler_view.adapter = softwareAdapter
-                recycler_view.setHasFixedSize(false)
-            }
-
-            if (::patentsAdapter.isInitialized) {
+            if (::adapter.isInitialized) {
                 adapter.notifyDataSetChanged()
             } else {
                 adapter = initializeAdapter()
@@ -122,16 +146,20 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
         }, 2000)
     }
 
-    private fun tryGetData(token : String, act : Context) {
+    private fun tryGetData(token : String, act : Context, type : String) {
         val retrofitClient = NetworkUtils.getRetrofit(token)
         val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.listMySoftware(true, currentPage, LIMIT)
-        requestData(callback, act)
+
+        val callback =
+            if(type == SOFTWARE) endpoint.listMySoftware(true, currentPageOfSoftwareList, LIMIT)
+            else endpoint.listMyPatents(true, currentPageOfPatentList, LIMIT)
+        requestData(callback, act, type)
     }
 
     private fun success(
         act: Context,
-        response: Response<AuthenticateResponse<ElementList<SoftwareModel>>>
+        response: Response<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>,
+        type: String
     ) {
         val responseChecker = ResponseChecker(act, response)
         if ( !responseChecker.checkResponse() ) {
@@ -139,34 +167,39 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
         }
 
         val elementsInfo = response.body()?.getData() ?: run {
-            return Toast.makeText(baseContext, "Date not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Data not found", Toast.LENGTH_SHORT).show()
         }
 
-        val softwareList = elementsInfo.elements
+        val intellectualProperties = elementsInfo.elements
         if (elementsInfo.elements.isEmpty()) {
-            return Toast.makeText(baseContext, "Software not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Intellectual Property (${type}) not found", Toast.LENGTH_SHORT).show()
         }
 
-        if (elementsInfo.pagesTotal < currentPage) {
-            return Toast.makeText(baseContext, "All your Software have been listed", Toast.LENGTH_SHORT)
+        if ((type == PATENT && elementsInfo.pagesTotal < currentPageOfPatentList) ||
+            (type == SOFTWARE && elementsInfo.pagesTotal < currentPageOfSoftwareList) ) {
+            return Toast.makeText(baseContext, "All your Intellectual Property ($type) have been listed", Toast.LENGTH_SHORT)
                 .show()
         }
 
-        if (lastPage == -1) {
-            lastPage = elementsInfo.pagesTotal
+        if (lastPageOfSoftwareList == -1 && type == SOFTWARE ) {
+            lastPageOfSoftwareList = elementsInfo.pagesTotal
         }
-        softwareList.forEach { mySoftwareList.add(it) }
+        if (lastPageOfPatentList == -1 && type == PATENT ) {
+            lastPageOfPatentList = elementsInfo.pagesTotal
+        }
+
+        intellectualProperties.forEach { myIntellectualProperties.add(it) }
     }
 
-    private fun requestData(callback : Call<AuthenticateResponse<ElementList<SoftwareModel>>>, act : Context) {
-        callback.enqueue(object : Callback<AuthenticateResponse<ElementList<SoftwareModel>>> {
-            override fun onFailure(call: Call<AuthenticateResponse<ElementList<SoftwareModel>>>, t: Throwable) {
+    private fun requestData(callback : Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>, act : Context, type : String) {
+        callback.enqueue(object : Callback<AuthenticateResponse<ElementList<IntellectualPropertyModel>>> {
+            override fun onFailure(call: Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<AuthenticateResponse<ElementList<SoftwareModel>>>,
-                                    response: Response<AuthenticateResponse<ElementList<SoftwareModel>>>
-            ) { success(act, response) }
+            override fun onResponse(call: Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>,
+                                    response: Response<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>
+            ) { success(act, response, type) }
         })
     }
 }

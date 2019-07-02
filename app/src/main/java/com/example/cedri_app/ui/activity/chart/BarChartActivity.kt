@@ -15,7 +15,7 @@ class BarChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bar_chart)
 
-        val token = NetworkUtils.getToken(intent.extras)
+        val token = NetworkUtils.getTokenFromDB(this)
         val title = intent?.extras?.getString("title") ?: ""
 
         setSupportActionBar(android.support.v7.widget.Toolbar(this))

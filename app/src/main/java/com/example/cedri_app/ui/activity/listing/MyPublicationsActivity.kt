@@ -7,6 +7,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import com.example.cedri_app.Endpoint
@@ -16,6 +17,7 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.PublicationModel
 import com.example.cedri_app.ui.adapter.MyPublicationsAdapter
+import kotlinx.android.synthetic.main.activity_bar_chart.*
 import kotlinx.android.synthetic.main.activity_my_publications.*
 import kotlinx.android.synthetic.main.activity_my_publications.recycler_view
 import retrofit2.Call
@@ -36,6 +38,7 @@ class MyPublicationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_publications)
+        //this.menu_bar_title.text = this.resources.getString(R.string.menu_bar_title_specific_work, "PUBLICATIONS")
         token = NetworkUtils.getTokenFromDB(this)
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)
@@ -50,12 +53,16 @@ class MyPublicationsActivity : AppCompatActivity() {
 
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                println("PARARARA 01")
                 tryGetPage(act)
+                println("PARARARA 02")
+
                 super.onScrolled(recyclerView, dx, dy)
             }
         }
 
         getPage(token, this)
+        println("MANINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN 01")
         recycler_view.addOnScrollListener(scrollListener)
     }
 
@@ -64,16 +71,29 @@ class MyPublicationsActivity : AppCompatActivity() {
             recycler_view.removeOnScrollListener(scrollListener)
             return Toast.makeText(act, "All Publications have been shown", Toast.LENGTH_LONG).show()
         }
+        println("TRY GET PAGE 01")
 
         val visibleItemCount = layoutManager.childCount
+        println("TRY GET PAGE 02")
+
         val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+        println("TRY GET PAGE 03")
+
         val total = adapter.itemCount
+        println("TRY GET PAGE 04")
 
         if ( isLoading || !isCurrentEndOfList(visibleItemCount, pastVisibleItem, total)) {
+            println("PAUuuuuuuuuuuuuuuuu")
             return
         }
+        println("TRY GET PAGE 05")
+
         currentPage++
+        println("TRY GET PAGE 06")
+
         getPage(token, act)
+        println("TRY GET PAGE 07")
+
     }
 
     /* As you roll, you're at the bottom of the list? */
@@ -90,7 +110,6 @@ class MyPublicationsActivity : AppCompatActivity() {
             Toast.makeText(this, "Publication selected", Toast.LENGTH_LONG).show()
         }
     }
-
 
     private fun getPage(token : String, act : Context) {
         isLoading = true
@@ -121,12 +140,12 @@ class MyPublicationsActivity : AppCompatActivity() {
         response: Response<AuthenticateResponse<ElementList<PublicationModel>>>
     ) {
         val responseChecker = ResponseChecker(act, response)
+
         if ( !responseChecker.checkResponse() ) {
             return
         }
-
         val elementsInfo = response.body()?.getData() ?: run {
-            return Toast.makeText(baseContext, "Date not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Data not found", Toast.LENGTH_SHORT).show()
         }
 
         val publications = elementsInfo.elements

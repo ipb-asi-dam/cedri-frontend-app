@@ -41,9 +41,7 @@
                 android:name=".MenuActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
-
         </activity>
-
 
         <!-- Chart Activities -->
         <activity
@@ -56,7 +54,6 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
-
 
         <!-- Listing Activities -->
         <activity

@@ -126,7 +126,7 @@ class MyAwardsActivity : AppCompatActivity() {
         }
 
         val elementsInfo = response.body()?.getData() ?: run {
-            return Toast.makeText(baseContext, "Date not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Data not found", Toast.LENGTH_SHORT).show()
         }
 
         val awards = elementsInfo.elements

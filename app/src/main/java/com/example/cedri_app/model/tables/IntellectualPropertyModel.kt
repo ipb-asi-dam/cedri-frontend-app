@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class IntellectualPropertyModel (
     @SerializedName("title")
-    val title : String
+    val title : String,
+    @SerializedName("authors")
+    val authors : String
 )

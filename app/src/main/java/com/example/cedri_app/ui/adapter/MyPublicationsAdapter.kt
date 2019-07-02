@@ -35,9 +35,8 @@ class MyPublicationsAdapter(private val publications: List<PublicationModel>,
         fun bindView(publication: PublicationModel, context: Context) {
             val title = itemView.publication_item_title
             val type = itemView.publication_item_type
-            //val image = itemView.publication_item_image
 
-            val dateList = publication.year.toString().split(" ")
+            val dateList = publication.date.toString().split(" ")
             val year = dateList.last()
 
             title.text = publication.title

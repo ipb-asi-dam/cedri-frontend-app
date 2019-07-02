@@ -39,11 +39,9 @@ class MyThesesAdapter(
 
             val dateList = these.date.toString().split(" ")
             val year = dateList.last()
-
-
+            val t = these.type.getDisplayName()
             title.text = context.resources.getString(R.string.my_these_item_title, these.title)
-            type.text = context.resources.getString(R.string.my_these_item_type, these.type, year)
+            type.text = context.resources.getString(R.string.my_these_item_type, these.type.getDisplayName(), year)
         }
     }
 }
-

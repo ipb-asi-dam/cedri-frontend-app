@@ -126,10 +126,10 @@ class MyThesesActivity : AppCompatActivity() {
         }
 
         val elementsInfo = response.body()?.getData() ?: run {
-            return Toast.makeText(baseContext, "Date not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Data not found", Toast.LENGTH_SHORT).show()
         }
 
-        val awards = elementsInfo.elements
+        val theses = elementsInfo.elements
         if (elementsInfo.elements.isEmpty()) {
             return Toast.makeText(baseContext, "Award not found", Toast.LENGTH_SHORT).show()
         }
@@ -142,7 +142,7 @@ class MyThesesActivity : AppCompatActivity() {
         if (lastPage == -1) {
             lastPage = elementsInfo.pagesTotal
         }
-        awards.forEach { myTheses.add(it) }
+        theses.forEach { myTheses.add(it) }
     }
 
     private fun requestData(callback : Call<AuthenticateResponse<ElementList<TheseModel>>>, act : Context) {

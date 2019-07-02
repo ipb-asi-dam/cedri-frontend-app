@@ -7,37 +7,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.cedri_app.R
-import com.example.cedri_app.model.tables.AwardModel
-import kotlinx.android.synthetic.main.my_award_item.view.*
+import com.example.cedri_app.model.tables.IntellectualPropertyModel
+import kotlinx.android.synthetic.main.my_intellectual_property_item.view.*
 
 class MyIntellectualPropertiesAdapter(
-    private val awards: List<AwardModel>,
+    private val intellectualProperties: List<IntellectualPropertyModel>,
     private val context: Context,
-    private val onItemClickListener: (award: AwardModel, position: Int) -> Unit) : Adapter<MyIntellectualPropertiesAdapter.ViewHolder>() {
+    private val onItemClickListener: (intellectualProperty: IntellectualPropertyModel, position: Int) -> Unit) : Adapter<MyIntellectualPropertiesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val award = awards[position]
-        holder.bindView(award, context)
+        val intellectualProperty = intellectualProperties[position]
+        holder.bindView(intellectualProperty, context)
         holder.itemView.setOnClickListener {
-            onItemClickListener(award, position)
+            onItemClickListener(intellectualProperty, position)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.my_award_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.my_intellectual_property_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return awards.size
+        return intellectualProperties.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(award: AwardModel, context: Context) {
-            val title = itemView.my_award_item_title
-            val event = itemView.my_award_item_event
-            title.text = context.resources.getString(R.string.my_award_item_title, award.title)
-            event.text = context.resources.getString(R.string.my_award_item_event, "unknown", "2019")
+        fun bindView(intellectualProperty: IntellectualPropertyModel, context: Context) {
+            val title = itemView.my_intellectual_property_item_title
+            title.text = context.resources.getString(R.string.my_intellectual_property_item_title, intellectualProperty.title)
+
+            val type = itemView.my_intellectual_property_item_type
+            if (intellectualProperty.authors != null) {
+                 type.text = context.resources.getString(R.string.my_intellectual_property_item_type, "Patent")
+            } else {
+                type.text = context.resources.getString(R.string.my_intellectual_property_item_type, "Software")
+            }
         }
     }
 }

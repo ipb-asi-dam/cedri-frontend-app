@@ -47,6 +47,7 @@
 
     <!-- my intellectual properties start -->
     <string name="my_intellectual_property_item_title">%1$s</string>
+    <string name="my_intellectual_property_item_type">%1$s</string>
     <!-- my intellectual properties end -->
 
     <!-- my software start -->

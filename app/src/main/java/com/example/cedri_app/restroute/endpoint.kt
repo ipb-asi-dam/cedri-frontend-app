@@ -106,7 +106,7 @@ interface Endpoint {
         @Query("showMy") showMy: Boolean,
         @Query("page") pageNumber: Int,
         @Query("limit") limit: Int
-    ) : Call<AuthenticateResponse<ElementList<SoftwareModel>>>
+    ) : Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>
     /* sofware endpoints end */
 
     /* patents endpoints start */
@@ -115,7 +115,7 @@ interface Endpoint {
         @Query("showMy") showMy: Boolean,
         @Query("page") pageNumber: Int,
         @Query("limit") limit: Int
-    ) : Call<AuthenticateResponse<ElementList<PatentModel>>>
+    ) : Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>
 
     /* patents endpoints end */
 }

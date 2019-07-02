@@ -62,7 +62,7 @@ class MyProjectsActivity : AppCompatActivity() {
     private fun tryGetPage(act : Context) {
         if ( !stillHavePagesToDisplay(currentPage, lastPage) ) {
             recycler_view.removeOnScrollListener(scrollListener)
-            return Toast.makeText(act, "All Awards have been shown", Toast.LENGTH_LONG).show()
+            return Toast.makeText(act, "All Projects have been shown", Toast.LENGTH_LONG).show()
         }
 
         val visibleItemCount = layoutManager.childCount
@@ -87,8 +87,8 @@ class MyProjectsActivity : AppCompatActivity() {
     }
 
     private fun initializeAdapter(): MyProjectsAdapter {
-        return MyProjectsAdapter(myProjects, this) { award, position ->
-            Toast.makeText(this, "Award selected", Toast.LENGTH_LONG).show()
+        return MyProjectsAdapter(myProjects, this) { project, position ->
+            Toast.makeText(this, "Project selected", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -126,23 +126,23 @@ class MyProjectsActivity : AppCompatActivity() {
         }
 
         val elementsInfo = response.body()?.getData() ?: run {
-            return Toast.makeText(baseContext, "Date not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Data not found", Toast.LENGTH_SHORT).show()
         }
 
-        val awards = elementsInfo.elements
+        val projects = elementsInfo.elements
         if (elementsInfo.elements.isEmpty()) {
-            return Toast.makeText(baseContext, "Award not found", Toast.LENGTH_SHORT).show()
+            return Toast.makeText(baseContext, "Project not found", Toast.LENGTH_SHORT).show()
         }
 
         if (elementsInfo.pagesTotal < currentPage) {
-            return Toast.makeText(baseContext, "All your awards have been listed", Toast.LENGTH_SHORT)
+            return Toast.makeText(baseContext, "All your Projects have been listed", Toast.LENGTH_SHORT)
                 .show()
         }
 
         if (lastPage == -1) {
             lastPage = elementsInfo.pagesTotal
         }
-        awards.forEach { myProjects.add(it) }
+        projects.forEach { myProjects.add(it) }
     }
 
     private fun requestData(callback : Call<AuthenticateResponse<ElementList<ProjectModel>>>, act : Context) {
