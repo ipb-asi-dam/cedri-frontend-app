@@ -29,6 +29,11 @@
     </string>
     <string name="chart_preview_image">chart</string>
 
+    <!--menu activity start-->
+    <string name="menu_card_item_button_name">%1$s</string>
+    <string name="menu_title">%1$s</string>
+    <!--menu activity end-->
+
     <!--setting toolbar start-->
     <string name="menu_bar_titles_chart_list_screen">CHARTS</string>
     <string name="menu_bar_titles_outcomes_chart_screen">TOTAL OUTCOMES</string>

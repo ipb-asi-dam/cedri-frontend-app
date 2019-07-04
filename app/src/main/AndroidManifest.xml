@@ -42,6 +42,11 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
         </activity>
+        <activity
+                android:name=".ui.activity.listing.MenuCardListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppLoginTheme">
+        </activity>
 
         <!-- Chart Activities -->
         <activity
