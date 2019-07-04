@@ -38,7 +38,7 @@ class NetworkUtils {
         }
 
         fun getBaseUrl() : String {
-            return "http://194.210.108.113:5000"
+            return "http://194.210.91.11:5000"
         }
 
         fun getToken(extras : Bundle?) : String {

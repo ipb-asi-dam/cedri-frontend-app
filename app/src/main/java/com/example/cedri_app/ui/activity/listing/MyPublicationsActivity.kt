@@ -53,16 +53,13 @@ class MyPublicationsActivity : AppCompatActivity() {
 
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                println("PARARARA 01")
                 tryGetPage(act)
-                println("PARARARA 02")
 
                 super.onScrolled(recyclerView, dx, dy)
             }
         }
 
         getPage(token, this)
-        println("MANINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN 01")
         recycler_view.addOnScrollListener(scrollListener)
     }
 
@@ -71,29 +68,15 @@ class MyPublicationsActivity : AppCompatActivity() {
             recycler_view.removeOnScrollListener(scrollListener)
             return Toast.makeText(act, "All Publications have been shown", Toast.LENGTH_LONG).show()
         }
-        println("TRY GET PAGE 01")
-
         val visibleItemCount = layoutManager.childCount
-        println("TRY GET PAGE 02")
-
         val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
-        println("TRY GET PAGE 03")
-
         val total = adapter.itemCount
-        println("TRY GET PAGE 04")
 
         if ( isLoading || !isCurrentEndOfList(visibleItemCount, pastVisibleItem, total)) {
-            println("PAUuuuuuuuuuuuuuuuu")
             return
         }
-        println("TRY GET PAGE 05")
-
         currentPage++
-        println("TRY GET PAGE 06")
-
         getPage(token, act)
-        println("TRY GET PAGE 07")
-
     }
 
     /* As you roll, you're at the bottom of the list? */

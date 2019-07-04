@@ -242,7 +242,6 @@ class TotalPieChart(
         val menuBarTitle = act.findViewById<TextView>(R.id.textView)
         menuBarTitle.text = chart.title
         val pieChart = act.findViewById<PieChart>(R.id.pie) ?: run {
-            println("ERROR: ID do Piechart não encontrado")
             return
         }
         pieChart.setNoDataText("There is no data to display.")

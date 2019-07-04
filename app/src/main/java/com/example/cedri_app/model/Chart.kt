@@ -17,7 +17,7 @@ class Chart(val title: String) {
         return when {
             title == "CeDRI Awards" -> "Unknown"
             title.contains("CeDRI") -> "Pie Chart"
-            else -> "Pie Chart"
+            else -> "Bar Chart"
         }
     }
 

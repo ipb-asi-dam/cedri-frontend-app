@@ -71,9 +71,6 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
             recycler_view.removeOnScrollListener(scrollListener)
             return Toast.makeText(act, "All Intellectual Properties have been shown", Toast.LENGTH_LONG).show()
         }
-
-        println("################ TRY GET SOFTwARE: CURREnt PAGE DO lastPageOfSOFTWARELIST: ${currentPageOfSoftwareList}")
-        println("################ TRY GET SOFTwARE: CURREnt PAGE DO lastPageOfPATENTST: ${currentPageOfPatentList}")
         val visibleItemCount = layoutManager.childCount
         val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
         val total = adapter.itemCount
@@ -94,9 +91,6 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
             recycler_view.removeOnScrollListener(scrollListener)
             return Toast.makeText(act, "All Intellectual Properties have been shown", Toast.LENGTH_LONG).show()
         }
-
-        println("################ TRY GET PATENT: CURREnt PAGE DO lastPageOfSOFTWARELIST: ${currentPageOfSoftwareList}")
-        println("################ TRY GET PATENT: CURREnt PAGE DO lastPageOfPATENTST: ${currentPageOfPatentList}")
 
         val visibleItemCount = layoutManager.childCount
         val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()

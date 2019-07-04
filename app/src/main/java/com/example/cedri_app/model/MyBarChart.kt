@@ -1,18 +1,27 @@
 package com.example.cedri_app.model
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.example.cedri_app.*
 import com.example.cedri_app.model.response.AnnualItem
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
+import java.util.*
+import android.graphics.Typeface
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
+import java.text.DecimalFormat
+
 
 class MyBarChart(
     val act: AppCompatActivity,
@@ -23,17 +32,13 @@ class MyBarChart(
     fun tryGetWorkData() {
         val retrofitClient = NetworkUtils.getRetrofit(token)
         val endpoint = retrofitClient.create(Endpoint::class.java)
-        val work = when (title) {
-            "My Awards" -> "award"
-            "My Intellectual Properties" -> "intellectual_properties"
-            "My Outcomes" -> "outcomes"
-            "My Publications" -> "publication"
-            "My Theses" -> "these"
-            "MY Projects" -> "project"
-            else -> "outcomes"
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        when (title) {
+            "My Awards" -> requestData( endpoint.list5YearsAwardData(currentYear-4, currentYear) )
+            "My Publications" -> requestData( endpoint.list5YearsPublicationData(currentYear-4, currentYear) )
+            "My Theses" -> requestData( endpoint.list5YearsTheseData(currentYear-4, currentYear) )
+            else -> requestData( endpoint.list5YearsProjectData(currentYear-4, currentYear) )
         }
-        val callback = endpoint.indexAnnual(work)
-        requestData(callback)
     }
 
     private fun requestData(
@@ -64,45 +69,75 @@ class MyBarChart(
 
     private fun configureBarChart(data: List<AnnualItem>) {
         val barChart: BarChart = act.findViewById(R.id.chart1) ?: run {
-            println("ERROR: ID do Bar Chart não encontrado")
             return
         }
-
         val xAxisValues = data.map {it.year.toString()}
+
         barChart.description.isEnabled = false
-
-        barChart.setMaxVisibleValueCount(60)
-        barChart.setPinchZoom(false)
-        barChart.setDrawBarShadow(false)
-        barChart.setDrawGridBackground(true)
-
-        //chart.xAxis.position = XAxisPosition.BOTTOM
-        //chart.xAxis.setDrawGridLines(true)
-
-        //chart.axisLeft.setDrawGridLines(true)
-        //chart.axisRight.setDrawGridLines(true)
 
         barChart.animateY(1500)
         barChart.legend.isEnabled = false
 
-        val entry = ArrayList<BarEntry>()
+        val entry : MutableList<BarEntry> = mutableListOf()
         setData(entry, data)
+        val set = BarDataSet(entry, "Years")
+        set.setColors(*ColorTemplate.JOYFUL_COLORS)
+        set.setValueTextColor(Color.rgb(55, 70, 73));
+        set.setValueTextSize(10f);
+        set.valueFormatter
 
-        val dataSet = BarDataSet(entry, "Data Set")
-        dataSet.setColors(*ColorTemplate.JOYFUL_COLORS)
-        dataSet.setDrawValues(true)
+        val data = BarData(set)
+        barChart.data = data
+        barChart.axisLeft.setAxisMinimum(0f)
+        barChart.axisLeft.textSize = 20f
 
-        val barData = BarData(dataSet)
-        barChart.setData(barData)
+        barChart.description.isEnabled = false
+
+        barChart.setDrawBarShadow(false)
+        barChart.setDrawValueAboveBar(true)
+        barChart.setPinchZoom(false)
+
+        val xAxis = barChart.xAxis
+        xAxis.granularity = 1f
+        xAxis.setCenterAxisLabels(false)
+
+        xAxis.setDrawGridLines(false)
+        xAxis.position = XAxis.XAxisPosition.TOP
+        xAxis.axisMaximum = 50f
+
         barChart.xAxis.valueFormatter = IndexAxisValueFormatter(xAxisValues)
-        barChart.setFitBars(true)
+        barChart.setExtraOffsets(2f, 25f, 15f, 20f)
+        val leftAxis = barChart.axisLeft
+        leftAxis.removeAllLimitLines()
+        leftAxis.typeface = Typeface.DEFAULT
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+        leftAxis.textColor = Color.BLACK
+        leftAxis.setDrawGridLines(true)
+        barChart.axisRight.isEnabled = false
+        data.barWidth = 0.85f
+        data.setValueTextSize(22f)
+        data.setValueFormatter(MyIntegerFormatter())
+        barChart.xAxis.axisMinimum = -0.5f
+        barChart.xAxis.axisMaximum = 4.5f
+        barChart.setDrawGridBackground(true)
+
+        barChart.xAxis.textSize = 20f
+        barChart.invalidate()
+
     }
-    private fun setData(entry: ArrayList<BarEntry>, data: List<AnnualItem>) {
+    private fun setData(entry: MutableList<BarEntry>, data: List<AnnualItem>) {
         var count = 0
         data.forEach {
-            entry.add( BarEntry( it.qty.toFloat(), count.toFloat()) )
+            entry.add( BarEntry( count.toFloat(), it.qty.toFloat() ) )
             count++
         }
     }
 
+    private class MyIntegerFormatter : ValueFormatter() {
+        var mFormat: DecimalFormat = DecimalFormat("###,###,##0")
+        override fun getFormattedValue(value: Float): String {
+            // return mFormat.format(value.toDouble()) + if (percentSignSeparated) " %" else "%"
+            return mFormat.format(value.toInt())
+        }
+    }
 }
