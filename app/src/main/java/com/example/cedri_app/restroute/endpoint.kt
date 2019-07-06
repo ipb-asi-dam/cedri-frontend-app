@@ -14,17 +14,17 @@ interface Endpoint {
     @GET("api/private/users/{investigator_id}")
     fun showInvestigator(@Path("investigator_id") investigator_id : Int): Call<AuthenticateResponse<Investigator>>
 
-    /* annual statistics endpoints start */
-    @GET("api/public/{work}/annual")
-    fun indexAnnual(@Path("work") work: String): Call<AuthenticateResponse<List<AnnualItem>>>
-    /* annual statistics endpoints end */
-
     /* awards endpoints start */
-    @GET("api/public/statistics/awards")
+    @GET("api/private/statistics/awards")
     fun indexTotalAwards(): Call<AuthenticateResponse<TotalAwards>>
 
-    @GET("api/public/statistics/awards/{investigator_id")
+    @GET("api/private/statistics/awards/{investigator_id")
     fun showTotalAwards(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalAwards>>
+
+    @GET("api/private/statistics/awards")
+    fun list5YearsAwardData(@Query("startYear") startYear: Int,
+                            @Query("endYear") endYear: Int
+    ): Call<AuthenticateResponse<List<AnnualItem>>>
 
     @GET("/api/private/awards")
     fun listMyAwards(
@@ -35,21 +35,28 @@ interface Endpoint {
     /* awards endpoints end */
 
     /* intellectual properties endpoints start */
-    @GET("api/public/statistics/intellectual_properties")
+    @GET("api/private/statistics/intellectual_properties")
     fun indexTotalIntellectualProperties(): Call<AuthenticateResponse<TotalIntellectualProperties>>
 
-    @GET("api/public/statistics/intellectual_properties/{investigator_id")
+    @GET("api/private/statistics/intellectual_properties/{investigator_id")
     fun showTotalIntellectualProperties(
-        @Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalIntellectualProperties>>
+        @Path("investigator_id") investigator_id: Int
+    ): Call<AuthenticateResponse<TotalIntellectualProperties>>
     /* intellectual properties endpoints end */
 
     /* publications endpoints start */
-    @GET("api/public/statistics/publications")
+    @GET("api/private/statistics/publications")
     fun indexTotalPublications(): Call<AuthenticateResponse<TotalPublications>>
 
-    @GET("api/public/statistics/publications/{investigator_id}")
+    @GET("api/private/statistics/publications/{investigator_id}")
     fun indexTotalPublications(
-        @Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalPublications>>
+        @Path("investigator_id") investigator_id: Int
+    ): Call<AuthenticateResponse<TotalPublications>>
+
+    @GET("api/private/statistics/publications")
+    fun list5YearsPublicationData(@Query("startYear") startYear: Int,
+                            @Query("endYear") endYear: Int
+    ): Call<AuthenticateResponse<List<AnnualItem>>>
 
     @GET("/api/private/publications")
     fun listMyPublications(
@@ -60,33 +67,57 @@ interface Endpoint {
     /* publications endpoints end */
 
     /* outcomes endpoints start */
-    @GET("api/public/statistics/outcomes/")
+    @GET("api/private/statistics/outcomes/")
     fun indexTotalOutcomes(): Call<AuthenticateResponse<TotalOutcomes>>
 
-    @GET("api/public/statistics/outcomes/{investigator_id")
+    @GET("api/private/statistics/outcomes/{investigator_id")
     fun showTotalOutcomes(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalOutcomes>>
     /* outcomes endpoints end */
 
     /* theses endpoints start */
-    @GET("api/public/statistics/theses/")
+    @GET("api/private/statistics/theses/")
     fun indexTotalTheses(): Call<AuthenticateResponse<TotalTheses>>
 
-    @GET("api/public/statistics/theses/{investigator_id")
+    @GET("api/private/statistics/theses/{investigator_id")
     fun showTotalTheses(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalTheses>>
+
+    @GET("api/private/statistics/theses")
+    fun list5YearsTheseData(@Query("startYear") startYear: Int,
+                                  @Query("endYear") endYear: Int
+    ): Call<AuthenticateResponse<List<AnnualItem>>>
+
+    @GET("api/private/theses")
+    fun listMyTheses(
+        @Query("showMy") showMy: Boolean,
+        @Query("page") pageNumber: Int,
+        @Query("limit") limit: Int
+    ): Call<AuthenticateResponse<ElementList<TheseModel>>>
     /* theses endpoints end */
 
     /* project endpoints start */
     @GET("api/private/projects/")
     fun indexProject(@Query("page") page_number: Int, @Query("limit") limit: Int): Call<AuthenticateResponse<ApprovalProjectList>>
 
-    @GET("api/private/projects")
-    fun listMyProjects(): Call<AuthenticateResponse<ElementList<ProjectModel>>>
+    @GET("api/private/projects/{project_id}")
+    fun showOneProjectInfo(@Path("project_id") project_id : Int) : Call<AuthenticateResponse<ProjectModel>>
 
-    @GET("api/public/statistics/projects/")
+    @GET("api/private/projects")
+    fun listMyProjects(
+        @Query("showMy") showMy: Boolean,
+        @Query("page") pageNumber: Int,
+        @Query("limit") limit: Int
+    ): Call<AuthenticateResponse<ElementList<ProjectModel>>>
+
+    @GET("api/private/statistics/projects/")
     fun indexTotalProjects(): Call<AuthenticateResponse<TotalProjects>>
 
-    @GET("api/public/statistics/projects/{investigator_id")
+    @GET("api/private/statistics/projects/{investigator_id}")
     fun showTotalProjects(@Path("investigator_id") investigator_id: Int): Call<AuthenticateResponse<TotalProjects>>
+
+    @GET("api/private/statistics/projects")
+    fun list5YearsProjectData(@Query("startYear") startYear: Int,
+                              @Query("endYear") endYear: Int
+    ): Call<AuthenticateResponse<List<AnnualItem>>>
     /* project endpoints end */
 
     /* sofware endpoints start */
@@ -95,7 +126,7 @@ interface Endpoint {
         @Query("showMy") showMy: Boolean,
         @Query("page") pageNumber: Int,
         @Query("limit") limit: Int
-    ) : Call<AuthenticateResponse<ElementList<SoftwareModel>>>
+    ) : Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>
     /* sofware endpoints end */
 
     /* patents endpoints start */
@@ -104,7 +135,7 @@ interface Endpoint {
         @Query("showMy") showMy: Boolean,
         @Query("page") pageNumber: Int,
         @Query("limit") limit: Int
-    ) : Call<AuthenticateResponse<ElementList<PatentModel>>>
+    ) : Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>
 
     /* patents endpoints end */
 }

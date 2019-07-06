@@ -10,24 +10,16 @@
     <string name="tela_revisao_artigo_name">REVIEW</string>
     <string name="tela_todos_artigos_name">ARTICLES</string>
     <string name="titulo_artigo">ARTICLE TITLE</string>
+    <string name="titulo_projeto">PROJECT TITLE</string>
     <string name="itemMenuConfiguracoes">SETTINGS</string>
-
-    <string name="exemploAbstract">A aprendizagem por reforço está revolucionando a inteligência artificial, isso
-        representa que
-        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
-        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
-        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
-        ações. A aprendizagem por reforço está revolucionando a inteligência artificial, isso representa que
-        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
-        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
-        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
-        ações. A aprendizagem por reforço está revolucionando a inteligência artificial, isso representa que
-        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
-        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
-        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
-        ações.
-    </string>
+    <string name="article_review_url_button">Link Project</string>
+    <string name="article_review_profile_author_button">Author Perfil</string>
     <string name="chart_preview_image">chart</string>
+
+    <!--menu activity start-->
+    <string name="menu_card_item_button_name">%1$s</string>
+    <string name="menu_title">%1$s</string>
+    <!--menu activity end-->
 
     <!--setting toolbar start-->
     <string name="menu_bar_titles_chart_list_screen">CHARTS</string>
@@ -40,8 +32,36 @@
     <string name="toolbar_avatar_image_content_description">Click to see your profile</string>
     <!--setting toolbar end-->
 
-    <!-- Publications List -->
-    <string name="publication_list_type">%1$s (%2$s)</string>
+    <!-- my awards start -->
     <string name="my_award_item_title">%1$s</string>
     <string name="my_award_item_event">%1$s (%2$s)</string>
+    <!-- my awards end -->
+
+    <!-- my intellectual properties start -->
+    <string name="my_intellectual_property_item_title">%1$s</string>
+    <string name="my_intellectual_property_item_type">%1$s</string>
+    <!-- my intellectual properties end -->
+
+    <!-- my software start -->
+    <string name="my_software_item_title">%1$s</string>
+    <!-- my software end -->
+
+    <!-- my patents start -->
+    <string name="my_patent_item_title">%1$s</string>
+    <!-- my patents end -->
+
+    <!-- my projects start -->
+    <string name="my_project_item_title">%1$s</string>
+    <string name="my_project_item_type">%1$s (%2$s - %3$s)</string>
+    <!-- my projects end -->
+
+    <!-- my publications start -->
+    <string name="my_publication_item_title">%1$s</string>
+    <string name="my_publication_item_type">%1$s (%2$s)</string>
+    <!-- my publications end -->
+
+    <!-- my theses start -->
+    <string name="my_these_item_title">%1$s</string>
+    <string name="my_these_item_type">%1$s (%2$s)</string>
+    <!-- my theses end -->
 </resources>

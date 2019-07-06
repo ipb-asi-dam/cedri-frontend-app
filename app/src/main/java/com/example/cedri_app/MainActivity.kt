@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
         // Asynchronous request. For synchronous request, use callback.execute()
         callback.enqueue(object : Callback<AuthenticateResponse<Token>> {
             override fun onFailure(call: Call<AuthenticateResponse<Token>>, t: Throwable) {
-                println("ERROR::::: ${t.message}")
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
 

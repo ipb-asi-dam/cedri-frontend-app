@@ -14,13 +14,13 @@ data class TheseModel (
     val grade : String,
     @SerializedName("institute")
     val institute : String,
-    @SerializedName("completed")
+    @SerializedName("completedAt")
     val completed : Boolean,
     @SerializedName("date")
     val date : Date,
     @SerializedName("supervisors")
     val supervisors : Boolean,
-    @SerializedName("completed")
+    @SerializedName("type")
     val type : TheseType,
     @SerializedName("investigatorId")
     val investigatorId : Int

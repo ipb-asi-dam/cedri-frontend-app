@@ -41,9 +41,12 @@
                 android:name=".MenuActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppLoginTheme">
-
         </activity>
-
+        <activity
+                android:name=".ui.activity.listing.MenuCardListActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppLoginTheme">
+        </activity>
 
         <!-- Chart Activities -->
         <activity
@@ -57,15 +60,9 @@
                 android:theme="@style/AppTheme">
         </activity>
 
-
         <!-- Listing Activities -->
         <activity
                 android:name=".ui.activity.listing.ChartListActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
-                android:name=".ui.activity.listing.PublicationListActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
@@ -75,7 +72,27 @@
                 android:theme="@style/AppTheme">
         </activity>
         <activity
-                android:name=".ui.activity.listing.MyAwardListActivity"
+                android:name=".ui.activity.listing.MyAwardsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.MyIntellectualPropertiesActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.MyProjectsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.MyPublicationsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
+        </activity>
+        <activity
+                android:name=".ui.activity.listing.MyThesesActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>

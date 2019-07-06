@@ -1,5 +1,7 @@
 package com.example.cedri_app
+import android.content.Context
 import android.os.Bundle
+import com.example.cedri_app.database.DatabaseHandler
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -37,6 +39,7 @@ class NetworkUtils {
 
         fun getBaseUrl() : String {
             return "http://192.168.1.13:5000"
+            //return "http://192.168.0.102:5000"
         }
 
         fun getToken(extras : Bundle?) : String {
@@ -45,6 +48,14 @@ class NetworkUtils {
                 token = it
             }
             return token
+        }
+
+        fun getTokenFromDB(context: Context) : String {
+            val myDB = DatabaseHandler(context)
+            val cursorDatabase = myDB.getTokenFromDatabase()
+            return if (cursorDatabase.moveToFirst())
+                cursorDatabase.getString(cursorDatabase.getColumnIndex("token"))
+            else ""
         }
     }
 }

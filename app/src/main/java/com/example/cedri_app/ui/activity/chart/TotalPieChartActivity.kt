@@ -13,7 +13,7 @@ class TotalPieChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_total_pie_chart)
 
-        val token = NetworkUtils.getToken(getIntent().getExtras())
+        val token = NetworkUtils.getTokenFromDB(this)
         val title = intent?.extras?.getString("title") ?: ""
         val chart = Chart(title)
 

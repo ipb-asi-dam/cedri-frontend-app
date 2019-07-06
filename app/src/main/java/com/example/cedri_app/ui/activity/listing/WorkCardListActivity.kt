@@ -19,7 +19,7 @@ class WorkCardListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_card_list)
-        val token = NetworkUtils.getToken(getIntent().getExtras())
+        val token = NetworkUtils.getTokenFromDB(this)
 
         backImageButtonChartList.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
@@ -31,11 +31,11 @@ class WorkCardListActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
 
         val workCards = listOf (
-            WorkCard(OUTCOMES_PUBLICATIONS, "Books, Book Chapters, Editorials, Journals and Proceedings", PublicationListActivity::class.java),
-            //WorkCard(OUTCOMES_INTELLECTUAL_PROPERTIES, "Patents and Sofwares"),
-            //WorkCard(OUTCOMES_THESES, "MsC and Ph.D", ),
-            WorkCard(OUTCOMES_AWARDS, "Awards", MyAwardListActivity::class.java)
-            //WorkCard(RESEARCH_AND_INNOVATION_PROJECTS)
+            WorkCard(OUTCOMES_PUBLICATIONS, "Books, Book Chapters, Editorials, Journals and Proceedings", MyPublicationsActivity::class.java),
+            WorkCard(OUTCOMES_INTELLECTUAL_PROPERTIES, "Patents and Sofwares", MyIntellectualPropertiesActivity::class.java),
+            WorkCard(OUTCOMES_THESES, "MsC and Ph.D", MyThesesActivity::class.java),
+            WorkCard(OUTCOMES_AWARDS, "Awards", MyAwardsActivity::class.java),
+            WorkCard(RESEARCH_AND_INNOVATION_PROJECTS, "National, International and Others", MyProjectsActivity::class.java)
         )
 
         recyclerView.adapter = WorkCardListAdapter(workCards, this) { workCard, position ->
