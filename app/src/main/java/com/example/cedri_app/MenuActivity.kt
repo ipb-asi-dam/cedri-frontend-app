@@ -58,6 +58,10 @@ class MenuActivity : AppCompatActivity() {
 
         itemMenuColum2Row2.setOnClickListener {
             Toast.makeText(this, "NÃO PLANEJADO", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, AuthorPerfilActivity::class.java)
+            //intent.putExtra("token", token)
+            startActivity(intent)
+            finish()
         }
 
         itemMenuColum1Row3.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.example.cedri_app.model
 
+import com.example.cedri_app.model.tables.CeDRIFile
 import com.google.gson.annotations.SerializedName
 
 data class Investigator(
@@ -15,6 +16,6 @@ data class Investigator(
     val isAdmin : Boolean,
     @SerializedName("email")
     val email : String,
-    @SerializedName("field")
-    val field : String?
+    @SerializedName("file")
+    val file : CeDRIFile
 )
