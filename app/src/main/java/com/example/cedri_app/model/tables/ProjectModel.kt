@@ -14,5 +14,11 @@ data class ProjectModel (
     @SerializedName("consortium")
     val consortium : String,
     @SerializedName("investigatorId")
-    val investigatorId : Int
+    val investigatorId : Int,
+    @SerializedName("startDate")
+    val startDate : String,
+    @SerializedName("endDate")
+    val endDate : String,
+    @SerializedName("isAccepted")
+    val isAccepted : Boolean
 )

@@ -12,23 +12,7 @@
     <string name="titulo_artigo">ARTICLE TITLE</string>
     <string name="itemMenuConfiguracoes">SETTINGS</string>
     <string name="article_review_url_button">Link Project</string>
-
-
-    <string name="exemploAbstract">A aprendizagem por reforço está revolucionando a inteligência artificial, isso
-        representa que
-        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
-        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
-        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
-        ações. A aprendizagem por reforço está revolucionando a inteligência artificial, isso representa que
-        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
-        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
-        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
-        ações. A aprendizagem por reforço está revolucionando a inteligência artificial, isso representa que
-        sistemas autônomos estão compreendendo cada vez mais o mundo visual. A aprendizagem
-        por reforço é uma das abordagens de aprendizagem de máquina que funciona alterando o
-        comportamento do agente por meio de feedbacks, como recompensas ou penalidades por suas
-        ações.
-    </string>
+    <string name="article_review_profile_author_button">Author Perfil</string>
     <string name="chart_preview_image">chart</string>
 
     <!-- Menu Bar Titles -->
