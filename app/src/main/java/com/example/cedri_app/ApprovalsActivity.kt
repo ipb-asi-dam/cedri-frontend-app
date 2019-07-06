@@ -46,29 +46,17 @@ class ApprovalsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_approvals)
 
-        //val token = NetworkUtils.getToken(getIntent().getExtras())
-
-        val CursorDatabase = myDB.getTokenFromDatabase()
-        var token : String = ""
-
-        if(CursorDatabase.moveToFirst()){
-            token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
-        }
+        val token = NetworkUtils.getTokenFromDB(this)
 
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
-            //intent.putExtra("token", token)
             finish()
         }
-
-        // retriveBackendData()
 
         layoutManager = LinearLayoutManager(this)
         approval_recyclerView.layoutManager = layoutManager
         getPage(token)
-
-        Log.e("E", "--->" + "FUDEU")
 
         approval_recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -78,15 +66,11 @@ class ApprovalsActivity : AppCompatActivity() {
                 val total = adapter.itemCount
 
                 if (!isLoading) {
-
                     if ((visibleItemCount + pastVisibleItem) >= total) {
                         page++
-                        // BUSCAR NO BACKEND DADOS DA PROXIMA PAGINA
                         getPage(token)
                     }
-
                 }
-
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
@@ -99,10 +83,7 @@ class ApprovalsActivity : AppCompatActivity() {
         val end = articlesApprovalsList.size + limit
 
         retriveBackendData(token)
-        /*
-        for (i in start until end) {
-            articlesApprovalsList.add(articlesApprovalsList[i])
-        }*/
+
         Handler().postDelayed({
             if (::adapter.isInitialized) {
                 adapter.notifyDataSetChanged()
@@ -113,19 +94,18 @@ class ApprovalsActivity : AppCompatActivity() {
                         "Artigo ${position} selecionado", Toast.LENGTH_LONG
                     ).show()
 
+                    Log.e("ARTIGOAPPROVED: ", "${articleApproved}")
+
                     val intent = Intent(this, ArticleReviewActivity::class.java)
+                    intent.putExtra("idInvestigator", articleApproved.id)
                     startActivity(intent)
-                    //intent.putExtra("token", NetworkUtils.getToken(getIntent().getExtras()))
                     finish()
-
-
                 }
                 approval_recyclerView.adapter = adapter
             }
             isLoading = false
             approval_progressBar.visibility = View.GONE
         }, 2000)
-
     }
 
     fun retriveBackendData(token : String){
@@ -133,19 +113,18 @@ class ApprovalsActivity : AppCompatActivity() {
 
         // instanciando um cliente Retrofit
         val service = retrofitClient.create(Endpoint::class.java)
-        val call = service?.indexProject(page,limit)
+        val call = service.indexProject(page,limit)
 
         //callback (async)
-        call?.enqueue(object : Callback<AuthenticateResponse<ApprovalProjectList>>{
+        call.enqueue(object : Callback<AuthenticateResponse<ApprovalProjectList>>{
             override fun onFailure(call: Call<AuthenticateResponse<ApprovalProjectList>>, t: Throwable) {
                 Toast.makeText(applicationContext,"CAMPOS INCORRETOS", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<AuthenticateResponse<ApprovalProjectList>>, response: Response<AuthenticateResponse<ApprovalProjectList>>) {
-                val body = response?.body()
+                val body = response.body()
                 val projects = body?.getData()?.elements
                 val size = projects?.size
-
 
                 if (projects != null){
                     // executa se o limite de paginas n ultrapassar o enviado pelo backend
@@ -156,11 +135,8 @@ class ApprovalsActivity : AppCompatActivity() {
                     } else {
                         return
                     }
-
                 }
-
             }
-
         })
     }
 

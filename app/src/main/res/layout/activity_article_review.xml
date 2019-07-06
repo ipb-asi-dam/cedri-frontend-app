@@ -76,8 +76,8 @@
             android:orientation="vertical">
 
         <TextView
-                android:id="@+id/articleTitleProcuraActivity"
-                android:text="@string/titulo_artigo"
+                android:id="@+id/articleTitleArticleReviewActivity"
+                android:text="@string/titulo_projeto"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -98,7 +98,8 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:text="@string/exemploAbstract"
+                            android:text="Description"
+                            android:id="@+id/descriptionProject_ArticleReviewActivity"
                             android:textColor="@color/colorPrimaryDark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -113,7 +114,8 @@
                 android:orientation="vertical">
 
             <TextView
-                    android:text="Junho 14, 2015"
+                    android:id="@+id/dates_ArticleReviewActivity"
+                    android:text="Initial date and final date"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center_vertical"
@@ -131,13 +133,15 @@
                     android:layout_marginTop="8dp">
 
                 <Button
+                        android:id="@+id/articleIsApprovedArticleReviewActivity"
                         android:text="Aprovar"
                         android:layout_centerHorizontal="true"
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@drawable/input_background_circle"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:layout_width="128dp"
                         android:layout_height="match_parent"
                         />
@@ -152,12 +156,13 @@
                     android:layout_margin="48dp">
 
                 <Button
-                        android:text="Download PDF"
+                        android:text="@string/article_review_url_button"
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@drawable/input_background_circle"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:layout_width="128dp"
                         android:layout_height="48dp"
                         android:layout_alignParentLeft="true"
@@ -165,12 +170,13 @@
 
                 <Button
                         android:id="@+id/buttonPerfilAutorTelaResumoArtigo"
-                        android:text="Perfil Autor"
+                        android:text="@string/article_review_profile_author_button"
                         android:gravity="center"
                         android:clickable="true"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@drawable/input_background_circle"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:layout_width="128dp"
                         android:layout_height="48dp"
                         android:layout_alignParentRight="true"

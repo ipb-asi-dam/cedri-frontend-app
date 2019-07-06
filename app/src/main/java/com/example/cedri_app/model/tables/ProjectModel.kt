@@ -8,12 +8,22 @@ data class ProjectModel (
     val id : Int,
     @SerializedName("title")
     val title : String,
-    @SerializedName("author")
-    val investigatorName : String,
+    @SerializedName("description")
+    val description : String,
+    @SerializedName("financedBy")
+    val financedBy : String,
+    @SerializedName("consortium")
+    val consortium : String,
+    @SerializedName("investigatorId")
+    val investigatorId : Int,
     @SerializedName("startDate")
     val startDate : Date,
     @SerializedName("endDate")
     val endDate : Date,
+    @SerializedName("isAccepted")
+    val isAccepted : Boolean,
+    @SerializedName("author")
+    val investigatorName : String,
     @SerializedName("type")
     val type : String
 )
