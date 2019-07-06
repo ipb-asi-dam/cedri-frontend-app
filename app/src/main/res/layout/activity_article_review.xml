@@ -76,8 +76,8 @@
             android:orientation="vertical">
 
         <TextView
-                android:id="@+id/articleTitleProcuraActivity"
-                android:text="@string/titulo_artigo"
+                android:id="@+id/articleTitleArticleReviewActivity"
+                android:text="@string/titulo_projeto"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -98,7 +98,8 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:text="Author: Fulano da Silva"
+                            android:text="Description"
+                            android:id="@+id/descriptionProject_ArticleReviewActivity"
                             android:textColor="@color/colorPrimaryDark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -113,7 +114,8 @@
                 android:orientation="vertical">
 
             <TextView
-                    android:text="Junho 14, 2015"
+                    android:id="@+id/dates_ArticleReviewActivity"
+                    android:text="Initial date and final date"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center_vertical"
@@ -131,6 +133,7 @@
                     android:layout_marginTop="8dp">
 
                 <Button
+                        android:id="@+id/articleIsApprovedArticleReviewActivity"
                         android:text="Aprovar"
                         android:layout_centerHorizontal="true"
                         android:gravity="center"

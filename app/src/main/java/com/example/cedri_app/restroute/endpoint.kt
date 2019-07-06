@@ -98,6 +98,9 @@ interface Endpoint {
     @GET("api/private/projects/")
     fun indexProject(@Query("page") page_number: Int, @Query("limit") limit: Int): Call<AuthenticateResponse<ApprovalProjectList>>
 
+    @GET("api/private/projects/{project_id}")
+    fun showOneProjectInfo(@Path("project_id") project_id : Int) : Call<AuthenticateResponse<ProjectModel>>
+
     @GET("api/private/projects")
     fun listMyProjects(
         @Query("showMy") showMy: Boolean,

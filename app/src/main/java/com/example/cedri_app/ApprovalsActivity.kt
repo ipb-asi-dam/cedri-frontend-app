@@ -46,12 +46,7 @@ class ApprovalsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_approvals)
 
-        val CursorDatabase = myDB.getTokenFromDatabase()
-        var token : String = ""
-
-        if(CursorDatabase.moveToFirst()){
-            token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
-        }
+        val token = NetworkUtils.getTokenFromDB(this)
 
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
@@ -99,7 +94,10 @@ class ApprovalsActivity : AppCompatActivity() {
                         "Artigo ${position} selecionado", Toast.LENGTH_LONG
                     ).show()
 
+                    Log.e("ARTIGOAPPROVED: ", "${articleApproved}")
+
                     val intent = Intent(this, ArticleReviewActivity::class.java)
+                    intent.putExtra("idInvestigator", articleApproved.id)
                     startActivity(intent)
                     finish()
                 }
@@ -115,16 +113,16 @@ class ApprovalsActivity : AppCompatActivity() {
 
         // instanciando um cliente Retrofit
         val service = retrofitClient.create(Endpoint::class.java)
-        val call = service?.indexProject(page,limit)
+        val call = service.indexProject(page,limit)
 
         //callback (async)
-        call?.enqueue(object : Callback<AuthenticateResponse<ApprovalProjectList>>{
+        call.enqueue(object : Callback<AuthenticateResponse<ApprovalProjectList>>{
             override fun onFailure(call: Call<AuthenticateResponse<ApprovalProjectList>>, t: Throwable) {
                 Toast.makeText(applicationContext,"CAMPOS INCORRETOS", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<AuthenticateResponse<ApprovalProjectList>>, response: Response<AuthenticateResponse<ApprovalProjectList>>) {
-                val body = response?.body()
+                val body = response.body()
                 val projects = body?.getData()?.elements
                 val size = projects?.size
 

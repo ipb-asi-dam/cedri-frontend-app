@@ -10,6 +10,7 @@
     <string name="tela_revisao_artigo_name">REVIEW</string>
     <string name="tela_todos_artigos_name">ARTICLES</string>
     <string name="titulo_artigo">ARTICLE TITLE</string>
+    <string name="titulo_projeto">PROJECT TITLE</string>
     <string name="itemMenuConfiguracoes">SETTINGS</string>
     <string name="article_review_url_button">Link Project</string>
     <string name="article_review_profile_author_button">Author Perfil</string>

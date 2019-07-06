@@ -17,9 +17,9 @@ data class ProjectModel (
     @SerializedName("investigatorId")
     val investigatorId : Int,
     @SerializedName("startDate")
-    val startDate : String,
+    val startDate : Date,
     @SerializedName("endDate")
-    val endDate : String,
+    val endDate : Date,
     @SerializedName("isAccepted")
     val isAccepted : Boolean,
     @SerializedName("author")
