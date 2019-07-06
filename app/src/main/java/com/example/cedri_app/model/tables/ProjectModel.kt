@@ -1,6 +1,7 @@
 package com.example.cedri_app.model.tables
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class ProjectModel (
     @SerializedName("id")
@@ -20,5 +21,9 @@ data class ProjectModel (
     @SerializedName("endDate")
     val endDate : String,
     @SerializedName("isAccepted")
-    val isAccepted : Boolean
+    val isAccepted : Boolean,
+    @SerializedName("author")
+    val investigatorName : String,
+    @SerializedName("type")
+    val type : String
 )

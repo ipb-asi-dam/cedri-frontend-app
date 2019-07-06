@@ -9,13 +9,10 @@ import android.view.ViewGroup
 import com.example.cedri_app.R
 import com.example.cedri_app.model.tables.PublicationModel
 import kotlinx.android.synthetic.main.publication_item.view.*
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatterBuilder
 
-
-class PublicationListAdapter(private val publications: List<PublicationModel>,
-                             private val context: Context,
-                             private val onItemClickListener: (publication: PublicationModel, position: Int) -> Unit) : Adapter<PublicationListAdapter.ViewHolder>() {
+class MyPublicationsAdapter(private val publications: List<PublicationModel>,
+                            private val context: Context,
+                            private val onItemClickListener: (publication: PublicationModel, position: Int) -> Unit) : Adapter<MyPublicationsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val publication = publications[position]
@@ -38,14 +35,13 @@ class PublicationListAdapter(private val publications: List<PublicationModel>,
         fun bindView(publication: PublicationModel, context: Context) {
             val title = itemView.publication_item_title
             val type = itemView.publication_item_type
-            //val image = itemView.publication_item_image
 
-            val dateList = publication.year.toString().split(" ")
+            val dateList = publication.date.toString().split(" ")
             val year = dateList.last()
 
             title.text = publication.title
             type.text = context.resources.getString(
-                R.string.publication_list_type, publication.type.getDisplayName(), year)
+                R.string.my_publication_item_type, publication.type.getDisplayName(), year)
         }
     }
 }

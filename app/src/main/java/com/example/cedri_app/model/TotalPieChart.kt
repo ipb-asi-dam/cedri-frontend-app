@@ -34,84 +34,50 @@ class TotalPieChart(
     val baseContext: Context,
     val chart: Chart) {
 
-    fun tryGetData() {
+    fun tryGetTotalWorksData() {
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
         when (chart.title) {
-            "CeDRI Awards" -> getTotalAwardsData()
-            "CeDRI Intellectual Properties" -> getTotalIntellectualPropertiesData()
-            "CeDRI Outcomes" -> getTotalOutcomesData()
-            "CeDRI Publications" -> getTotalPublicationsData()
-            "CeDRI Theses" -> getTotalThesesData()
-            else -> getTotalOutcomesData()
+            "CeDRI Awards" -> {
+                val callback = endpoint.indexTotalAwards()
+                requestTotalAwardsData(callback)
+            }
+
+            "CeDRI Intellectual Properties" -> {
+                val callback = endpoint.indexTotalIntellectualProperties()
+                requestTotalIntellectualPropertiesData(callback)
+            }
+
+            "CeDRI Outcomes" -> {
+                val callback = endpoint.indexTotalOutcomes()
+                requestTotalOutcomesData(callback)
+            }
+
+            "CeDRI Publications" -> {
+                val callback = endpoint.indexTotalPublications()
+                requestTotalPublicationsData(callback)
+            }
+
+            "CeDRI Theses" -> {
+                val callback = endpoint.indexTotalTheses()
+                requestTotalThesesData(callback)
+            }
+
+            else -> {
+                val callback = endpoint.indexTotalProjects()
+                requestTotalProjectsData(callback)
+            }
         }
     }
 
-    private fun getTotalAwardsData() {
-        // For test
-        val data = readAndGetDataFromJSONFile(TotalAwards::class.java)
-        configurePieChart(data)
-        /*
-        val retrofitClient = NetworkUtils.getRetrofit(token)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.indexTotalAwards()
-        requestData(callback)*/
-    }
-
-    private fun getTotalThesesData() {
-        // For test
-        val data = readAndGetDataFromJSONFile(TotalTheses::class.java)
-        configurePieChart(data)
-        /*
-        val retrofitClient = NetworkUtils.getRetrofit(token)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.indexTotalTheses()
-        requestData(callback)*/
-    }
-
-    private fun getTotalIntellectualPropertiesData() {
-        // For test
-        val data = readAndGetDataFromJSONFile(TotalIntellectualProperties::class.java)
-        configurePieChart(data)
-        /*
-        val retrofitClient = NetworkUtils.getRetrofit(token)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.indexTotalIntellectualProperties()
-        requestData(callback)*/
-    }
-
-    private fun getTotalPublicationsData() {
-        // For test
-        val data = readAndGetDataFromJSONFile(TotalPublications::class.java)
-        configurePieChart(data)
-        /*
-        val retrofitClient = NetworkUtils.getRetrofit(token)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.indexTotalPublications()
-        requestData(callback)*/
-    }
-
-    private fun getTotalOutcomesData() {
-        // For test
-        val data = readAndGetDataFromJSONFile(TotalOutcomes::class.java)
-        configurePieChart(data)
-        /*
-        val retrofitClient = NetworkUtils.getRetrofit(token)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.indexTotalOutcomes()
-        requestData(callback)*/
-    }
-
-    private fun <T: Total>requestData(callback : Call<AuthenticateResponse<T>>) {
-        // Asynchronous request. For synchronous request, use callback.execute()
-
-        callback.enqueue(object : Callback<AuthenticateResponse<T>> {
-            override fun onFailure(call: Call<AuthenticateResponse<T>>, t: Throwable) {
+    private fun requestTotalAwardsData(callback: Call<AuthenticateResponse<TotalAwards>>) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalAwards>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalAwards>>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
-
-            override fun onResponse(call: Call<AuthenticateResponse<T>>,
-                                    response: Response<AuthenticateResponse<T>>) {
+            override fun onResponse(call: Call<AuthenticateResponse<TotalAwards>>,
+                                    response: Response<AuthenticateResponse<TotalAwards>>) {
                 val responseChecker = ResponseChecker(act, response)
-
                 if ( responseChecker.checkResponse() ) {
                     val data = response.body()?.getData() ?: run {
                         val errorMsg = "DADOS NÃO ENCONTRADOS"
@@ -123,6 +89,107 @@ class TotalPieChart(
             }
         })
     }
+
+    private fun requestTotalIntellectualPropertiesData(callback: Call<AuthenticateResponse<TotalIntellectualProperties>>) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalIntellectualProperties>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalIntellectualProperties>>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<AuthenticateResponse<TotalIntellectualProperties>>,
+                                    response: Response<AuthenticateResponse<TotalIntellectualProperties>>) {
+                val responseChecker = ResponseChecker(act, response)
+                if ( responseChecker.checkResponse() ) {
+                    val data = response.body()?.getData() ?: run {
+                        val errorMsg = "DADOS NÃO ENCONTRADOS"
+                        Toast.makeText(baseContext, errorMsg, Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    configurePieChart(data)
+                }
+            }
+        })
+    }
+
+    private fun requestTotalOutcomesData(callback: Call<AuthenticateResponse<TotalOutcomes>>) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalOutcomes>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalOutcomes>>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<AuthenticateResponse<TotalOutcomes>>,
+                                    response: Response<AuthenticateResponse<TotalOutcomes>>) {
+                val responseChecker = ResponseChecker(act, response)
+                if ( responseChecker.checkResponse() ) {
+                    val data = response.body()?.getData() ?: run {
+                        val errorMsg = "DADOS NÃO ENCONTRADOS"
+                        Toast.makeText(baseContext, errorMsg, Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    configurePieChart(data)
+                }
+            }
+        })
+    }
+
+    private fun requestTotalPublicationsData(callback: Call<AuthenticateResponse<TotalPublications>>) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalPublications>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalPublications>>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<AuthenticateResponse<TotalPublications>>,
+                                    response: Response<AuthenticateResponse<TotalPublications>>) {
+                val responseChecker = ResponseChecker(act, response)
+                if ( responseChecker.checkResponse() ) {
+                    val data = response.body()?.getData() ?: run {
+                        val errorMsg = "DADOS NÃO ENCONTRADOS"
+                        Toast.makeText(baseContext, errorMsg, Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    configurePieChart(data)
+                }
+            }
+        })
+    }
+
+    private fun requestTotalThesesData(callback: Call<AuthenticateResponse<TotalTheses>>) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalTheses>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalTheses>>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<AuthenticateResponse<TotalTheses>>,
+                                    response: Response<AuthenticateResponse<TotalTheses>>) {
+                val responseChecker = ResponseChecker(act, response)
+                if ( responseChecker.checkResponse() ) {
+                    val data = response.body()?.getData() ?: run {
+                        val errorMsg = "DADOS NÃO ENCONTRADOS"
+                        Toast.makeText(baseContext, errorMsg, Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    configurePieChart(data)
+                }
+            }
+        })
+    }
+
+    private fun requestTotalProjectsData(callback: Call<AuthenticateResponse<TotalProjects>>) {
+        callback.enqueue(object : Callback<AuthenticateResponse<TotalProjects>> {
+            override fun onFailure(call: Call<AuthenticateResponse<TotalProjects>>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<AuthenticateResponse<TotalProjects>>,
+                                    response: Response<AuthenticateResponse<TotalProjects>>) {
+                val responseChecker = ResponseChecker(act, response)
+                if ( responseChecker.checkResponse() ) {
+                    val data = response.body()?.getData() ?: run {
+                        val errorMsg = "DADOS NÃO ENCONTRADOS"
+                        Toast.makeText(baseContext, errorMsg, Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    configurePieChart(data)
+                }
+            }
+        })
+    }
+
 
     private fun configureLegend(legend: Legend) {
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
@@ -175,10 +242,9 @@ class TotalPieChart(
         val menuBarTitle = act.findViewById<TextView>(R.id.textView)
         menuBarTitle.text = chart.title
         val pieChart = act.findViewById<PieChart>(R.id.pie) ?: run {
-            println("ERROR: ID do Piechart não encontrado")
             return
         }
-
+        pieChart.setNoDataText("There is no data to display.")
         pieChart.description = setupDescription()
         configureLegend(pieChart.legend)
         val total = data.total
@@ -197,7 +263,9 @@ class TotalPieChart(
         val pairList = data.getPairList()
         pairList.forEach {
             val (label, value) = it
-            entry.add( PieEntry( value.toFloat(), label) )
+            if (value > 0) {
+                entry.add( PieEntry( value.toFloat(), label) )
+            }
         }
     }
 

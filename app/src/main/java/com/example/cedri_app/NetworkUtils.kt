@@ -1,5 +1,7 @@
 package com.example.cedri_app
+import android.content.Context
 import android.os.Bundle
+import com.example.cedri_app.database.DatabaseHandler
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -48,11 +50,12 @@ class NetworkUtils {
             return token
         }
 
-        fun getRetrofitInstance(path: String): Retrofit {
-            return Retrofit.Builder()
-                .baseUrl(path)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+        fun getTokenFromDB(context: Context) : String {
+            val myDB = DatabaseHandler(context)
+            val cursorDatabase = myDB.getTokenFromDatabase()
+            return if (cursorDatabase.moveToFirst())
+                cursorDatabase.getString(cursorDatabase.getColumnIndex("token"))
+            else ""
         }
     }
 }

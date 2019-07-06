@@ -10,20 +10,16 @@ class ChartList(val isAdmin : Boolean) {
                 Chart("CeDRI Outcomes"),
                 Chart("CeDRI Publications"),
                 Chart("CeDRI Theses"),
-                Chart("My Awards"),
-                Chart("My Intellectual Properties"),
-                Chart("My Outcomes"),
-                Chart("My Publications"),
-                Chart("My Theses"),
-                Chart("My Projects")
+                Chart("My Awards (last 5 years)"),
+                Chart("My Publications (last 5 years)"),
+                Chart("My Theses (last 5 years)"),
+                Chart("My Projects (last 5 years)")
             )
             else -> return listOf (
-                Chart("My Awards"),
-                Chart("My Intellectual Properties"),
-                Chart("My Outcomes"),
-                Chart("My Publications"),
-                Chart("My Theses"),
-                Chart("My Projects")
+                Chart("My Awards (last 5 years)"),
+                Chart("My Publications (last 5 years)"),
+                Chart("My Theses (last 5 years)"),
+                Chart("My Projects (last 5 years)")
             )
         }
     }
