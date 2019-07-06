@@ -10,8 +10,8 @@ data class PublicationModel(
     val authors : String,
     @SerializedName("title")
     val title : String,
-    @SerializedName("year")
-    val year : Date,
+    @SerializedName("date")
+    val date : Date,
     @SerializedName("sourceTitle")
     val sourceTitle : String,
     @SerializedName("volume")

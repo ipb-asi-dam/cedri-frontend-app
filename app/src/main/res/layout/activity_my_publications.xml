@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.example.cedri_app.ui.activity.listing.WorkCardListActivity"
-                android:background="@color/chartMenuBlue">
-
+<!-- REFACTORED -->
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.cedri_app.ui.activity.listing.MyPublicationsActivity"
+        android:background="@color/chartMenuBlue">
     <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -15,27 +16,25 @@
             android:background="@color/colorPrimary"
             android:id="@+id/toolbar"
             app:contentInsetStart="0dp">
-
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
             <ImageButton
-                    android:id="@+id/backImageButtonChartList"
+                    android:id="@+id/back_image_button"
                     android:layout_height="48dp"
                     android:layout_width="48dp"
                     android:src="@drawable/ic_arrow_back_black_24dp"
                     android:background="@color/colorPrimary"
-                    android:contentDescription="Logout button."
+                    android:contentDescription="@string/toolbar_back_image_content_description"
                     android:clickable="true"
+                    android:focusable="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"/>
-
             <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/menu_bar"
                     android:text="@string/menu_bar_title_specific_work"
                     android:textAllCaps="true"
                     android:textStyle="bold"
@@ -44,31 +43,31 @@
                     android:layout_height="32dp"
                     android:gravity="center"
                     android:layout_centerInParent="true"/>
-
             <ImageButton
-                    android:id="@+id/logoutImageButton2"
+                    android:id="@+id/profile_image_button"
                     android:layout_height="48dp"
                     android:layout_width="48dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_person_black_24dp"
                     android:background="@color/colorPrimary"
-                    android:contentDescription="Avatar button."
+                    android:contentDescription="@string/toolbar_avatar_image_content_description"
                     android:clickable="true"
+                    android:focusable="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-            />
-
+                    android:layout_alignParentRight="true"/>
         </RelativeLayout>
-
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_below="@id/toolbar"
-            android:id="@+id/work_card_list_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
-
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
 </RelativeLayout>
