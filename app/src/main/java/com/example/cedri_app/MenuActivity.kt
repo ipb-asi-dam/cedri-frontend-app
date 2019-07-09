@@ -12,11 +12,19 @@ import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity() {
 
+    var myDB = DatabaseHandler(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
         logoutButton.setOnClickListener {
+            try {
+                myDB.deleteToken(NetworkUtils.getTokenFromDB(this).toInt())
+                Toast.makeText(baseContext, "deletado", Toast.LENGTH_SHORT).show()
+            } finally {
+
+            }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -35,16 +43,6 @@ class MenuActivity : AppCompatActivity() {
         }
 
         itemMenuColum2Row1.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        itemMenuColum2Row2.setOnClickListener {
-            Toast.makeText(this, "NÃO PLANEJADO", Toast.LENGTH_LONG).show()
-        }
-
-        itemMenuColum1Row3.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)
             startActivity(intent)
             finish()
