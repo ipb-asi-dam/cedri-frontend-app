@@ -30,7 +30,7 @@ import java.io.BufferedReader
 
 class ApprovalsActivity : AppCompatActivity() {
 
-    var myDB = DatabaseHandler(this)
+    // var myDB = DatabaseHandler(this)
 
     val articlesApprovalsList: MutableList<ApprovalProjectCard> = mutableListOf()
 
