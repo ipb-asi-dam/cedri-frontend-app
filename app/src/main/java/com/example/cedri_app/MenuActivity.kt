@@ -4,8 +4,10 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.cedri_app.database.DatabaseHandler
+import com.example.cedri_app.model.Decode
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
 import com.example.cedri_app.ui.activity.listing.WorkCardListActivity
 import kotlinx.android.synthetic.main.activity_menu.*

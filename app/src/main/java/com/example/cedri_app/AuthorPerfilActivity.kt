@@ -1,14 +1,14 @@
 package com.example.cedri_app
 
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.widget.Toast
 import com.example.cedri_app.model.*
 import kotlinx.android.synthetic.main.activity_author_perfil.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

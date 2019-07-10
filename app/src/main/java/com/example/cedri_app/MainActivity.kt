@@ -24,12 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
         buttonForgotPassword.setOnClickListener {
             val intent = Intent (this, ForgotPasswordActivity::class.java)
             startActivity(intent)
             finish()
         }
-
+        */
         buttonLogin.setOnClickListener{
             val utilsTeste = Utils()
             if (editTextEmailActivityMain.text.isEmpty()) {
