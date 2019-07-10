@@ -89,15 +89,15 @@ class ApprovalsActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             } else {
                 adapter = ApporvalsAdapter(this) { articleApproved, position ->
-                    Toast.makeText(
+                    /*Toast.makeText(
                         this,
                         "Artigo ${position} selecionado", Toast.LENGTH_LONG
-                    ).show()
+                    ).show()*/
 
-                    Log.e("ARTIGOAPPROVED: ", "${articleApproved}")
+                    // Log.e("ARTIGOAPPROVED: ", "${articleApproved}")
 
                     val intent = Intent(this, ArticleReviewActivity::class.java)
-                    intent.putExtra("idInvestigator", articleApproved.id)
+                    intent.putExtra("idProject", articleApproved.id)
                     startActivity(intent)
                     finish()
                 }

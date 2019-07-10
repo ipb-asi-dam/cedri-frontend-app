@@ -13,6 +13,7 @@ import com.example.cedri_app.NetworkUtils
 import com.example.cedri_app.R
 import com.example.cedri_app.SearchActivity
 import com.example.cedri_app.ui.adapter.MenuCardListAdapter
+import kotlinx.android.synthetic.main.activity_chart_list.*
 import kotlinx.android.synthetic.main.activity_menu_card_list.*
 
 class MenuCardListActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class MenuCardListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_card_list)
         val token = NetworkUtils.getTokenFromDB(this)
+        NetworkUtils.setupAvatar(this, token, profile_image_button)
 
         back_image_button.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)

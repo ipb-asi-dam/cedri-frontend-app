@@ -4,12 +4,16 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.AnnualItem
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface Endpoint {
     @POST("api/public/authenticate")
     fun postLogin(@Body authRequest: AuthenticateRequest): Call<AuthenticateResponse<Token>>
+
+    @GET("api/public/files/{md5}")
+    fun getFile(@Path("md5") md5 : String): Call<ResponseBody>
 
     @GET("api/private/users/{investigator_id}")
     fun showInvestigator(@Path("investigator_id") investigator_id : Int): Call<AuthenticateResponse<Investigator>>
@@ -101,6 +105,9 @@ interface Endpoint {
     @GET("api/private/projects/{project_id}")
     fun showOneProjectInfo(@Path("project_id") project_id : Int) : Call<AuthenticateResponse<ProjectModel>>
 
+    @PUT("api/private/projects/{project_id}")
+    fun changeIsAcceptedProjecValue(@Path("project_id") project_id : Int, @Body putBody: ApprovalChangeValueRequest) : Call<AuthenticateResponse<ApprovalChangeValueRequest>>
+
     @GET("api/private/projects")
     fun listMyProjects(
         @Query("showMy") showMy: Boolean,
@@ -136,6 +143,5 @@ interface Endpoint {
         @Query("page") pageNumber: Int,
         @Query("limit") limit: Int
     ) : Call<AuthenticateResponse<ElementList<IntellectualPropertyModel>>>
-
     /* patents endpoints end */
 }

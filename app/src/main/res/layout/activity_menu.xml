@@ -74,93 +74,71 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
-            android:id="@+id/scrollView2"
-            android:orientation="vertical"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             card_view:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <LinearLayout
+        <GridLayout
+                android:id="@+id/mainGrid"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:orientation="vertical">
 
-            <GridLayout
-                    android:id="@+id/mainGrid"
-                    android:columnCount="2"
-                    android:rowCount="2"
-                    android:alignmentMode="alignMargins"
-                    android:columnOrderPreserved="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp">
+            <!-- Row 1 -->
 
-                <!-- Row 1 -->
+            <!-- Column 1 -->
+            <android.support.v7.widget.CardView
+                    android:id="@+id/itemMenuColum1Row1"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="8dp"
+                    android:clickable="true"
+                    card_view:cardBackgroundColor="@color/colorPrimaryDark"
 
-                <!-- Column 1 -->
-                <!--
-                <include layout="@layout/card_menu_layout"
-                         android:layout_columnWeight="1"
-                         android:layout_rowWeight="1"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_marginBottom="16dp"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginRight="16dp">
-                </include>
-                -->
+            >
 
-                <android.support.v7.widget.CardView
-                        android:id="@+id/itemMenuColum1Row1"
-                        android:layout_columnWeight="1"
-                        android:layout_rowWeight="1"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
+                <LinearLayout
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardElevation="8dp"
-                        app:cardCornerRadius="8dp"
-                        android:clickable="true"
-                        card_view:cardBackgroundColor="@color/colorPrimaryDark"
+                        android:background="@color/colorPrimaryDark">
 
-                >
+                    <ImageView
+                            android:src="@drawable/ic_insert_chart_black_24dp"
+                            android:scaleType="centerCrop"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"/>
 
-                    <LinearLayout
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
-                            android:orientation="vertical"
+                    <TextView
+                            android:text="@string/itemMenuDashboard"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/colorPrimaryDark">
+                            android:layout_height="wrap_content"/>
 
-                        <ImageView
-                                android:src="@drawable/ic_insert_chart_black_24dp"
-                                android:scaleType="centerCrop"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"/>
+                </LinearLayout>
 
-                        <TextView
-                                android:text="@string/itemMenuDashboard"
-                                android:textAlignment="center"
-                                android:textColor="@android:color/white"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+            </android.support.v7.widget.CardView
+            >
 
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView
-                >
-
-                <!-- Column 2 -->
+            <!-- Column 2 -->
+            <!--
                 <android.support.v7.widget.CardView
                         android:id="@+id/itemMenuColum2Row1"
                         android:layout_columnWeight="1"
@@ -205,57 +183,56 @@
 
                 </android.support.v7.widget.CardView
                 >
+                -->
 
+            <!-- Row 2 -->
 
-                <!-- Row 2 -->
+            <!-- Column 1 -->
+            <android.support.v7.widget.CardView
+                    android:id="@+id/itemMenuColum2Row1"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="8dp"
+                    android:clickable="true"
+                    card_view:cardBackgroundColor="@color/colorPrimaryDark"
 
-                <!-- Column 1 -->
-                <android.support.v7.widget.CardView
-                        android:id="@+id/itemMenuColum1Row2"
-                        android:layout_columnWeight="1"
-                        android:layout_rowWeight="1"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
+            >
+
+                <LinearLayout
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardElevation="8dp"
-                        app:cardCornerRadius="8dp"
-                        android:clickable="true"
-                        card_view:cardBackgroundColor="@color/colorPrimaryDark"
+                        android:background="@color/colorPrimaryDark">
 
-                >
+                    <ImageView
+                            android:src="@drawable/ic_spellcheck_black_24dp"
+                            android:scaleType="centerCrop"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"/>
 
-                    <LinearLayout
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
-                            android:orientation="vertical"
+                    <TextView
+                            android:text="@string/itemMenuAprovacoes"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/colorPrimaryDark">
+                            android:layout_height="wrap_content"/>
 
-                        <ImageView
-                                android:src="@drawable/ic_spellcheck_black_24dp"
-                                android:scaleType="centerCrop"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"/>
+                </LinearLayout>
 
-                        <TextView
-                                android:text="@string/itemMenuAprovacoes"
-                                android:textAlignment="center"
-                                android:textColor="@android:color/white"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+            </android.support.v7.widget.CardView
+            >
 
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView
-                >
-
-                <!-- Column 2 -->
+            <!-- Column 2 -->
+            <!--
                 <android.support.v7.widget.CardView
                         android:id="@+id/itemMenuColum2Row2"
                         android:layout_columnWeight="1"
@@ -300,59 +277,57 @@
 
                 </android.support.v7.widget.CardView
                 >
+                -->
 
-                <!-- Row 3 -->
+            <!-- Row 3 -->
 
-                <!-- Column 1 -->
-                <android.support.v7.widget.CardView
-                        android:id="@+id/itemMenuColum1Row3"
-                        android:layout_columnWeight="1"
-                        android:layout_rowWeight="1"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
+            <!-- Column 1 -->
+            <android.support.v7.widget.CardView
+                    android:id="@+id/itemMenuColum1Row2"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="8dp"
+                    android:clickable="true"
+                    card_view:cardBackgroundColor="@color/colorPrimaryDark">
+
+                <LinearLayout
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardElevation="8dp"
-                        app:cardCornerRadius="8dp"
-                        android:clickable="true"
-                        card_view:cardBackgroundColor="@color/colorPrimaryDark">
+                        android:background="@color/colorPrimaryDark">
 
-                    <LinearLayout
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
-                            android:orientation="vertical"
+                    <ImageView
+                            android:src="@drawable/ic_work_black_24dp"
+                            android:scaleType="centerCrop"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"/>
+
+                    <TextView
+                            android:text="@string/itemMenuMeusTrabalhos"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/colorPrimaryDark">
+                            android:layout_height="wrap_content"/>
 
-                        <ImageView
-                                android:src="@drawable/ic_spellcheck_black_24dp"
-                                android:scaleType="centerCrop"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"/>
+                </LinearLayout>
 
-                        <TextView
-                                android:text="@string/itemMenuMeusTrabalhos"
-                                android:textAlignment="center"
-                                android:textColor="@android:color/white"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+            </android.support.v7.widget.CardView>
 
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <!-- Column 2 -->
+            <!-- Column 2 -->
 
 
-            </GridLayout>
+        </GridLayout>
 
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

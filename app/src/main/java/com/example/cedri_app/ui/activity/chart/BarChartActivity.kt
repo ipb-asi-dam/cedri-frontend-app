@@ -8,6 +8,8 @@ import com.example.cedri_app.R
 import com.example.cedri_app.model.MyBarChart
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
 import kotlinx.android.synthetic.main.activity_bar_chart.*
+import kotlinx.android.synthetic.main.activity_bar_chart.logoutImageButton2
+import kotlinx.android.synthetic.main.activity_chart_list.*
 
 class BarChartActivity : AppCompatActivity() {
 
@@ -17,6 +19,7 @@ class BarChartActivity : AppCompatActivity() {
 
         val token = NetworkUtils.getTokenFromDB(this)
         val title = intent?.extras?.getString("title") ?: ""
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
 
         setSupportActionBar(android.support.v7.widget.Toolbar(this))
 

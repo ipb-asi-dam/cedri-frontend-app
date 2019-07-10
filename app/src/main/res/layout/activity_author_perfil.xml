@@ -97,37 +97,9 @@
 
             <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-                <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="72dp"
-                        android:layout_marginBottom="8dp"
-                        card_view:cardBackgroundColor="@color/backgroundLight">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@color/colorPrimaryDark">
-
-                        <TextView
-                                android:id="@+id/author_phone_number"
-                                android:text="+000 000000000"
-                                android:textColor="@color/colorPrimary"
-                                android:gravity="left|center"
-                                android:paddingLeft="16dp"
-                                android:drawablePadding="10dp"
-                                android:drawableLeft="@drawable/ic_phone_black_24dp"
-                                android:drawableTint="@color/colorPrimary"
-                                android:clickable="true"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
@@ -143,33 +115,6 @@
                         <TextView
                                 android:id="@+id/author_perfil_first_email"
                                 android:text="fulano@exemplo.com"
-                                android:textColor="@color/colorPrimary"
-                                android:gravity="left|center"
-                                android:paddingLeft="16dp"
-                                android:drawablePadding="10dp"
-                                android:drawableLeft="@drawable/ic_email_black_24dp"
-                                android:drawableTint="@color/colorPrimary"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="72dp"
-                        android:layout_marginBottom="8dp"
-                        card_view:cardBackgroundColor="@color/colorPrimaryDark">
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                        <TextView
-                                android:id="@+id/author_perfil_second_email"
-                                android:text="fulano@sample_example.com"
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="left|center"
                                 android:paddingLeft="16dp"

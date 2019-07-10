@@ -20,6 +20,7 @@ class WorkCardListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_card_list)
         val token = NetworkUtils.getTokenFromDB(this)
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
 
         backImageButtonChartList.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
