@@ -9,6 +9,8 @@ import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
 import com.example.cedri_app.ui.activity.listing.WorkCardListActivity
 import kotlinx.android.synthetic.main.activity_menu.*
+import kotlinx.android.synthetic.main.activity_menu.logoutImageButton2
+import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class MenuActivity : AppCompatActivity() {
 
@@ -26,6 +28,7 @@ class MenuActivity : AppCompatActivity() {
             token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
         }
 
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
         Log.e("DB", "DADOS-> ${CursorDatabase}")
 
         logoutButton.setOnClickListener {

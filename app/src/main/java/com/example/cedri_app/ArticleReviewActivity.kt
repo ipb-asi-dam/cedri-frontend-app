@@ -3,7 +3,10 @@ package com.example.cedri_app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cedri_app.database.DatabaseHandler
 import kotlinx.android.synthetic.main.activity_article_review.*
+import kotlinx.android.synthetic.main.activity_article_review.logoutImageButton2
+import kotlinx.android.synthetic.main.activity_menu.*
 
 class ArticleReviewActivity : AppCompatActivity() {
 
@@ -11,7 +14,13 @@ class ArticleReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_review)
 
-        val token = NetworkUtils.getToken( getIntent().getExtras() )
+        var myDB = DatabaseHandler(this)
+        val CursorDatabase = myDB.getTokenFromDatabase()
+        var token : String = ""
+        if(CursorDatabase.moveToFirst()){
+            token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
+        }
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
 
         backImageButtonSingleArticleReview.setOnClickListener {
             val intent = Intent(this, ApprovalsActivity::class.java)

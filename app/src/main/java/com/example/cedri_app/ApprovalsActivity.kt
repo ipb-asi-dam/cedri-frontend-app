@@ -23,6 +23,8 @@ import com.example.cedri_app.ui.adapter.ApporvalsAdapter
 import com.example.cedri_app.ui.adapter.ChartListAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_approvals.*
+import kotlinx.android.synthetic.main.activity_approvals.logoutImageButton2
+import kotlinx.android.synthetic.main.activity_article_review.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +56,7 @@ class ApprovalsActivity : AppCompatActivity() {
         if(CursorDatabase.moveToFirst()){
             token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
         }
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
 
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)

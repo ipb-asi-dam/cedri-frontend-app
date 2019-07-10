@@ -6,6 +6,9 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import android.os.Build
+
+
 
 class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, null, 1) {
 
@@ -20,14 +23,21 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
             return db.rawQuery(query, null)
         }
 
+    override fun onOpen(db: SQLiteDatabase) {
+        super.onOpen(db)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            db.disableWriteAheadLogging()
+        }
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = "CREATE TABLE $TABLE_NAME ($COL1 INTEGER PRIMARY KEY AUTOINCREMENT, $COL2 TEXT)"
+        val createTable = "CREATE TABLE $TABLE_NAME ($COL1 INTEGER PRIMARY KEY AUTOINCREMENT, $COL2 TEXT, $COL3 BLOB);"
         db.execSQL(createTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, i: Int, i1: Int) {
-        //db.execSQL("DROP IF TABLE EXISTS $TABLE_NAME")
-        //onCreate(db)
+        db.execSQL("DROP TABLE IF EXISTS '$TABLE_NAME'")
+        onCreate(db)
     }
 
     fun insertToken(token: String): Boolean {
@@ -47,6 +57,17 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
         }
     }
 
+    fun insertAvatar(image: ByteArray): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COL3, image)
+        Log.d(TAG, "addData: Adding $image to $TABLE_NAME")
+        val result = db.insert(TABLE_NAME, null, contentValues)
+
+        //if date as inserted incorrectly it will return -1
+        return (-1).toLong() != result
+    }
+
     /**
      * Returns only the token that matches the id passed in
      * @param id
@@ -55,6 +76,17 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
     fun getAll(): Cursor {
         val db = this.writableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
+        return db.rawQuery(query, null)
+    }
+
+    /**
+     * Returns only the ID that matches the name passed in
+     * @param name
+     * @return
+     */
+    fun getAvatarFromDatabase(): Cursor {
+        val db = this.writableDatabase
+        val query = "SELECT * FROM $TABLE_NAME LIMIT 1"
         return db.rawQuery(query, null)
     }
 
@@ -96,11 +128,11 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, TABLE_NAME, 
     }
 
     companion object {
-
         private val TAG = "DatabaseHelper"
         private val TABLE_NAME = "token_table"
         private val COL1 = "ID"
         private val COL2 = "token"
+        private val COL3 = "avatar"
     }
 
 }
