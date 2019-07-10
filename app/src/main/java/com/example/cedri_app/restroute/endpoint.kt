@@ -101,6 +101,9 @@ interface Endpoint {
     @GET("api/private/projects/{project_id}")
     fun showOneProjectInfo(@Path("project_id") project_id : Int) : Call<AuthenticateResponse<ProjectModel>>
 
+    @PUT("api/private/projects/{project_id}")
+    fun changeIsAcceptedProjecValue(@Path("project_id") project_id : Int, @Body putBody: ApprovalChangeValueRequest) : Call<AuthenticateResponse<ApprovalChangeValueRequest>>
+
     @GET("api/private/projects")
     fun listMyProjects(
         @Query("showMy") showMy: Boolean,

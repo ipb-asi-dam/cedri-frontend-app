@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val email = editTextEmailActivityMain.text.toString();
                 val password = editTextPasswordActivityMain.text.toString();
-                Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
+                // Toast.makeText(this,"CAMPOS CORRETOS", Toast.LENGTH_LONG).show()
 
                 loginRequest(this, email, password)
             }
@@ -78,11 +78,11 @@ class MainActivity : AppCompatActivity() {
                     //armazenar no banco o token (ele só passa pra proxima tela se ele receber e inserir o token no DB)
                     if (token != null) {
                         if(myDB.insertToken(token)){
-                            Toast.makeText(baseContext, "Inserido no DB", Toast.LENGTH_SHORT).show()
+                            // Toast.makeText(baseContext, "Inserido no DB", Toast.LENGTH_SHORT).show()
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(baseContext, "Não inserido no DB", Toast.LENGTH_SHORT).show()
+                            // Toast.makeText(baseContext, "Não inserido no DB", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

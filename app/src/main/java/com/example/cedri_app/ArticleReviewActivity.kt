@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.cedri_app.database.DatabaseHandler
+import com.example.cedri_app.model.ApprovalChangeValueRequest
 import com.example.cedri_app.model.AuthenticateResponse
 import com.example.cedri_app.model.tables.ProjectModel
 import kotlinx.android.synthetic.main.activity_article_review.*
@@ -18,16 +19,19 @@ class ArticleReviewActivity : AppCompatActivity() {
 
     var myDB = DatabaseHandler(this)
 
+    var buttonValue: Boolean = false
+
+    var authorId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_review)
 
-        val a = intent
-
-        var idInvestigatorFromExtra = intent.getIntExtra("idInvestigator", 0)
-        Log.e("ID_INVESTIGADOR", "${idInvestigatorFromExtra}")
+        var idProjectFromExtra = intent.getIntExtra("idProject", 0)
+        // Log.e("ID_INVESTIGADOR", "${idProjectFromExtra}")
 
         val token = NetworkUtils.getTokenFromDB(this)
+        retriveBackendData(token, idProjectFromExtra)
 
         backImageButtonSingleArticleReview.setOnClickListener {
             val intent = Intent(this, ApprovalsActivity::class.java)
@@ -37,27 +41,71 @@ class ArticleReviewActivity : AppCompatActivity() {
 
         buttonPerfilAutorTelaResumoArtigo.setOnClickListener {
             val intent = Intent(this, AuthorPerfilActivity::class.java)
+            intent.putExtra("authorId", authorId)
             startActivity(intent)
             finish()
         }
 
 
-        retriveBackendData(token, idInvestigatorFromExtra)
-
-
+        articleIsApprovedArticleReviewActivity.setOnClickListener {
+            // FAZER A REQUISIÇÃO COM O BACK E MUDAR O VALOR DO DO BOTAO
+            // Log.e("BUTTON VALUE: ", "${buttonValue}")
+            changeIsAcceptedValue(token, idProjectFromExtra, buttonValue)
+            //articleIsApprovedArticleReviewActivity.text = "${buttonValue}"
+        }
     }
 
-    fun retriveBackendData(token : String, idInvestigatorFromExtra : Int){
+    fun changeIsAcceptedValue(token: String, idProject: Int, changeIsAccepted: Boolean){
         val retrofitClient = NetworkUtils.getRetrofit(token)
 
         val service = retrofitClient.create(Endpoint::class.java)
-        // mudar o PROJECT ID -> COLOCAR O Q VEM DA TELA ANTERIOR
-        val call = service.showOneProjectInfo(idInvestigatorFromExtra.toInt())
+
+        val putBody = ApprovalChangeValueRequest(!changeIsAccepted)
+        // Log.e("SENT VALUE: ", "${!changeIsAccepted}")
+
+        val callback = service.changeIsAcceptedProjecValue(idProject, putBody)
+
+        callback.enqueue(object : Callback<AuthenticateResponse<ApprovalChangeValueRequest>>{
+            override fun onFailure(call: Call<AuthenticateResponse<ApprovalChangeValueRequest>>, t: Throwable) {
+                Toast.makeText(applicationContext,"ERRO COMUNICAÇÃO", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(
+                call: Call<AuthenticateResponse<ApprovalChangeValueRequest>>,
+                response: Response<AuthenticateResponse<ApprovalChangeValueRequest>>
+            ) {
+                val body = response.body()
+                val isAcceptedFromDB = body?.getData()?.isAccepted
+
+                if (isAcceptedFromDB != null){
+                    Log.e("FROM DB VALUE: ", "${isAcceptedFromDB}")
+                    if (isAcceptedFromDB){
+                        buttonValue = isAcceptedFromDB
+                        articleIsApprovedArticleReviewActivity.text = "REJEITAR"
+                    } else {
+                        buttonValue = isAcceptedFromDB
+                        articleIsApprovedArticleReviewActivity.text = "APROVAR"
+                    }
+                } else {
+                    Toast.makeText(applicationContext,"ERRO DO SERVER", Toast.LENGTH_LONG).show()
+                }
+
+            }
+        })
+
+    }
+
+    fun retriveBackendData(token : String, idProjectFromExtra : Int){
+        val retrofitClient = NetworkUtils.getRetrofit(token)
+
+        val service = retrofitClient.create(Endpoint::class.java)
+
+        val call = service.showOneProjectInfo(idProjectFromExtra)
 
 
         call.enqueue(object : Callback<AuthenticateResponse<ProjectModel>>{
             override fun onFailure(call: Call<AuthenticateResponse<ProjectModel>>, t: Throwable) {
-                Toast.makeText(applicationContext,"CAMPOS INCORRETOS", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"ERRO AO RECEBER DADOS", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<AuthenticateResponse<ProjectModel>>, response: Response<AuthenticateResponse<ProjectModel>>) {
@@ -72,13 +120,19 @@ class ArticleReviewActivity : AppCompatActivity() {
                 var initialDate = projectStartDate.toString().split(" ")
                 var finalDate = projectEndDate.toString().split(" ")
 
+                authorId = projectAuthorId!!
 
                 articleTitleArticleReviewActivity.text = projectTitle
                 descriptionProject_ArticleReviewActivity.text = projectDescription
                 dates_ArticleReviewActivity.text = "${initialDate[2]} ${initialDate[1]} ${initialDate.last()} - ${finalDate[2]} ${finalDate[1]} ${finalDate.last()}"
+
                 if (projectIsAccepted!!){
+                    buttonValue = projectIsAccepted
+                    // Log.e("STORED VALUE: ", "${buttonValue}")
                     articleIsApprovedArticleReviewActivity.text = "REJEITAR"
                 } else {
+                    buttonValue = projectIsAccepted
+                    // Log.e("STORED VALUE: ", "${buttonValue}")
                     articleIsApprovedArticleReviewActivity.text = "APROVAR"
                 }
                 // TODO: pegar o valor do ID para abrir a proxima INTENT
@@ -86,4 +140,6 @@ class ArticleReviewActivity : AppCompatActivity() {
             }
         })
     }
+
+
 }

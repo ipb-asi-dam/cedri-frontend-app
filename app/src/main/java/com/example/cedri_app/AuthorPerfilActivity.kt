@@ -31,17 +31,6 @@ class AuthorPerfilActivity : AppCompatActivity() {
             finish()
         }
 
-        author_phone_number.setOnClickListener {
-
-            // TODO: COLOCAR ALGUM POPUP INDICANDO AO USUARIO Q ELE SERÁ ENCAMINHADO AO APP DE CHAMADAS E SE ELE ACEITAR ELE VAI PARA LIGAÇÃO
-            // SEGUE LINK PARA UMA POSSIVEL SOLUCAO https://www.youtube.com/watch?v=6_kGW103Ue8 ESTA SOLUÇÂO CONSISTE EM COPIAR O NUMERO PARA O APLICATIVO DE DISCAGEM
-
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), REQUEST_PHONE_CALL)
-            } else {
-                startCall()
-            }
-        }
     }
 
     private fun tryGetData(mainAct : AuthorPerfilActivity, token : String) {
@@ -77,19 +66,5 @@ class AuthorPerfilActivity : AppCompatActivity() {
     private fun configureInvestigator(investigator : Investigator) {
         author_perfil_first_email.text = investigator.email
         author_perfil_full_name.text = investigator.name
-    }
-
-    private fun startCall(){
-        val callIntent = Intent(Intent.ACTION_CALL)
-        val number = "913801231"
-
-        callIntent.data = Uri.parse("tel:" + number)
-        startActivity(callIntent)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == REQUEST_PHONE_CALL){
-            startCall()
-        }
     }
 }
