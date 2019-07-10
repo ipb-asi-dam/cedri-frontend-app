@@ -16,6 +16,7 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.AwardModel
 import com.example.cedri_app.ui.adapter.MyAwardsAdapter
+import kotlinx.android.synthetic.main.activity_chart_list.*
 import kotlinx.android.synthetic.main.activity_my_awards.*
 import kotlinx.android.synthetic.main.activity_my_awards.recycler_view
 import retrofit2.Call
@@ -37,6 +38,8 @@ class MyAwardsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_awards)
         token = NetworkUtils.getTokenFromDB(this)
+        NetworkUtils.setupAvatar(this, token, profile_image_button)
+
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)
             intent.putExtra("token", token)

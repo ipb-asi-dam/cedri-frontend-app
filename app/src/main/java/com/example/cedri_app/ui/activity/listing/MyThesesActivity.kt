@@ -16,7 +16,12 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.TheseModel
 import com.example.cedri_app.ui.adapter.MyThesesAdapter
+import kotlinx.android.synthetic.main.activity_chart_list.*
+import kotlinx.android.synthetic.main.activity_my_awards.*
 import kotlinx.android.synthetic.main.activity_my_theses.*
+import kotlinx.android.synthetic.main.activity_my_theses.back_image_button
+import kotlinx.android.synthetic.main.activity_my_theses.profile_image_button
+import kotlinx.android.synthetic.main.activity_my_theses.progress_bar
 import kotlinx.android.synthetic.main.activity_my_theses.recycler_view
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +42,8 @@ class MyThesesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_theses)
         token = NetworkUtils.getTokenFromDB(this)
+        NetworkUtils.setupAvatar(this, token, profile_image_button)
+
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)
             intent.putExtra("token", token)

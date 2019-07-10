@@ -7,7 +7,6 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import com.example.cedri_app.Endpoint
@@ -17,8 +16,9 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.PublicationModel
 import com.example.cedri_app.ui.adapter.MyPublicationsAdapter
-import kotlinx.android.synthetic.main.activity_bar_chart.*
-import kotlinx.android.synthetic.main.activity_my_publications.*
+import kotlinx.android.synthetic.main.activity_my_publications.back_image_button
+import kotlinx.android.synthetic.main.activity_my_publications.profile_image_button
+import kotlinx.android.synthetic.main.activity_my_publications.progress_bar
 import kotlinx.android.synthetic.main.activity_my_publications.recycler_view
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,6 +40,8 @@ class MyPublicationsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_publications)
         //this.menu_bar_title.text = this.resources.getString(R.string.menu_bar_title_specific_work, "PUBLICATIONS")
         token = NetworkUtils.getTokenFromDB(this)
+        NetworkUtils.setupAvatar(this, token, profile_image_button)
+
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)
             intent.putExtra("token", token)
