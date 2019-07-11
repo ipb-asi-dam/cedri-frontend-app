@@ -12,6 +12,8 @@ data class InvestigatorModel (
     val bio : String,
     @SerializedName("isAdmin")
     val isAdmin : Boolean,
+    @SerializedName("email")
+    val email : String,
     @SerializedName("occupation")
     val occupation : Int
 )

@@ -106,7 +106,7 @@ class ArticleReviewActivity : AppCompatActivity() {
                 val projectStartDate = body?.getData()?.startDate
                 val projectEndDate = body?.getData()?.endDate
                 val projectIsAccepted = body?.getData()?.isAccepted
-                val projectAuthorId = body?.getData()?.investigatorId
+                val projectAuthorId = body?.getData()?.investigator?.id
 
                 var initialDate = projectStartDate.toString().split(" ")
                 var finalDate = projectEndDate.toString().split(" ")
