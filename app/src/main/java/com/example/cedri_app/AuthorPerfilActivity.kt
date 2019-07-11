@@ -22,9 +22,11 @@ class AuthorPerfilActivity : AppCompatActivity() {
         val token = NetworkUtils.getTokenFromDB(this)
         tryGetData(this, token, authorId)
 
+        var idProjectFromExtra = intent.getIntExtra("idProject", 0)
+
         backImageButtonAutorPerfil.setOnClickListener {
             val intent = Intent(this, ArticleReviewActivity::class.java)
-            intent.putExtra("token", token)
+            intent.putExtra("idProject", idProjectFromExtra)
             startActivity(intent)
             finish()
         }

@@ -38,6 +38,7 @@ class ArticleReviewActivity : AppCompatActivity() {
         buttonPerfilAutorTelaResumoArtigo.setOnClickListener {
             val intent = Intent(this, AuthorPerfilActivity::class.java)
             intent.putExtra("authorId", authorId)
+            intent.putExtra("idProject", idProjectFromExtra)
             startActivity(intent)
             finish()
         }
@@ -111,7 +112,9 @@ class ArticleReviewActivity : AppCompatActivity() {
                 var initialDate = projectStartDate.toString().split(" ")
                 var finalDate = projectEndDate.toString().split(" ")
 
-                authorId = projectAuthorId!!
+                if (projectAuthorId != null) {
+                    authorId = projectAuthorId
+                }
 
                 articleTitleArticleReviewActivity.text = projectTitle
                 descriptionProject_ArticleReviewActivity.text = projectDescription
