@@ -31,10 +31,11 @@ class MyBarChart(
         val retrofitClient = NetworkUtils.getRetrofit(token)
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-        when (title) {
-            "My Awards" -> requestData( endpoint.list5YearsAwardData(currentYear-5, currentYear-1) )
-            "My Publications" -> requestData( endpoint.list5YearsPublicationData(currentYear-5, currentYear-1) )
-            "My Theses" -> requestData( endpoint.list5YearsTheseData(currentYear-5, currentYear-1) )
+        when {
+            title.contains("My Awards") -> requestData( endpoint.list5YearsAwardData(currentYear-5, currentYear-1) )
+            title.contains("My Publications") -> requestData( endpoint.list5YearsPublicationData(currentYear-5, currentYear-1) )
+            title.contains("My Theses") -> requestData( endpoint.list5YearsTheseData(currentYear-5, currentYear-1) )
+            title.contains("My Projects") -> requestData( endpoint.list5YearsProjectData(currentYear-5, currentYear-1) )
             else -> requestData( endpoint.list5YearsProjectData(currentYear-5, currentYear-1) )
         }
     }
