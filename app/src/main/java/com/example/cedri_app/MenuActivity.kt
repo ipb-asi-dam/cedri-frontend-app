@@ -3,16 +3,13 @@ package com.example.cedri_app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.model.Decode
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
 import com.example.cedri_app.ui.activity.listing.WorkCardListActivity
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.activity_menu.logoutImageButton2
-import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class MenuActivity : AppCompatActivity() {
 
@@ -34,14 +31,8 @@ class MenuActivity : AppCompatActivity() {
             itemMenuColum2Row1.visibility = View.INVISIBLE
         }
 
-	val CursorDatabase = myDB.getTokenFromDatabase()
-        var token : String = ""
-
-        if(CursorDatabase.moveToFirst()){
-            token = CursorDatabase.getString(CursorDatabase.getColumnIndex("token"))
-        }
+        val token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, logoutImageButton2)
-        Log.e("DB", "DADOS-> ${CursorDatabase}")
 
         logoutButton.setOnClickListener {
             try {

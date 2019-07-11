@@ -1,5 +1,6 @@
 package com.example.cedri_app
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -17,9 +18,9 @@ class AuthorPerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_author_perfil)
-
+        val authorId = intent?.extras?.getInt("authorId") ?: 0
         val token = NetworkUtils.getTokenFromDB(this)
-        tryGetData(this, token)
+        tryGetData(this, token, authorId)
 
         backImageButtonAutorPerfil.setOnClickListener {
             val intent = Intent(this, ArticleReviewActivity::class.java)
@@ -29,12 +30,20 @@ class AuthorPerfilActivity : AppCompatActivity() {
         }
     }
 
-    private fun tryGetData(mainAct : AuthorPerfilActivity, token : String) {
-        val payload = Decode.decoded(token)
+    private fun tryGetData(mainAct : AuthorPerfilActivity, token : String, authorId : Int) {
+        var investigatorId = 0
+        var isMyProfile = true
+        if (authorId == 0) {
+            val payload = Decode.decoded(token)
+            investigatorId = payload.id
+        } else {
+            investigatorId = authorId
+            isMyProfile = false
+        }
 
         val retrofitClient = NetworkUtils.getRetrofit(token)
         val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.showInvestigator(payload.id)
+        val callback = endpoint.showInvestigator(investigatorId)
         callback.enqueue(object : Callback<AuthenticateResponse<Investigator>> {
             override fun onFailure(call: Call<AuthenticateResponse<Investigator>>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
@@ -50,16 +59,16 @@ class AuthorPerfilActivity : AppCompatActivity() {
                         return
                     }
                     if (investigator.file != null && investigator.file.mimetype.contains("image/")) {
-                        tryGetImage(token, investigator.file.md5, mainAct, investigator)
+                        tryGetImage(token, investigator.file.md5, mainAct, investigator, isMyProfile)
                     } else {
-                        configureInvestigator(investigator, null)
+                        configureInvestigator(investigator, null, isMyProfile, mainAct, token)
                     }
                 }
             }
         })
     }
 
-    private fun tryGetImage(token : String, md5 : String, mainAct : AuthorPerfilActivity, investigator: Investigator) {
+    private fun tryGetImage(token : String, md5 : String, mainAct : AuthorPerfilActivity, investigator: Investigator, isMyProfile : Boolean) {
         val retrofitClient = NetworkUtils.getRetrofit(token)
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val callback = endpoint.getFile(md5)
@@ -75,17 +84,21 @@ class AuthorPerfilActivity : AppCompatActivity() {
                     return
                 }
                 val imageInBitmap = BitmapFactory.decodeStream(imageInByte.byteStream())
-                configureInvestigator(investigator, imageInBitmap)
+                configureInvestigator(investigator, imageInBitmap, isMyProfile, mainAct, token)
             }
         })
     }
 
-    private fun configureInvestigator(investigator : Investigator, image : Bitmap?) {
+    private fun configureInvestigator(investigator : Investigator, image : Bitmap?, isMyProfile : Boolean, mainAct : Context, token : String) {
         author_perfil_first_email.text = investigator.email
         author_perfil_full_name.text = investigator.name
         image?.let {
             author_perfil_avatar.setImageBitmap(it)
-            logoutImageButton2.setImageBitmap(it)
+            if (isMyProfile) {
+                logoutImageButton2.setImageBitmap(it)
+            } else {
+                NetworkUtils.setupAvatar(mainAct, token, logoutImageButton2)
+            }
         }
     }
 }

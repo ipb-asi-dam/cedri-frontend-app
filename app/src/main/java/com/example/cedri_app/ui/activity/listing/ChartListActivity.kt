@@ -9,11 +9,9 @@ import com.example.cedri_app.MenuActivity
 import com.example.cedri_app.NetworkUtils
 import com.example.cedri_app.NetworkUtils.Companion.getTokenFromDB
 import com.example.cedri_app.R
-import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.model.*
 import kotlinx.android.synthetic.main.activity_chart_list.*
 import com.example.cedri_app.ui.adapter.ChartListAdapter
-import kotlinx.android.synthetic.main.activity_article_review.*
 import kotlinx.android.synthetic.main.activity_chart_list.backImageButtonChartList
 import kotlinx.android.synthetic.main.activity_chart_list.logoutImageButton2
 

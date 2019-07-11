@@ -16,9 +16,7 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.TheseModel
 import com.example.cedri_app.ui.adapter.MyThesesAdapter
-import kotlinx.android.synthetic.main.activity_chart_list.*
-import kotlinx.android.synthetic.main.activity_my_awards.*
-import kotlinx.android.synthetic.main.activity_my_theses.*
+import kotlinx.android.synthetic.main.activity_my_theses.menu_bar
 import kotlinx.android.synthetic.main.activity_my_theses.back_image_button
 import kotlinx.android.synthetic.main.activity_my_theses.profile_image_button
 import kotlinx.android.synthetic.main.activity_my_theses.progress_bar
@@ -43,6 +41,8 @@ class MyThesesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_theses)
         token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, profile_image_button)
+        this.menu_bar.text = this.resources.getString(
+            R.string.menu_bar_title_specific_work, "THESES")
 
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)

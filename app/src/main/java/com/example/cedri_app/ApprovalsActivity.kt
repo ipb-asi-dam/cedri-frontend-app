@@ -1,36 +1,23 @@
 package com.example.cedri_app
 
-import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.model.ApprovalProjectCard
 import com.example.cedri_app.model.AuthenticateResponse
-import com.example.cedri_app.model.ResponseChecker
-import com.example.cedri_app.model.Total
 import com.example.cedri_app.model.tables.ApprovalProjectList
 import com.example.cedri_app.ui.adapter.ApporvalsAdapter
-import com.example.cedri_app.ui.adapter.ChartListAdapter
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_approvals.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.BufferedReader
 
 class ApprovalsActivity : AppCompatActivity() {
-
-    var myDB = DatabaseHandler(this)
 
     val articlesApprovalsList: MutableList<ApprovalProjectCard> = mutableListOf()
 
@@ -47,7 +34,7 @@ class ApprovalsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_approvals)
 
         val token = NetworkUtils.getTokenFromDB(this)
-
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
         backImageButtonArticlesReview.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)

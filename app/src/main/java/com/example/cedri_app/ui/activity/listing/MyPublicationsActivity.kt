@@ -16,10 +16,7 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.PublicationModel
 import com.example.cedri_app.ui.adapter.MyPublicationsAdapter
-import kotlinx.android.synthetic.main.activity_my_publications.back_image_button
-import kotlinx.android.synthetic.main.activity_my_publications.profile_image_button
-import kotlinx.android.synthetic.main.activity_my_publications.progress_bar
-import kotlinx.android.synthetic.main.activity_my_publications.recycler_view
+import kotlinx.android.synthetic.main.activity_my_publications.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +38,8 @@ class MyPublicationsActivity : AppCompatActivity() {
         //this.menu_bar_title.text = this.resources.getString(R.string.menu_bar_title_specific_work, "PUBLICATIONS")
         token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, profile_image_button)
+        this.menu_bar.text = this.resources.getString(
+            R.string.menu_bar_title_specific_work, "PUBLICATIONS")
 
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.cedri_app.R
 import com.example.cedri_app.model.MenuCard
-import kotlinx.android.synthetic.main.menu_card_item.view.*
 
 class MenuCardListAdapter(
     private val menuCards : List<MenuCard>,
