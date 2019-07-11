@@ -29,11 +29,12 @@ class BarChartActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        val menuBarTitle = when (title) {
-            "My Awards" -> "AWARDS"
-            "My Publications" -> "PUBLICATIONS"
-            "My Theses" -> "THESES"
-            else -> "PROJECT"
+        val menuBarTitle = when {
+            title.contains("My Awards") -> "AWARDS"
+            title.contains("My Publications") -> "PUBLICATIONS"
+            title.contains("My Theses") -> "THESES"
+            title.contains("My Projects") -> "PROJECTS"
+            else -> "UNKNOWN"
         }
         this.menu_bar_title.text = this.resources.getString(
             R.string.menu_bar_titles_bar_chart_screen, menuBarTitle)

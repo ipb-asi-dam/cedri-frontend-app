@@ -26,7 +26,7 @@
     <string name="menu_bar_titles_outcomes_chart_screen">TOTAL OUTCOMES</string>
     <string name="menu_bar_titles_bar_chart_screen">MY %1$s</string>
     <string name="menu_bar_title_work_card_list_screen">MY WORKS</string>
-    <string name="menu_bar_title_specific_work">MY 1$s</string>
+    <string name="menu_bar_title_specific_work">MY %1$s</string>
 
     <string name="toolbar_back_image_content_description">Click to go back</string>
     <string name="toolbar_avatar_image_content_description">Click to see your profile</string>

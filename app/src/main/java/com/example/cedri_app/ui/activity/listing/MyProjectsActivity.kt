@@ -16,10 +16,7 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.ProjectModel
 import com.example.cedri_app.ui.adapter.MyProjectsAdapter
-import kotlinx.android.synthetic.main.activity_my_projects.back_image_button
-import kotlinx.android.synthetic.main.activity_my_projects.profile_image_button
-import kotlinx.android.synthetic.main.activity_my_projects.progress_bar
-import kotlinx.android.synthetic.main.activity_my_projects.recycler_view
+import kotlinx.android.synthetic.main.activity_my_projects.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,6 +37,8 @@ class MyProjectsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_projects)
         token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, profile_image_button)
+        this.menu_bar.text = this.resources.getString(
+            R.string.menu_bar_title_specific_work, "PROJECTS")
 
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)

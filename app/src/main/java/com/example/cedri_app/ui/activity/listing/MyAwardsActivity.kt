@@ -39,6 +39,8 @@ class MyAwardsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_awards)
         token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, profile_image_button)
+        this.menu_bar.text = this.resources.getString(
+            R.string.menu_bar_title_specific_work, "AWARDS")
 
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)

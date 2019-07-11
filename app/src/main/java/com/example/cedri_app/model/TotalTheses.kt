@@ -3,9 +3,9 @@ package com.example.cedri_app.model
 import com.google.gson.annotations.SerializedName
 
 class TotalTheses(
-    @SerializedName("msc")
+    @SerializedName("mscs")
     val msc: Int,
-    @SerializedName("phd")
+    @SerializedName("phds")
     val phd: Int,
     total: Int
 ) : Total(total) {

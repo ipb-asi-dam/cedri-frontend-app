@@ -16,12 +16,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import android.graphics.Typeface
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import java.text.DecimalFormat
-
 
 class MyBarChart(
     val act: AppCompatActivity,
@@ -34,10 +32,10 @@ class MyBarChart(
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         when (title) {
-            "My Awards" -> requestData( endpoint.list5YearsAwardData(currentYear-4, currentYear) )
-            "My Publications" -> requestData( endpoint.list5YearsPublicationData(currentYear-4, currentYear) )
-            "My Theses" -> requestData( endpoint.list5YearsTheseData(currentYear-4, currentYear) )
-            else -> requestData( endpoint.list5YearsProjectData(currentYear-4, currentYear) )
+            "My Awards" -> requestData( endpoint.list5YearsAwardData(currentYear-5, currentYear-1) )
+            "My Publications" -> requestData( endpoint.list5YearsPublicationData(currentYear-5, currentYear-1) )
+            "My Theses" -> requestData( endpoint.list5YearsTheseData(currentYear-5, currentYear-1) )
+            else -> requestData( endpoint.list5YearsProjectData(currentYear-5, currentYear-1) )
         }
     }
 
@@ -82,13 +80,13 @@ class MyBarChart(
         setData(entry, data)
         val set = BarDataSet(entry, "Years")
         set.setColors(*ColorTemplate.JOYFUL_COLORS)
-        set.setValueTextColor(Color.rgb(55, 70, 73));
-        set.setValueTextSize(10f);
+        set.valueTextColor = Color.rgb(55, 70, 73)
+        set.valueTextSize = 10f
         set.valueFormatter
 
-        val data = BarData(set)
-        barChart.data = data
-        barChart.axisLeft.setAxisMinimum(0f)
+        val barData = BarData(set)
+        barChart.data = barData
+        barChart.axisLeft.axisMinimum = 0f
         barChart.axisLeft.textSize = 20f
 
         barChart.description.isEnabled = false
@@ -114,9 +112,9 @@ class MyBarChart(
         leftAxis.textColor = Color.BLACK
         leftAxis.setDrawGridLines(true)
         barChart.axisRight.isEnabled = false
-        data.barWidth = 0.85f
-        data.setValueTextSize(22f)
-        data.setValueFormatter(MyIntegerFormatter())
+        barData.barWidth = 0.85f
+        barData.setValueTextSize(22f)
+        barData.setValueFormatter(MyIntegerFormatter())
         barChart.xAxis.axisMinimum = -0.5f
         barChart.xAxis.axisMaximum = 4.5f
         barChart.setDrawGridBackground(true)

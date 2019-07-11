@@ -43,7 +43,8 @@ class MyIntellectualPropertiesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_intellectual_properties)
         token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, profile_image_button)
-
+        this.menu_bar.text = this.resources.getString(
+            R.string.menu_bar_title_specific_work, "INTELLECTUAL PROPERTIES")
         back_image_button.setOnClickListener {
             val intent = Intent(this, WorkCardListActivity::class.java)
             intent.putExtra("token", token)

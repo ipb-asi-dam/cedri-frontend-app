@@ -15,12 +15,13 @@ import kotlinx.android.synthetic.main.activity_chart_list.backImageButtonChartLi
 import kotlinx.android.synthetic.main.activity_work_card_list.*
 
 class WorkCardListActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_card_list)
         val token = NetworkUtils.getTokenFromDB(this)
         NetworkUtils.setupAvatar(this, token, logoutImageButton2)
+        this.textView.text = this.resources.getString(
+            R.string.menu_bar_titles_bar_chart_screen, "WORKS")
 
         backImageButtonChartList.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
