@@ -250,6 +250,7 @@ class TotalPieChart(
         val total = data.total
         pieChart.centerText = generateCenterSpannableText(total)
         configurePieChartSlices(pieChart, data)
+        pieChart.invalidate()
     }
 
     private fun <T: Total>readAndGetDataFromJSONFile(totalClass : Class<T>) : T {
