@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.example.cedri_app.*
 import com.example.cedri_app.model.*
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
-import kotlinx.android.synthetic.main.activity_chart_list.*
 import kotlinx.android.synthetic.main.activity_total_pie_chart.*
 import kotlinx.android.synthetic.main.activity_total_pie_chart.logoutImageButton2
 

@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Debug
-import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +11,6 @@ import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_search.*
-import okhttp3.Dispatcher
 
 class SearchActivity : AppCompatActivity() {
 
@@ -31,7 +27,6 @@ class SearchActivity : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.search_listView)
 
         listView.adapter = SeachListViewAdapter(this)
-
     }
 
     private class SeachListViewAdapter(context: Context) : BaseAdapter() {
@@ -75,7 +70,5 @@ class SearchActivity : AppCompatActivity() {
         override fun getCount(): Int {
             return article_names.size
         }
-
     }
-
 }

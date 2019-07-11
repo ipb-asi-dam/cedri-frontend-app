@@ -1,12 +1,10 @@
 package com.example.cedri_app
 
-import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.cedri_app.database.DatabaseHandler
 import com.example.cedri_app.model.ApprovalChangeValueRequest
 import com.example.cedri_app.model.AuthenticateResponse
 import com.example.cedri_app.model.tables.ProjectModel
@@ -17,10 +15,7 @@ import retrofit2.Response
 
 class ArticleReviewActivity : AppCompatActivity() {
 
-    var myDB = DatabaseHandler(this)
-
     var buttonValue: Boolean = false
-
     var authorId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +26,7 @@ class ArticleReviewActivity : AppCompatActivity() {
         // Log.e("ID_INVESTIGADOR", "${idProjectFromExtra}")
 
         val token = NetworkUtils.getTokenFromDB(this)
+        NetworkUtils.setupAvatar(this, token, logoutImageButton2)
         retriveBackendData(token, idProjectFromExtra)
 
         backImageButtonSingleArticleReview.setOnClickListener {
@@ -45,7 +41,6 @@ class ArticleReviewActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
 
         articleIsApprovedArticleReviewActivity.setOnClickListener {
             // FAZER A REQUISIÇÃO COM O BACK E MUDAR O VALOR DO DO BOTAO
@@ -88,10 +83,8 @@ class ArticleReviewActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(applicationContext,"ERRO DO SERVER", Toast.LENGTH_LONG).show()
                 }
-
             }
         })
-
     }
 
     fun retriveBackendData(token : String, idProjectFromExtra : Int){
@@ -100,7 +93,6 @@ class ArticleReviewActivity : AppCompatActivity() {
         val service = retrofitClient.create(Endpoint::class.java)
 
         val call = service.showOneProjectInfo(idProjectFromExtra)
-
 
         call.enqueue(object : Callback<AuthenticateResponse<ProjectModel>>{
             override fun onFailure(call: Call<AuthenticateResponse<ProjectModel>>, t: Throwable) {

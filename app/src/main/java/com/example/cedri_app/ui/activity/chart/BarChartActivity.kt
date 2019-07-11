@@ -9,7 +9,6 @@ import com.example.cedri_app.model.MyBarChart
 import com.example.cedri_app.ui.activity.listing.ChartListActivity
 import kotlinx.android.synthetic.main.activity_bar_chart.*
 import kotlinx.android.synthetic.main.activity_bar_chart.logoutImageButton2
-import kotlinx.android.synthetic.main.activity_chart_list.*
 
 class BarChartActivity : AppCompatActivity() {
 

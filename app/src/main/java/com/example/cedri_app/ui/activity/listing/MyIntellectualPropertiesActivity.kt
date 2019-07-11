@@ -16,7 +16,6 @@ import com.example.cedri_app.model.*
 import com.example.cedri_app.model.response.ElementList
 import com.example.cedri_app.model.tables.IntellectualPropertyModel
 import com.example.cedri_app.ui.adapter.MyIntellectualPropertiesAdapter
-import kotlinx.android.synthetic.main.activity_chart_list.*
 import kotlinx.android.synthetic.main.activity_my_intellectual_properties.*
 import kotlinx.android.synthetic.main.activity_my_intellectual_properties.recycler_view
 import retrofit2.Call

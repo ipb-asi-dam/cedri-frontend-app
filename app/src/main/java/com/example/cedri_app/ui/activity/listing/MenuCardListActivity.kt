@@ -13,7 +13,6 @@ import com.example.cedri_app.NetworkUtils
 import com.example.cedri_app.R
 import com.example.cedri_app.SearchActivity
 import com.example.cedri_app.ui.adapter.MenuCardListAdapter
-import kotlinx.android.synthetic.main.activity_chart_list.*
 import kotlinx.android.synthetic.main.activity_menu_card_list.*
 
 class MenuCardListActivity : AppCompatActivity() {
